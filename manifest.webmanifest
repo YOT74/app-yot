@@ -1,0 +1,16 @@
+{
+  "name": "YOT — le club",
+  "short_name": "YOT",
+  "description": "Calendrier des courses du club de triathlon",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#EFEAE1",
+  "theme_color": "#5B2A86",
+  "icons": [
+    { "src": "icons/icone-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icone-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icone-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

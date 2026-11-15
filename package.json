@@ -1,0 +1,6 @@
+{
+  "name": "app-yot",
+  "private": true,
+  "type": "module",
+  "description": "App du club YOT. Pas de dépendance : ce fichier sert seulement aux robots (Node lit les .js comme des modules)."
+}

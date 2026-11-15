@@ -1,0 +1,21 @@
+{
+  "_lisez_moi": "Grands marathons et semis, à mettre à jour une fois par an (dates sur le site officiel). Une ligne = une course. format : Marathon ou Semi. Dates relevées en novembre 2026 ; Lisbonne et Valence étaient encore annoncées sans confirmation officielle.",
+  "courses": [
+    { "nom": "Marathon de Séville", "date": "2027-02-21", "lieu": "Séville, Espagne", "format": "Marathon" },
+    { "nom": "Semi-marathon de Paris", "date": "2027-03-07", "lieu": "Paris", "departement": "75", "format": "Semi" },
+    { "nom": "Marathon de Barcelone", "date": "2027-03-14", "lieu": "Barcelone, Espagne", "format": "Marathon" },
+    { "nom": "Marathon de Rome", "date": "2027-03-14", "lieu": "Rome, Italie", "format": "Marathon" },
+    { "nom": "Marathon de Paris", "date": "2027-04-04", "lieu": "Paris", "departement": "75", "format": "Marathon" },
+    { "nom": "Marathon de Milan", "date": "2027-04-04", "lieu": "Milan, Italie", "format": "Marathon" },
+    { "nom": "Marathon de Rotterdam", "date": "2027-04-11", "lieu": "Rotterdam, Pays-Bas", "format": "Marathon" },
+    { "nom": "Marathon du lac d'Annecy", "date": "2027-04-18", "lieu": "Annecy", "departement": "74", "format": "Marathon" },
+    { "nom": "Marathon de Vienne", "date": "2027-04-18", "lieu": "Vienne, Autriche", "format": "Marathon" },
+    { "nom": "Marathon de Londres", "date": "2027-04-25", "lieu": "Londres, Royaume-Uni", "format": "Marathon" },
+    { "nom": "Marathon de Madrid", "date": "2027-04-25", "lieu": "Madrid, Espagne", "format": "Marathon" },
+    { "nom": "Marathon de Hambourg", "date": "2027-04-25", "lieu": "Hambourg, Allemagne", "format": "Marathon" },
+    { "nom": "Marathon de Berlin", "date": "2027-09-26", "lieu": "Berlin, Allemagne", "format": "Marathon" },
+    { "nom": "Marathon de Lisbonne", "date": "2027-10-09", "lieu": "Lisbonne, Portugal", "format": "Marathon" },
+    { "nom": "Marathon de Francfort", "date": "2027-10-31", "lieu": "Francfort, Allemagne", "format": "Marathon" },
+    { "nom": "Marathon de Valence", "date": "2027-12-05", "lieu": "Valence, Espagne", "format": "Marathon" }
+  ]
+}

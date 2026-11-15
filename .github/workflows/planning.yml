@@ -1,0 +1,31 @@
+# Recopie le planning du coach (Google Sheets, en lecture seule) dans l'app, deux fois par jour (vers 6 h et 18 h).
+# Secrets à créer dans GitHub → Settings → Secrets and variables → Actions :
+#   PLANNING_URL          le lien de partage du Google Sheets (partagé en « lecteur »)
+#   SUPABASE_URL          l'URL du projet (https://xxxx.supabase.co)
+#   SUPABASE_CLE_SERVICE  la clé « service_role » (jamais dans le code, seulement ici en secret)
+# Lancement à la main : onglet Actions → « Planning du coach » → Run workflow.
+name: Planning du coach
+
+on:
+  schedule:
+    - cron: '23 5,17 * * *'   # heure UTC : 6 h 23 et 18 h 23 en hiver, 7 h 23 et 19 h 23 en été
+  workflow_dispatch:
+
+concurrency:
+  group: planning
+  cancel-in-progress: false
+
+jobs:
+  planning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node robot/planning.mjs
+        env:
+          PLANNING_URL: ${{ secrets.PLANNING_URL }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_CLE_SERVICE: ${{ secrets.SUPABASE_CLE_SERVICE }}

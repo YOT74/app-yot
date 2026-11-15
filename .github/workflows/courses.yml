@@ -1,0 +1,27 @@
+# Met à jour la base de courses (FFTri, IRONMAN, grands marathons) chaque lundi.
+# Secrets à créer dans GitHub → Settings → Secrets and variables → Actions :
+#   SUPABASE_URL          l'URL du projet (https://xxxx.supabase.co)
+#   SUPABASE_CLE_SERVICE  la clé « service_role » (Supabase → Project Settings → API).
+#                         Elle contourne les règles d'accès : elle ne va JAMAIS dans
+#                         config.js ni dans le code, seulement ici en secret.
+# Lancement à la main : onglet Actions → « Base de courses » → Run workflow.
+name: Base de courses
+
+on:
+  schedule:
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+
+jobs:
+  importer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node robot/importer.mjs
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_CLE_SERVICE: ${{ secrets.SUPABASE_CLE_SERVICE }}

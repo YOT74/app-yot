@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#EFEAE1"/>
+  <rect x="96" y="112" width="320" height="288" rx="18" fill="#FFFFFF"/>
+  <rect x="96" y="112" width="320" height="76" rx="18" fill="#5B2A86"/>
+  <rect x="96" y="160" width="320" height="28" fill="#5B2A86"/>
+  <circle cx="126" cy="218" r="10" fill="#EFEAE1"/>
+  <circle cx="386" cy="218" r="10" fill="#EFEAE1"/>
+  <circle cx="126" cy="370" r="10" fill="#EFEAE1"/>
+  <circle cx="386" cy="370" r="10" fill="#EFEAE1"/>
+  <text x="256" y="350" text-anchor="middle" font-family="Archivo, Arial Narrow, Arial, sans-serif" font-weight="900" font-size="150" fill="#151515" letter-spacing="-4">TRI</text>
+</svg>
