@@ -377,12 +377,33 @@ document.addEventListener('click', async (ev) => {
     case 'export-csv': exporterCSV(); break;
 
     // notifications
+    case 'verifier-attente': {
+      etat.infoAttente = null;
+      await charger();
+      if (etat.moi?.en_attente) { etat.infoAttente = 'Ta demande n’a pas encore été validée.'; afficher(); }
+      else if (etat.moi && tutoAVoir()) { etat.tuto = 0; afficher(); }
+      break;
+    }
+    case 'accepter-membre': {
+      const d = etat.demandes.find((x) => x.id === id);
+      await ecrire(() => donnees.accepterMembre(id), `${d?.prenom ?? 'Le membre'} a maintenant accès à l’application.`);
+      break;
+    }
+    case 'refuser-membre': {
+      const d = etat.demandes.find((x) => x.id === id);
+      confirmer({ titre: `Refuser la demande de ${d?.prenom ?? 'ce membre'} ?`, texte: 'La demande sera supprimée. La personne pourra en refaire une.', bouton: 'Refuser', action: 'confirmer-refus-membre', id });
+      break;
+    }
+    case 'confirmer-refus-membre':
+      feuille.close();
+      await ecrire(() => donnees.refuserMembre(id), 'Demande refusée.');
+      break;
     case 'ouvrir-notif': {
       const n = etat.notifications.find((x) => x.id === id);
       if (!n) break;
       if (!n.lue) { n.lue = true; donnees.marquerLues([n.id]).catch(() => {}); }
       if (['mot', 'reponse'].includes(n.type)) etat.defilerVers = 'discussion';
-      location.hash = n.course_id && course(n.course_id) ? `#/course/${n.course_id}` : '#/';
+      location.hash = n.type === 'adhesion' ? '#/bureau' : n.course_id && course(n.course_id) ? `#/course/${n.course_id}` : '#/';
       break;
     }
   }
@@ -562,8 +583,7 @@ document.addEventListener('submit', async (ev) => {
         await donnees.inscrire(identite);
         etat.erreurInscription = null;
         await charger();
-        etat.tuto = 0;   // première visite : présentation de l'app
-        afficher();
+        if (etat.moi && !etat.moi.en_attente) { etat.tuto = 0; afficher(); }   // présentation de l'app
       } catch (e) {
         etat.erreurInscription = e.message;
         afficher();

@@ -27,12 +27,17 @@ async function chargerTout(email) {
   verifier(moiRep.error, 'Chargement des données impossible.');
   if (!moiRep.data) return { moi: null };
   moiId = moiRep.data.id;
-  const [membres, courses, seances, partenaires, actualites] = await Promise.all([
-    supabase.from('membres').select('id, prenom, nom, role, actif, cree_le, photo, groupe, heures_semaine, niveau_cap, niveau_velo').order('prenom'),
+  // demande d'inscription pas encore validée par le bureau : l'app n'affiche que l'écran d'attente
+  if (moiRep.data.en_attente) return { moi: moiRep.data, membres: [], courses: [], seances: [], partenaires: [], actualites: [], demandes: [] };
+  const bureau = ['bureau', 'admin'].includes(moiRep.data.role);
+  const [membres, courses, seances, partenaires, actualites, demandes] = await Promise.all([
+    supabase.from('membres').select('id, prenom, nom, role, actif, cree_le, photo, groupe, heures_semaine, niveau_cap, niveau_velo').eq('en_attente', false).order('prenom'),
     supabase.from('courses').select('*, participations(*), albums(*), messages(*)').order('date_course'),
     supabase.from('seances').select('*, presences(membre_id, vient)').order('date'),
     supabase.from('partenaires').select('*').order('nom'),
     supabase.from('actualites').select('*, votes_sondage(membre_id, option)').order('publiee_le', { ascending: false }),
+    bureau ? supabase.from('membres').select('id, prenom, nom, email, heures_semaine, cree_le').eq('en_attente', true).order('cree_le')
+      : Promise.resolve({ data: [] }),
   ]);
   verifier(membres.error || courses.error || seances.error || partenaires.error || actualites.error,
     'Chargement des données impossible.');
@@ -43,6 +48,7 @@ async function chargerTout(email) {
     seances: seances.data,
     partenaires: partenaires.data,
     actualites: actualites.data,
+    demandes: demandes.data ?? [],
   };
 }
 
@@ -182,6 +188,16 @@ async function messageEngages(id, texte) {
 }
 
 // Bureau : rôle et activation d'un membre.
+// Demandes d'inscription (bureau) : accepter ouvre l'accès, refuser supprime la demande.
+async function accepterMembre(id) {
+  const { error } = await supabase.from('membres').update({ en_attente: false }).eq('id', id).eq('en_attente', true);
+  verifier(error, "Impossible d'accepter cette demande.");
+}
+async function refuserMembre(id) {
+  const { error } = await supabase.from('membres').delete().eq('id', id).eq('en_attente', true);
+  verifier(error, 'Impossible de refuser cette demande.');
+}
+
 async function modifierMembre(id, champs) {
   const { error } = await supabase.from('membres').update(champs).eq('id', id);
   verifier(error, 'Impossible de modifier ce membre.');
@@ -271,7 +287,7 @@ const reel = {
   changerStatut, majParticipation,
   proposerCourse, modifierCourse, validerCourse, supprimerCourse, refuserCourse, masquerCourse, messageEngages, modifierMembre,
   ajouterAlbum, supprimerAlbum,
-  enregistrerSeance, supprimerSeance, remplacerSeances, repondrePresence, changerGroupe, changerNiveau,
+  enregistrerSeance, supprimerSeance, remplacerSeances, repondrePresence, changerGroupe, changerNiveau, accepterMembre, refuserMembre,
   enregistrerPartenaire, supprimerPartenaire, enregistrerActualite, supprimerActualite, voter,
   marquerLues,
 };

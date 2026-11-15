@@ -15,14 +15,14 @@ const lienMenu = (href, titre, detail = '', extra = '') =>
 
 export function ecranPlus() {
   const n = nbNonLues();
-  const attente = enAttente().length;
+  const attente = enAttente().length + etat.demandes.length;
   return `
     ${entete('Plus')}
     <nav class="menu" aria-label="Autres rubriques">
       ${lienMenu('#/notifications', 'Notifications', n ? `${n} non lue${n > 1 ? 's' : ''}` : 'Ce qui s’est passé sur tes courses')}
       ${lienMenu('#/membres', 'Membres', 'Leurs courses et résultats')}
       ${lienMenu('#/partenaires', 'Partenaires', 'Codes promo et réductions')}
-      ${estBureau() ? lienMenu('#/bureau', 'Espace bureau', 'Validations, tableau de bord, export', attente ? `<span class="compteur">${attente}</span>` : '') : ''}
+      ${estBureau() ? lienMenu('#/bureau', 'Espace bureau', 'Inscriptions, validations, tableau de bord', attente ? `<span class="compteur">${attente}</span>` : '') : ''}
       ${lienMenu('#/compte', 'Mon compte', `${esc(etat.moi.prenom)} ${esc(etat.moi.nom)} · ${esc(etat.email)}`)}
     </nav>
     <section class="bloc apparence">
@@ -176,6 +176,7 @@ function texteNotif(n) {
     case 'reponse': return `${qui} a répondu dans la discussion de ${nomCourse} : « ${esc(n.extrait ?? '')} »`;
     case 'inscription': return `${qui} s'est inscrit${''} à ${nomCourse}`;
     case 'proposition': return `${qui} propose une course à valider : <strong>${esc(n.extrait ?? '')}</strong>`;
+    case 'adhesion': return `<strong>${esc(n.extrait ?? '')}</strong> demande à rejoindre l’application`;
     case 'validation': return `Le bureau a validé ta proposition <strong>${esc(n.extrait ?? '')}</strong>`;
     case 'actualite': return `${etat.actualites.find((a) => a.id === n.actualite_id)?.sondage_options ? 'Nouveau sondage' : 'Nouvelle actualité'} : <strong>${esc(n.extrait ?? '')}</strong>`;
     case 'refus': return `Le bureau n'a pas retenu ta proposition <strong>${esc(n.extrait ?? '')}</strong>`;
@@ -288,6 +289,18 @@ export function ecranBureau() {
   return `
     ${retour('#/plus', 'Plus')}
     <h1 class="fiche-titre">Espace bureau</h1>
+    ${etat.demandes.length ? `<section class="bloc">
+      <h2>Demandes d’inscription <span class="compteur">${etat.demandes.length}</span></h2>
+      ${etat.demandes.map((d) => `
+        <div class="a-valider">
+          <span class="ligne-texte"><strong>${esc(d.prenom)} ${esc(d.nom)}</strong>
+            <span class="ligne-detail">${esc(d.email)}${d.heures_semaine ? ` · ${esc(d.heures_semaine)} h par semaine` : ''} · ${esc(ilYa(d.cree_le))}</span></span>
+          <div class="rangee">
+            <button class="bouton" type="button" data-action="accepter-membre" data-id="${esc(d.id)}">Accepter</button>
+            <button class="bouton contour danger" type="button" data-action="refuser-membre" data-id="${esc(d.id)}">Refuser</button>
+          </div>
+        </div>`).join('')}
+    </section>` : ''}
     <section class="bloc">
       <h2>À valider ${attente.length ? `<span class="compteur">${attente.length}</span>` : ''}</h2>
       ${attente.length ? attente.map((c) => {

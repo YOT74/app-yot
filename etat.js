@@ -16,6 +16,7 @@ export const etat = {
   seances: [],
   partenaires: [],
   actualites: [],
+  demandes: [],           // demandes d'inscription à valider (bureau)
   notifications: [],
   horsLigne: false,
   connexion: { etape: 'email', email: '', erreur: null, envoi: false },

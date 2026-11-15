@@ -9,7 +9,7 @@ create type statut_participation as enum
   ('interesse', 'inscrit', 'cherche_dossard', 'vend_dossard', 'finisher', 'forfait');
 create type role_membre as enum ('membre', 'bureau', 'coach', 'admin');
 create type type_notification as enum
-  ('mot', 'inscription', 'proposition', 'validation', 'actualite', 'dossard', 'refus', 'message', 'reponse');
+  ('mot', 'inscription', 'proposition', 'validation', 'actualite', 'dossard', 'refus', 'message', 'reponse', 'adhesion');
 
 -- 2. Tables -------------------------------------------------------------
 create table membres (
@@ -24,6 +24,7 @@ create table membres (
   groupe text,                                      -- groupe de niveau du planning (ex. « 7-10 »), ajustable par le coach
   niveau_cap text,                                  -- niveau de course à pied (1, 2, 3), réglé par le coach
   niveau_velo text,                                 -- niveau de vélo (1, 2, 3), réglé par le coach
+  en_attente boolean not null default true,         -- nouveau compte : attend la validation du bureau
   -- réglages des notifications (chacun coche ce qu'il veut recevoir)
   notif_mot boolean not null default true,          -- discussion : nouveau message sur une de mes courses, réponse à un fil où j'écris
   notif_inscription boolean not null default true,  -- quelqu'un s'inscrit à une course où je suis inscrit
@@ -171,12 +172,12 @@ create index notifications_destinataire on notifications (destinataire, lue, cre
 -- 3. Fonctions d'aide (lisent l'email du jeton de connexion) -------------
 create function mon_membre_id() returns uuid
 language sql stable security definer set search_path = public as $$
-  select id from membres where email = lower(auth.jwt() ->> 'email') and actif
+  select id from membres where email = lower(auth.jwt() ->> 'email') and actif and not en_attente
 $$;
 
 create function mon_role() returns role_membre
 language sql stable security definer set search_path = public as $$
-  select role from membres where email = lower(auth.jwt() ->> 'email') and actif
+  select role from membres where email = lower(auth.jwt() ->> 'email') and actif and not en_attente
 $$;
 
 -- l'admin a tous les droits du bureau et du coach ; seul un admin nomme ou modifie un admin
@@ -209,11 +210,14 @@ alter table notifications enable row level security;
 
 -- membres
 create policy "membres visibles" on membres for select to authenticated
-  using (mon_membre_id() is not null);
--- inscription libre : chacun crée SA fiche (son email, rôle membre). L'email
--- unique empêche les doublons ; un membre désactivé ne peut pas se réinscrire.
+  using (mon_membre_id() is not null and (not en_attente or est_bureau()));
+-- chacun voit sa propre fiche, même en attente de validation
+create policy "ma fiche" on membres for select to authenticated
+  using (email = lower(auth.jwt() ->> 'email'));
+-- inscription : chacun crée SA fiche (son email, rôle membre), en attente de validation
+-- par le bureau. L'email unique empêche les doublons ; un membre désactivé ne peut pas se réinscrire.
 create policy "je m'inscris" on membres for insert to authenticated
-  with check (email = lower(auth.jwt() ->> 'email') and role = 'membre' and actif);
+  with check (email = lower(auth.jwt() ->> 'email') and role = 'membre' and actif and en_attente);
 -- chacun corrige son nom et ses réglages, sans changer son rôle, son email ni se réactiver
 create policy "je modifie ma fiche" on membres for update to authenticated
   using (email = lower(auth.jwt() ->> 'email') and actif)
@@ -404,6 +408,20 @@ begin
 end $$;
 create trigger membres_niveaux before update on membres for each row execute function proteger_niveaux();
 
+-- nouvelle demande d'inscription → le bureau est prévenu
+create function notifier_adhesion() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if new.en_attente then
+    insert into notifications (destinataire, type, auteur, extrait)
+    select m.id, 'adhesion', new.id, new.prenom || ' ' || new.nom
+    from membres m
+    where m.role in ('bureau', 'admin') and m.actif and not m.en_attente;
+  end if;
+  return new;
+end $$;
+create trigger membres_adhesion after insert on membres for each row execute function notifier_adhesion();
+
 -- 7. Horodatages automatiques --------------------------------------------
 create function maj_horodatage() returns trigger language plpgsql as $$
 begin new.maj_le = now(); return new; end $$;
@@ -546,7 +564,7 @@ end $$;
 revoke execute on all functions in schema public from public, anon;
 grant execute on function ping() to anon;
 revoke execute on function notifier_actualite(), notifier_course(), notifier_message(), notifier_participation(),
-  proteger_corrections(), proteger_niveaux(), vote_unique(), maj_horodatage(), trace_validation(), ranger_message() from authenticated;
+  proteger_corrections(), proteger_niveaux(), notifier_adhesion(), vote_unique(), maj_horodatage(), trace_validation(), ranger_message() from authenticated;
 alter function vote_unique() set search_path = public;
 alter function maj_horodatage() set search_path = public;
 alter function trace_validation() set search_path = public;

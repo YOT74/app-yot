@@ -6,7 +6,7 @@ import { STATUTS } from './config.js';
 import { etat, estBureau, course, monStatut, statutPossible, nbNonLues, enAttente, appliquerDonnees } from './etat.js';
 import { donnees } from './donnees.js';
 import { esc, icone, dateCourte } from './outils.js';
-import { ecranConnexion, ecranInscription, tuto } from './ecrans/connexion.js';
+import { ecranConnexion, ecranInscription, ecranAttente, tuto } from './ecrans/connexion.js';
 import { ecranAccueil, ecranFormulaireActu } from './ecrans/accueil.js';
 import { ecranCalendrier, ecranFormulaireCourse } from './ecrans/calendrier.js';
 import { ecranCourse } from './ecrans/course.js';
@@ -58,7 +58,7 @@ function choisirEcran() {
 
 function barreNav(actif) {
   const nNotifs = nbNonLues();
-  const nBureau = estBureau() ? enAttente().length : 0;
+  const nBureau = estBureau() ? enAttente().length + etat.demandes.length : 0;
   const lien = (cle, href, nom, ic, compte = 0) =>
     `<a href="${href}" ${actif === cle ? 'aria-current="page"' : ''}>${ic}${nom}${compte ? `<span class="compteur" aria-label="${compte} nouveau${compte > 1 ? 'x' : ''}">${compte > 9 ? '9+' : compte}</span>` : ''}</a>`;
   nav.innerHTML =
@@ -75,6 +75,7 @@ export function afficher() {
   if (!etat.email) { nav.hidden = true; ecran.innerHTML = ecranConnexion(); return; }
   if (etat.aInscrire) { nav.hidden = true; ecran.innerHTML = ecranInscription(); return; }
   if (!etat.moi) { ecran.innerHTML = '<p class="chargement">Chargement…</p>'; return; }
+  if (etat.moi.en_attente) { nav.hidden = true; ecran.innerHTML = ecranAttente(); return; }
   let [html, onglet] = choisirEcran();
   if (etat.horsLigne) html = `<p class="avertissement">Hors ligne : affichage des dernières données reçues, modifications impossibles.</p>${html}`;
   if (etat.tuto !== null && etat.tuto !== undefined) html += tuto(etat.tuto);

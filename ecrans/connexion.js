@@ -82,6 +82,20 @@ export function ecranInscription() {
     </section>`;
 }
 
+// Inscription envoyée, en attente de validation par le bureau.
+export function ecranAttente() {
+  return `
+    <section class="connexion">
+      ${dossard(NOM_CLUB, 'Bienvenue', `
+        <span class="dossard-chiffre petit">Demande envoyée</span>
+        <span class="dossard-info">Ta demande d’inscription a été transmise au bureau du club.</span>`)}
+      <p>Tu pourras accéder à l’application dès que le bureau l’aura validée.</p>
+      ${etat.infoAttente ? `<p class="aide">${esc(etat.infoAttente)}</p>` : ''}
+      <button class="bouton large" type="button" data-action="verifier-attente">Vérifier</button>
+      <button class="bouton discret large" type="button" data-action="deconnexion">Se déconnecter</button>
+    </section>`;
+}
+
 // --- Tuto d'accueil : quelques écrans, un geste pour passer -----------------
 export const ETAPES_TUTO = [
   { icone: icone.accueil, titre: 'Ton accueil', texte: "Retrouve ta prochaine course, les clôtures d'inscription, les actualités du club et la prochaine séance." },

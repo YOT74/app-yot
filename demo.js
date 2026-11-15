@@ -66,7 +66,7 @@ const refuse = () => { throw new Error("Tu n'as pas les droits pour cette action
 
 function notifier(destinataires, type, champs) {
   for (const m of db.membres) {
-    if (!destinataires(m) || !m.actif || !m[`notif_${type}`]) continue;
+    if (!destinataires(m) || !m.actif || m[`notif_${type}`] === false) continue;
     db.notifications.unshift({ id: nouvelId('n'), destinataire: m.id, type, lue: false, cree_le: maintenant(), ...champs });
   }
 }
@@ -112,10 +112,12 @@ export const demo = {
     monEmail = email;
     moi = db.membres.find((m) => m.email === email && m.actif) ?? null;
     if (!moi) return { moi: null };
+    if (moi.en_attente) return copie({ moi, membres: [], courses: [], seances: [], partenaires: [], actualites: [], demandes: [] });
     notificationsDeDepart();
     return copie({
       moi,
-      membres: db.membres.map(({ id, prenom, nom, role, actif, cree_le, photo, groupe, heures_semaine, niveau_cap, niveau_velo }) =>
+      demandes: estBureau() ? db.membres.filter((m) => m.en_attente).map(({ id, prenom, nom, email, heures_semaine, cree_le }) => ({ id, prenom, nom, email, heures_semaine, cree_le })) : [],
+      membres: db.membres.filter((m) => !m.en_attente).map(({ id, prenom, nom, role, actif, cree_le, photo, groupe, heures_semaine, niveau_cap, niveau_velo }) =>
         ({ id, prenom, nom, role, actif, cree_le, photo: photo ?? null, groupe: groupe ?? null, heures_semaine: heures_semaine ?? null,
            niveau_cap: niveau_cap ?? null, niveau_velo: niveau_velo ?? null })),
       courses: coursesVisibles(),
@@ -135,7 +137,9 @@ export const demo = {
   async inscrire({ prenom, nom, heures_semaine = null, groupe = null }) {
     await pause();
     if (db.membres.some((m) => m.email === monEmail)) throw new Error('Ce compte a été désactivé par le bureau.');
-    db.membres.push({ ...REGLAGES_DEFAUT, id: nouvelId('m'), email: monEmail, prenom, nom, role: 'membre', actif: true, heures_semaine, groupe, cree_le: maintenant() });
+    const m = { ...REGLAGES_DEFAUT, id: nouvelId('m'), email: monEmail, prenom, nom, role: 'membre', actif: true, en_attente: true, heures_semaine, groupe, cree_le: maintenant() };
+    db.membres.push(m);
+    notifier((x) => ['bureau', 'admin'].includes(x.role) && !x.en_attente, 'adhesion', { auteur: m.id, extrait: `${prenom} ${nom}` });
   },
   async modifierMaFiche(champs) {
     await pause();
@@ -302,6 +306,16 @@ export const demo = {
     await pause();
     db.presences = db.presences.filter((x) => !(x.seance_id === seanceId && x.membre_id === moi.id));
     if (vient !== null) db.presences.push({ seance_id: seanceId, membre_id: moi.id, vient });
+  },
+  async accepterMembre(id) {
+    await pause();
+    if (!estBureau()) refuse();
+    db.membres.find((m) => m.id === id).en_attente = false;
+  },
+  async refuserMembre(id) {
+    await pause();
+    if (!estBureau()) refuse();
+    db.membres = db.membres.filter((m) => !(m.id === id && m.en_attente));
   },
   async changerNiveau(membreId, discipline, niveau) {
     await pause();

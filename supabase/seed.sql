@@ -1,6 +1,9 @@
 -- seed.sql — données de test pour la base LOCALE uniquement (généré depuis le POC v3).
 -- Rejoué à chaque `npx supabase db reset`. Ne pas exécuter en prod.
 -- Les dates sont recalées autour d'aujourd'hui (même jour de la semaine que dans le POC).
+-- les membres de test sont des comptes déjà validés par le bureau
+alter table membres alter column en_attente set default false;
+
 do $$
 declare d0 date := date '2026-08-22' + 7 * round((current_date - date '2026-08-22') / 7.0)::int;
 begin
@@ -144,3 +147,5 @@ Les photos arrivent, le temps que l''organisation les mette en ligne.', false, '
   -- le seed ne doit pas laisser de notifications de démarrage
   delete from notifications;
 end $$;
+
+alter table membres alter column en_attente set default true;
