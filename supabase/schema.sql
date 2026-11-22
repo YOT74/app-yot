@@ -56,6 +56,10 @@ create table courses (
   source_ref text,                                  -- identifiant chez la source (mises à jour du robot)
   date_a_confirmer boolean not null default false,  -- date estimée : jour pas encore publié par l'organisateur
   jour_inconnu boolean not null default false,      -- seul le mois est annoncé (date_course = 1er du mois)
+  periode text,                                     -- précision quand le jour n'est pas connu : « fin avril 2027 »
+  doublon_de uuid references courses(id) on delete set null,  -- masquée par le robot : doublon de cette course
+  pas_doublon boolean not null default false,       -- réaffichée par le bureau : le robot ne la masque plus
+  date_verifiee timestamptz,                        -- date trouvée par robot/dates.mjs : l'import de la liste ne l'écrase plus
   epreuves jsonb,                                   -- événement sur plusieurs jours : [{"nom": "10 km", "date": "2027-04-17"}, …]
   url_source text,                                  -- page de la course chez la source
   corrigee boolean not null default false,          -- corrigée par le bureau : le robot ne l'écrase plus

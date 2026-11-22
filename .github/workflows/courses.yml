@@ -1,4 +1,5 @@
-# Met à jour la base de courses (FFTri, IRONMAN, grands marathons) chaque lundi.
+# Met à jour la base de courses (FFTri, IRONMAN, listes du club) chaque lundi, masque les doublons
+# et cherche les nouvelles dates annoncées.
 # Secrets à créer dans GitHub → Settings → Secrets and variables → Actions :
 #   SUPABASE_URL          l'URL du projet (https://xxxx.supabase.co)
 #   SUPABASE_CLE_SERVICE  la clé « service_role » (Supabase → Project Settings → API).
@@ -11,17 +12,28 @@ on:
   schedule:
     - cron: '17 4 * * 1'
   workflow_dispatch:
+    inputs:
+      essai_dates:
+        description: "Seulement chercher les dates, sans rien écrire (essai)"
+        type: boolean
+        default: false
 
 jobs:
   importer:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
       - run: node robot/importer.mjs
+        if: ${{ !inputs.essai_dates }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_CLE_SERVICE: ${{ secrets.SUPABASE_CLE_SERVICE }}
+      # Dates annoncées depuis (finishers.com) pour les courses dont le jour est inconnu ou à confirmer
+      - run: node robot/dates.mjs ${{ inputs.essai_dates && '--essai' || '' }}
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_CLE_SERVICE: ${{ secrets.SUPABASE_CLE_SERVICE }}

@@ -250,7 +250,7 @@ export const demo = {
   async masquerCourse(id, masquee) {
     await pause();
     if (!estBureau()) refuse();
-    db.courses.find((x) => x.id === id).masquee = masquee;
+    Object.assign(db.courses.find((x) => x.id === id), masquee ? { masquee } : { masquee, pas_doublon: true, doublon_de: null });
   },
   async messageEngages(id, texte) {
     await pause();

@@ -14,6 +14,7 @@
    "date": "2026-12-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "mi décembre 2026",
    "lieu": "Aix-les-Bains",
    "departement": "73",
    "discipline": "course_a_pied",
@@ -58,15 +59,6 @@
    "departement": "01",
    "discipline": "course_a_pied",
    "format": "5 km, 10 km"
-  },
-  {
-   "nom": "Course de l'Escalade",
-   "date": "2026-12-01",
-   "jour_inconnu": true,
-   "a_confirmer": true,
-   "lieu": "Genève (Suisse)",
-   "discipline": "course_a_pied",
-   "format": "4,8 km, 7,3 km"
   },
   {
    "nom": "Cross de l'EPSM 74",
@@ -157,6 +149,13 @@
    "departement": "73",
    "discipline": "trail",
    "format": "10 km, 20 km"
+  },
+  {
+   "nom": "Course de l'Escalade",
+   "date": "2026-12-05",
+   "lieu": "Genève (Suisse)",
+   "discipline": "course_a_pied",
+   "format": "4,8 km, 7,3 km"
   },
   {
    "nom": "Relais du Muscle",
@@ -337,6 +336,7 @@
    "date": "2027-02-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "fin février 2027",
    "lieu": "Bron",
    "departement": "69",
    "discipline": "course_a_pied",
@@ -347,6 +347,7 @@
    "date": "2027-02-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "début février 2027",
    "lieu": "Genève (Suisse)",
    "discipline": "course_a_pied",
    "format": "5 km, 10 km"
@@ -466,16 +467,6 @@
    "a_confirmer": true,
    "lieu": "Oullins",
    "departement": "69",
-   "discipline": "course_a_pied",
-   "format": "10 km"
-  },
-  {
-   "nom": "10 km d'Aix-les-Bains",
-   "date": "2027-03-01",
-   "jour_inconnu": true,
-   "a_confirmer": true,
-   "lieu": "Aix-les-Bains",
-   "departement": "73",
    "discipline": "course_a_pied",
    "format": "10 km"
   },
@@ -690,10 +681,19 @@
    "format": "5 km, 11 km, 22 km, 31 km"
   },
   {
+   "nom": "10 km d'Aix-les-Bains",
+   "date": "2027-03-21",
+   "lieu": "Aix-les-Bains",
+   "departement": "73",
+   "discipline": "course_a_pied",
+   "format": "10 km"
+  },
+  {
    "nom": "10 kil de Cluses",
    "date": "2027-04-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "début avril 2027",
    "lieu": "Cluses",
    "departement": "74",
    "discipline": "course_a_pied",
@@ -743,20 +743,11 @@
    "date": "2027-04-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "début avril 2027",
    "lieu": "Villeurbanne",
    "departement": "69",
    "discipline": "course_a_pied",
    "format": "5 km, 10 km, Semi"
-  },
-  {
-   "nom": "Grenoble-Vizille",
-   "date": "2027-04-01",
-   "jour_inconnu": true,
-   "a_confirmer": true,
-   "lieu": "Eybens",
-   "departement": "38",
-   "discipline": "course_a_pied",
-   "format": "11 km, 20 km"
   },
   {
    "nom": "Hardloop Trail d'Annecy Les Glaisins",
@@ -847,26 +838,6 @@
    "departement": "01",
    "discipline": "course_a_pied",
    "format": "5 km, 10 km"
-  },
-  {
-   "nom": "Lyon Urban Trail",
-   "date": "2027-04-01",
-   "jour_inconnu": true,
-   "a_confirmer": true,
-   "lieu": "Lyon",
-   "departement": "69",
-   "discipline": "trail",
-   "format": "12 km, 18 km, 25 km, 35 km"
-  },
-  {
-   "nom": "Marathon Bresse Dombes",
-   "date": "2027-04-01",
-   "jour_inconnu": true,
-   "a_confirmer": true,
-   "lieu": "Châtillon-sur-Chalaronne",
-   "departement": "01",
-   "discipline": "course_a_pied",
-   "format": "10 km, Semi, Marathon"
   },
   {
    "nom": "Marathon du Grésivaudan",
@@ -993,10 +964,27 @@
    "date": "2027-04-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "fin avril 2027",
    "lieu": "Évian-les-Bains",
    "departement": "74",
    "discipline": "trail",
    "format": "8 km, 16 km, 30 km"
+  },
+  {
+   "nom": "Grenoble-Vizille",
+   "date": "2027-04-04",
+   "lieu": "Eybens",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "11 km, 20 km"
+  },
+  {
+   "nom": "Lyon Urban Trail",
+   "date": "2027-04-04",
+   "lieu": "Lyon",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "12 km, 18 km, 25 km, 35 km"
   },
   {
    "nom": "Thonon-les-Bains Running Race",
@@ -1013,6 +1001,14 @@
    "departement": "74",
    "discipline": "course_a_pied",
    "format": "5 km, 10 km, Semi, Marathon"
+  },
+  {
+   "nom": "Marathon Bresse Dombes",
+   "date": "2027-04-25",
+   "lieu": "Châtillon-sur-Chalaronne",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "10 km, Semi, Marathon"
   },
   {
    "nom": "Beaujol'Trail Morgon",
@@ -1155,16 +1151,6 @@
    "format": "5 km, 10 km, Semi"
   },
   {
-   "nom": "Marathon des Alpes",
-   "date": "2027-05-01",
-   "jour_inconnu": true,
-   "a_confirmer": true,
-   "lieu": "Bourg-Saint-Maurice",
-   "departement": "73",
-   "discipline": "course_a_pied",
-   "format": "5,5 km, 10 km, Semi, Marathon"
-  },
-  {
    "nom": "Marathon du Clair de Lune",
    "date": "2027-05-01",
    "jour_inconnu": true,
@@ -1173,16 +1159,6 @@
    "departement": "74",
    "discipline": "course_a_pied",
    "format": "Marathon"
-  },
-  {
-   "nom": "Maxi-Race",
-   "date": "2027-05-01",
-   "jour_inconnu": true,
-   "a_confirmer": true,
-   "lieu": "Annecy",
-   "departement": "74",
-   "discipline": "trail",
-   "format": "19 km, 42 km, 55 km, 100 km"
   },
   {
    "nom": "Odysséa Chambéry",
@@ -1248,6 +1224,7 @@
    "date": "2027-05-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "début mai 2027",
    "lieu": "Voglans",
    "departement": "73",
    "discipline": "trail",
@@ -1400,6 +1377,22 @@
    "format": "5 km, 10 km, Semi, Marathon"
   },
   {
+   "nom": "Marathon des Alpes",
+   "date": "2027-05-16",
+   "lieu": "Bourg-Saint-Maurice",
+   "departement": "73",
+   "discipline": "course_a_pied",
+   "format": "5,5 km, 10 km, Semi, Marathon"
+  },
+  {
+   "nom": "Maxi-Race",
+   "date": "2027-05-28",
+   "lieu": "Annecy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "19 km, 42 km, 55 km, 100 km"
+  },
+  {
    "nom": "10 km de Chambéry",
    "date": "2027-06-01",
    "jour_inconnu": true,
@@ -1474,6 +1467,7 @@
    "date": "2027-06-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "début juin 2027",
    "lieu": "Genève (Suisse)",
    "discipline": "trail",
    "format": "10 km, 20 km, 30 km, 46 km"
@@ -1527,16 +1521,6 @@
    "departement": "69",
    "discipline": "course_a_pied",
    "format": "5 km, 10 km, 21 km"
-  },
-  {
-   "nom": "Marathon du Mont-Blanc",
-   "date": "2027-06-01",
-   "jour_inconnu": true,
-   "a_confirmer": true,
-   "lieu": "Chamonix-Mont-Blanc",
-   "departement": "74",
-   "discipline": "trail",
-   "format": "10 km, 23 km, 42 km, 92 km"
   },
   {
    "nom": "Marathon du Vercors",
@@ -1757,6 +1741,14 @@
    "departement": "74",
    "discipline": "trail",
    "format": "9 km, 18 km, 33 km, 53 km, 96 km, 128 km"
+  },
+  {
+   "nom": "Marathon du Mont-Blanc",
+   "date": "2027-06-25",
+   "lieu": "Chamonix-Mont-Blanc",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "10 km, 23 km, 42 km, 92 km"
   },
   {
    "nom": "Argentrail",
@@ -2003,6 +1995,7 @@
    "date": "2027-07-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "mi juillet 2027",
    "lieu": "Grenoble",
    "departement": "38",
    "discipline": "trail",
@@ -2042,6 +2035,7 @@
    "date": "2027-08-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "mi août 2027",
    "lieu": "Vizille",
    "departement": "38",
    "discipline": "trail",
@@ -2591,6 +2585,7 @@
    "date": "2027-10-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "fin octobre 2027",
    "lieu": "Genève (Suisse)",
    "discipline": "course_a_pied",
    "format": "10 km, 20 km"
@@ -2656,16 +2651,6 @@
    "format": "9 km, 19 km, 36,5 km"
   },
   {
-   "nom": "Ekiden de Grenoble",
-   "date": "2027-10-01",
-   "jour_inconnu": true,
-   "a_confirmer": true,
-   "lieu": "Grenoble",
-   "departement": "38",
-   "discipline": "course_a_pied",
-   "format": "Marathon"
-  },
-  {
    "nom": "Foulée de Drumettaz-Clarafond",
    "date": "2027-10-01",
    "jour_inconnu": true,
@@ -2680,6 +2665,7 @@
    "date": "2027-10-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "mi octobre 2027",
    "lieu": "Le Bourget-du-Lac",
    "departement": "73",
    "discipline": "trail",
@@ -2774,16 +2760,6 @@
    "departement": "74",
    "discipline": "trail",
    "format": "3,2 km"
-  },
-  {
-   "nom": "Run In Lyon",
-   "date": "2027-10-01",
-   "jour_inconnu": true,
-   "a_confirmer": true,
-   "lieu": "Lyon",
-   "departement": "69",
-   "discipline": "course_a_pied",
-   "format": "5 km, 10 km, Semi, Marathon"
   },
   {
    "nom": "Saint-Fé Trail Solidaire",
@@ -2946,6 +2922,22 @@
    "format": "7 km"
   },
   {
+   "nom": "Run In Lyon",
+   "date": "2027-10-03",
+   "lieu": "Lyon",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, Semi, Marathon"
+  },
+  {
+   "nom": "Ekiden de Grenoble",
+   "date": "2027-10-10",
+   "lieu": "Grenoble",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "Marathon"
+  },
+  {
    "nom": "Agglo City Run",
    "date": "2027-11-01",
    "jour_inconnu": true,
@@ -2960,6 +2952,7 @@
    "date": "2027-11-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "début novembre 2027",
    "lieu": "Lyon",
    "departement": "69",
    "discipline": "course_a_pied",
@@ -2970,6 +2963,7 @@
    "date": "2027-11-01",
    "jour_inconnu": true,
    "a_confirmer": true,
+   "periode": "mi novembre 2027",
    "lieu": "Vénissieux",
    "departement": "69",
    "discipline": "course_a_pied",

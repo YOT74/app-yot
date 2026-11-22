@@ -21,6 +21,7 @@
 import * as fftri from './sources/fftri.mjs';
 import * as ironman from './sources/ironman.mjs';
 import * as liste from './sources/liste.mjs';
+import { traiterDoublons } from './doublons.mjs';
 
 const SOURCES = { fftri, ironman, liste };
 
@@ -34,7 +35,12 @@ const aLire = choisies.length ? choisies : Object.keys(SOURCES);
 
 const aujourdhui = new Date().toISOString().slice(0, 10);
 
-async function envoyer(lignes) {
+async function envoyer(toutesLignes) {
+  const groupes = new Map();
+  for (const c of toutesLignes) { const k = Object.keys(c).sort().join(','); groupes.set(k, [...(groupes.get(k) ?? []), c]); }
+  for (const lignes of groupes.values()) await envoyerGroupe(lignes);
+}
+async function envoyerGroupe(lignes) {
   const url = process.env.SUPABASE_URL?.replace(/\/$/, '');
   const cle = process.env.SUPABASE_CLE_SERVICE;
   if (!url || !cle) throw new Error('SUPABASE_URL et SUPABASE_CLE_SERVICE doivent être définis (secrets du dépôt).');
@@ -84,6 +90,18 @@ async function dejaAilleurs(lignes) {
   return gardees;
 }
 
+// Dates déjà trouvées par robot/dates.mjs : on ne les remplace pas par l'estimation de la liste.
+const CHAMPS_DATE = ['date_course', 'date_a_confirmer', 'jour_inconnu', 'periode'];
+async function garderDatesTrouvees(lignes) {
+  const url = process.env.SUPABASE_URL?.replace(/\/$/, '');
+  const cle = process.env.SUPABASE_CLE_SERVICE;
+  if (!url || !cle) return lignes;
+  const rep = await fetch(`${url}/rest/v1/courses?select=source_ref,${CHAMPS_DATE.join(',')}&source=eq.liste&date_verifiee=not.is.null&limit=5000`, { headers: { apikey: cle, Authorization: `Bearer ${cle}` } });
+  if (!rep.ok) return lignes;
+  const verifiees = new Map((await rep.json()).map(({ source_ref, ...dates }) => [source_ref, dates]));
+  return lignes.map((c) => (verifiees.has(c.source_ref) ? { ...c, ...verifiees.get(c.source_ref) } : c));
+}
+
 let erreurs = 0;
 for (const nom of aLire) {
   try {
@@ -94,7 +112,7 @@ for (const nom of aLire) {
       // à venir ; une course dont seul le mois est connu reste jusqu'à la fin de ce mois
       .filter((c) => c.date_course >= aujourdhui || (c.jour_inconnu && c.date_course.slice(0, 7) >= aujourdhui.slice(0, 7)))
       .map((c) => ({ ...c, validee: true }));   // les courses importées n'ont pas à être validées
-    if (nom === 'liste') lignes = await dejaAilleurs(lignes);
+    if (nom === 'liste') lignes = await garderDatesTrouvees(await dejaAilleurs(lignes));
     console.log(`${nom} : ${lues.length} lues, ${lignes.length} à venir`);
     if (essai) {
       for (const c of lignes.slice(0, 15)) console.log(`  ${c.date_course}${c.date_a_confirmer ? '?' : ' '} ${c.nom}  · ${c.discipline} ${c.format ?? ''} · ${c.lieu ?? ''}${c.departement ? ` (${c.departement})` : ''}`);
@@ -109,6 +127,10 @@ for (const nom of aLire) {
     erreurs++;
     console.error(`${nom} : ÉCHEC — ${e.message}`);
   }
+}
+// Après l'import : les courses en double entre sources sont masquées (si personne n'y est engagé).
+if (!essai && !sortie) {
+  try { await traiterDoublons(); } catch (e) { erreurs++; console.error(`doublons : ÉCHEC — ${e.message}`); }
 }
 if (sortie) {
   const { writeFile } = await import('node:fs/promises');

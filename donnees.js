@@ -190,7 +190,8 @@ async function refuserCourse(id, motif) {
 
 // Bureau : masquer / réafficher une course importée (supprimée, le robot la réimporterait).
 async function masquerCourse(id, masquee) {
-  const { error } = await supabase.from('courses').update({ masquee }).eq('id', id);
+  // réafficher une course : le robot ne la masquera plus comme doublon
+  const { error } = await supabase.from('courses').update(masquee ? { masquee } : { masquee, pas_doublon: true, doublon_de: null }).eq('id', id);
   verifier(error, 'Impossible de masquer la course.');
 }
 

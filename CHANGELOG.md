@@ -8,6 +8,14 @@ Numérotation X.Y.Z (la version change à chaque mise en ligne, sinon les télé
 - Y, fonctionnalité : nouvelle fonction visible pour les membres. Section + release.
 - X, version majeure : grande étape (lancement officiel auprès des membres = v2.0.0, refonte…). Section + release.
 
+## v1.17.0 — Doublons et dates plus précises
+
+- Le robot des courses repère les doublons entre sources (ex. IRONMAN 70.3 Aix-en-Provence, présent chez FFTri et chez IRONMAN) : dates à un jour près, noms qui se ressemblent et une distance en commun. Il masque celle en trop, seulement si personne n'y a de statut ; sinon le bureau fusionne. Une course réaffichée par le bureau n'est plus jamais masquée.
+- Dates exactes pour les grandes courses de la région déjà annoncées (10 km d'Aix-les-Bains le 21 mars, Grenoble-Vizille, Run In Lyon, Marathon des Alpes…), et période affichée quand seul le moment du mois est connu (« fin avril 2027 »).
+- Chaque semaine, le robot cherche les dates nouvellement annoncées (pages publiques de finishers.com) pour les courses dont le jour est inconnu ou à confirmer, et les met à jour.
+
+Base de données : colonnes `doublon_de`, `pas_doublon`, `periode` et `date_verifiee` sur `courses`.
+
 ## v1.16.0 — Courses de la région
 
 - 309 courses sur route, trails et cross ajoutées à la base : Haute-Savoie, Savoie, Rhône, Ain, Isère et Genève (marathon d'Annecy, Run in Lyon, foulées de Villeurbanne, semi de Bourg-en-Bresse, Grenoble-Vizille, Marathon de Genève, Escalade, Maxi-Race, UTMB, SaintéLyon…). Liste tenue à la main : la FFA interdit la lecture automatique de son calendrier.

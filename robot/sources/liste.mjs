@@ -24,6 +24,7 @@ export async function lire() {
         date_course: c.date,
         date_a_confirmer: !!c.a_confirmer,
         jour_inconnu: !!c.jour_inconnu,
+        periode: c.periode ?? null,
         lieu: c.lieu ?? null,
         departement: c.departement ?? null,
         discipline: c.discipline ?? discipline,

@@ -376,7 +376,8 @@ export function ecranBureau() {
     ${masquees.length ? `
       <section class="bloc">
         <h2>Courses masquées · ${masquees.length}</h2>
-            ${masquees.map((c) => `<div class="ligne-simple"><span>${esc(c.nom)} <span class="aide">· ${esc(avecAnnee(dateCourte(c.date_course), c.date_course))}</span></span>
+        <p class="aide" style="margin:0">Les doublons repérés par le robot sont masqués ici. Une course réaffichée ne sera plus masquée.</p>
+            ${masquees.map((c) => `<div class="ligne-simple"><span>${esc(c.nom)} <span class="aide">· ${esc(avecAnnee(dateCourte(c.date_course), c.date_course))}${c.doublon_de ? ` · doublon de « ${esc(course(c.doublon_de)?.nom ?? 'une autre course')} »` : ''}</span></span>
           <button class="lien-mini" type="button" data-action="reafficher-course" data-id="${esc(c.id)}">Réafficher</button></div>`).join('')}
       </section>` : ''}
     <section class="bloc">
