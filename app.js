@@ -16,6 +16,9 @@ import { emailConnecte } from './auth.js';
 import { afficher, charger, voirNotifications } from './rendu.js';
 import { tutoAVoir } from './actions.js';
 import { DELAI_RENVOI } from './config.js';
+import { ecouterInstallation } from './installation.js';
+
+ecouterInstallation(() => afficher());
 
 // Bouton « Recevoir un nouveau code » : compte à rebours avant de pouvoir redemander.
 setInterval(() => {

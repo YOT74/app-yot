@@ -4,7 +4,7 @@
 import { DISCIPLINES_SEANCE, INTENSITES, SANS_PRESENCE, NIVEAUX } from '../config.js';
 import { etat, estCoach, membre, nomMembre, groupeActif, sansGroupe } from '../etat.js';
 import { menuAdmin } from './communs.js';
-import { esc, aujourdhui, ajouterJours, lundiDe, jourSemaine, jourMois, jourMoisCourt, dateLongue } from '../outils.js';
+import { esc, icone, aujourdhui, ajouterJours, lundiDe, jourSemaine, jourMois, jourMoisCourt, dateLongue } from '../outils.js';
 import { entete, retour } from './communs.js';
 import { ORDRE_DISCIPLINES } from '../import-excel.js';
 
@@ -135,24 +135,30 @@ export function ecranEntrainement() {
 
   return `
     ${entete('Entraînement', `<span class="etiquette">${nb} séance${nb > 1 ? 's' : ''}</span>`)}
-    <p class="sous-titre">Semaine du ${esc(jourMois(debut))} au ${esc(jourMois(fin))}${coach ? ` · planning de ${esc(coach.prenom)} ${esc(coach.nom)}` : ''}</p>
-    <div class="segments" role="group" aria-label="Semaine">
-      <button type="button" data-action="semaine" data-valeur="${ajouterJours(debut, -7)}">‹ Précédente</button>
-      <button type="button" data-action="semaine" data-valeur="${lundiDe(aujourdhui())}" aria-pressed="${debut === lundiDe(aujourdhui())}">Cette semaine</button>
-      <button type="button" data-action="semaine" data-valeur="${ajouterJours(debut, 7)}">Suivante ›</button>
+    ${coach ? `<p class="sous-titre">Planning de ${esc(coach.prenom)} ${esc(coach.nom)}</p>` : ''}
+    <div class="barre-semaine" role="group" aria-label="Semaine">
+      <button class="bouton-icone" type="button" data-action="semaine" data-valeur="${ajouterJours(debut, -7)}" aria-label="Semaine précédente">${icone.precedent}</button>
+      <div class="barre-semaine-titre">
+        <strong>${esc(jourMois(debut))} – ${esc(jourMois(fin))}</strong>
+        ${debut === lundiDe(aujourdhui()) ? '<span>Cette semaine</span>'
+          : `<button type="button" class="lien-discret" data-action="semaine" data-valeur="${lundiDe(aujourdhui())}">Revenir à cette semaine</button>`}
+      </div>
+      <button class="bouton-icone" type="button" data-action="semaine" data-valeur="${ajouterJours(debut, 7)}" aria-label="Semaine suivante">${icone.suivant}</button>
     </div>
-    <div class="segments vue" role="group" aria-label="Affichage">
-      <button type="button" data-action="vue-planning" data-valeur="texte" aria-pressed="${!graphique}">Texte</button>
-      <button type="button" data-action="vue-planning" data-valeur="graphique" aria-pressed="${graphique}">Graphique</button>
+    <div class="outils-planning">
+      ${monGroupe || etat.moi.niveau_cap || etat.moi.niveau_velo ? `<div class="segments compact" role="group" aria-label="Séances affichées">
+        <button type="button" data-action="filtre-groupe" data-valeur="" aria-pressed="${etat.groupe !== 'tous'}">Mes séances</button>
+        <button type="button" data-action="filtre-groupe" data-valeur="tous" aria-pressed="${etat.groupe === 'tous'}">Toutes</button>
+      </div>` : '<span></span>'}
+      <div class="segments compact icones" role="group" aria-label="Affichage">
+        <button type="button" data-action="vue-planning" data-valeur="texte" aria-pressed="${!graphique}" aria-label="Vue liste" title="Liste">${icone.liste}</button>
+        <button type="button" data-action="vue-planning" data-valeur="graphique" aria-pressed="${graphique}" aria-label="Vue semaine" title="Semaine">${icone.grille}</button>
+      </div>
     </div>
-    ${monGroupe || etat.moi.niveau_cap || etat.moi.niveau_velo ? `<div class="segments" role="group" aria-label="Séances affichées">
-      <button type="button" data-action="filtre-groupe" data-valeur="" aria-pressed="${etat.groupe !== 'tous'}">Mes séances</button>
-      <button type="button" data-action="filtre-groupe" data-valeur="tous" aria-pressed="${etat.groupe === 'tous'}">Toutes les séances</button>
-    </div>` : ''}
     ${!monGroupe ? '<p class="aide" style="margin:0">Renseigne ton volume d’entraînement hebdomadaire dans <a href="#/compte">Mon compte</a> pour afficher ton groupe.</p>' : ''}
     ${estCoach() ? `<div class="rangee">
-      <a class="bouton contour" href="#/seance/nouvelle/${debut}">+ Séance</a>
-      <a class="bouton contour" href="#/import-planning">Importer un fichier Excel</a></div>` : ''}
+      <a class="bouton petit discret" href="#/seance/nouvelle/${debut}">${icone.ajouter} Séance</a>
+      <a class="bouton petit discret" href="#/import-planning">Importer un fichier Excel</a></div>` : ''}
     ${graphique ? vueGraphique(jours) : `<div class="semaine">
       ${jours.map((j) => {
         const duJour = etat.seances.filter((s) => s.date === j && seanceDuGroupe(s)).sort((a, b) => (a.heure || '').localeCompare(b.heure || ''));

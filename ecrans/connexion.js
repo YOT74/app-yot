@@ -5,6 +5,7 @@ import { MODE_DEMO, LONGUEUR_CODE, NOM_CLUB, CONNEXION_GOOGLE, CONNEXION_APPLE }
 import { etat } from '../etat.js';
 import { esc, icone } from '../outils.js';
 import { dossard } from './communs.js';
+import { installationPossible } from '../installation.js';
 
 // Comptes de démonstration (mode démo seulement) : un clic pour entrer.
 const COMPTES_DEMO = [
@@ -54,6 +55,7 @@ export function ecranConnexion() {
           ${CONNEXION_GOOGLE ? `<button class="bouton contour large fournisseur" type="button" data-action="connexion-fournisseur" data-valeur="google">${LOGO_GOOGLE} Continuer avec Google</button>` : ''}
           ${CONNEXION_APPLE ? `<button class="bouton large fournisseur apple" type="button" data-action="connexion-fournisseur" data-valeur="apple">${LOGO_APPLE} Continuer avec Apple</button>` : ''}
         </div>` : ''}
+      ${installationPossible() ? '<button class="bouton discret large" type="button" data-action="installer-app">📲 Installer l’app sur mon téléphone</button>' : ''}
       ${MODE_DEMO && c.etape === 'email' ? `
         <div class="avertissement">
           <p style="margin:0 0 10px">Mode démo : choisis un compte ou saisis une adresse quelconque (le code peut être composé de ${LONGUEUR_CODE} chiffres au choix).</p>

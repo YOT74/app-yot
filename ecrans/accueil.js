@@ -95,8 +95,8 @@ export function ecranAccueil() {
           <span class="aide">${esc(dateCourte(seance.date))}${seance.heure ? ` · ${esc(seance.heure)}` : ''} · ${esc(DISCIPLINES_SEANCE[seance.discipline] ?? seance.discipline)}${seance.groupe ? ` · ${esc(seance.groupe)}` : ''}</span></span>${icone.suivant}</a>
       </section>` : ''}
 
-    <div class="mois">Actualités du club</div>
-    ${estBureau() ? '<a class="bouton contour" href="#/actualite/nouvelle">Publier une actualité</a>' : ''}
+    <div class="mois mois-action">Actualités du club
+      ${estBureau() ? `<a class="bouton petit discret" href="#/actualite/nouvelle">${icone.ajouter} Publier</a>` : ''}</div>
     ${visibles.length ? visibles.map(carteActu).join('') : '<p class="vide">Aucune actualité pour le moment.</p>'}
     ${actus.length > 3 && !etat.toutesActus ? '<button class="bouton discret" type="button" data-action="toutes-actus">Voir les actualités plus anciennes</button>' : ''}
 

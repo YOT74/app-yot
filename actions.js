@@ -15,6 +15,7 @@ import { lireFichier, seancesAImporter, trierFeuilles } from './import-excel.js'
 import { preparerPhoto } from './avatar.js';
 import { detailSeance } from './ecrans/entrainement.js';
 import { groupeActif, sansGroupe } from './etat.js';
+import { etapesIphone } from './installation.js';
 
 const bloquerSiHorsLigne = () => {
   if (etat.horsLigne) { message('Tu es hors ligne. Réessaie lorsque la connexion sera rétablie.'); return true; }
@@ -377,6 +378,15 @@ document.addEventListener('click', async (ev) => {
     case 'export-csv': exporterCSV(); break;
 
     // notifications
+    case 'installer-app': {
+      const invitation = etat.invitationInstall;
+      if (invitation) {                 // Android : fenêtre d'installation du navigateur
+        etat.invitationInstall = null;
+        await invitation.prompt();
+        afficher();
+      } else { feuille.innerHTML = etapesIphone(); feuille.showModal(); }
+      break;
+    }
     case 'verifier-attente': {
       etat.infoAttente = null;
       await charger();

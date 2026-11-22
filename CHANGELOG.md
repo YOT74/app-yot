@@ -3,6 +3,12 @@
 Chaque nouvelle section « ## vX.Y.Z — titre » crée automatiquement une release sur GitHub
 (workflow « Releases »). Les petites retouches (un texte, une couleur) n'ont pas de section.
 
+## v1.9.3 — Installer l'app, planning plus léger
+
+- Bouton « Installer l'app » sur l'écran de connexion et dans Plus : fenêtre d'installation sur Android, étapes illustrées sur iPhone. Il disparaît une fois l'app installée.
+- Planning : barre de semaine compacte, bascule liste / semaine en icônes, « Mes séances / Toutes » en pastille.
+- Accueil : petit bouton « + Publier » à côté des actualités ; bordures des boutons secondaires plus fines.
+
 ## v1.9.2 — Inscriptions validées par le bureau
 
 - Nouveau compte en attente : le bureau accepte ou refuse depuis l'Espace bureau (notification à chaque demande).

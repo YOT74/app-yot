@@ -8,6 +8,7 @@ import { etat, estAdmin, estBureau, estCoach, membre, nomMembre, suffixeRole, co
 import { esc, icone, normalise, aujourdhui, ajouterJours, jourMois, dateCourte, ilYa, lienSur } from '../outils.js';
 import { entete, retour, ligneCourse, menuAdmin } from './communs.js';
 import { avatar } from '../avatar.js';
+import { installationPossible } from '../installation.js';
 import { doublonsPossibles } from './calendrier.js';
 
 const lienMenu = (href, titre, detail = '', extra = '') =>
@@ -23,6 +24,7 @@ export function ecranPlus() {
       ${lienMenu('#/membres', 'Membres', 'Leurs courses et résultats')}
       ${lienMenu('#/partenaires', 'Partenaires', 'Codes promo et réductions')}
       ${estBureau() ? lienMenu('#/bureau', 'Espace bureau', 'Inscriptions, validations, tableau de bord', attente ? `<span class="compteur">${attente}</span>` : '') : ''}
+      ${installationPossible() ? `<button class="menu-lien" type="button" data-action="installer-app"><span><strong>Installer l’app</strong><br><span class="aide">Sur l’écran d’accueil du téléphone</span></span>${icone.suivant}</button>` : ''}
       ${lienMenu('#/compte', 'Mon compte', `${esc(etat.moi.prenom)} ${esc(etat.moi.nom)} · ${esc(etat.email)}`)}
     </nav>
     <section class="bloc apparence">
