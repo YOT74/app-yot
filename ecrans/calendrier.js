@@ -34,7 +34,7 @@ function elargir() {
   const f = etat.filtres;
   if (f.base || !f.recherche.trim()) return '';
   const autres = coursesFiltrees(true).length - coursesFiltrees(false).length;
-  return autres > 0 ? `<button type="button" class="lien-discret elargir" data-action="filtre-portee" data-valeur="base">+ ${autres} course${autres > 1 ? 's' : ''} dans toute la base</button>` : '';
+  return autres > 0 ? `<button type="button" class="lien-discret elargir" data-action="filtre-portee" data-valeur="base">Chercher dans toute la base (+ ${autres})</button>` : '';
 }
 
 // La liste seule : réaffichée à chaque lettre tapée dans la recherche (garde le focus du champ).

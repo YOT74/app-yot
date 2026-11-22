@@ -26,10 +26,12 @@ export const feuille = document.getElementById('feuille');
 const bandeau = document.getElementById('bandeau');
 
 export function message(texte) {
+  // message bref, en bas de l'écran, qui laisse passer les touchers (ne bloque pas la flèche retour)
   bandeau.innerHTML = `<span>${esc(texte)}</span>`;
+  bandeau.classList.add('info');
   bandeau.hidden = false;
   clearTimeout(message.minuteur);
-  message.minuteur = setTimeout(() => { bandeau.hidden = true; }, 3500);
+  message.minuteur = setTimeout(() => { bandeau.hidden = true; bandeau.classList.remove('info'); }, 2500);
 }
 
 // Écran à afficher pour l'adresse courante → [html, onglet actif]

@@ -52,6 +52,7 @@ window.addEventListener('online', () => { if (etat.horsLigne) charger(); });
 // --- Mises à jour de l'app (service worker) -----------------------------------
 function proposerMiseAJour(travailleur) {
   const bandeau = document.getElementById('bandeau');
+  bandeau.classList.remove('info');
   bandeau.innerHTML = '<span>Nouvelle version disponible</span><button type="button">Recharger</button>';
   bandeau.hidden = false;
   bandeau.querySelector('button').addEventListener('click', () => travailleur.postMessage('activer'), { once: true });
