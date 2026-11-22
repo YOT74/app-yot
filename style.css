@@ -753,3 +753,4 @@ button.menu-lien { width: 100%; background: none; border-left: none; border-righ
 .encart .ligne-detail { font-size: 12px; }
 .encart .ligne-detail .badge { font-size: 10px; padding: 1px 5px; }
 .encart .ligne .pastille { min-height: 24px; font-size: 12px; padding: 2px 7px; }
+.elargir { display: block; margin: 4px 0 8px; }

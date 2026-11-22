@@ -249,6 +249,7 @@ document.addEventListener('click', async (ev) => {
       afficher(); break;
     case 'filtre-periode': f.periode = valeur; afficher(); break;
     case 'filtre-bascule': f[valeur] = !f[valeur]; afficher(); break;
+    case 'filtre-portee': f.base = valeur === 'base'; afficher(); break;
     case 'tri': f.tri = valeur; afficher(); break;
     case 'vider-filtres': Object.assign(f, { disciplines: [], periode: 'tout', club: false, miennes: false, passees: false, base: false, tri: 'date' }); afficher(); break;
 

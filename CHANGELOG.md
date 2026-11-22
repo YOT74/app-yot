@@ -8,6 +8,11 @@ Numérotation X.Y.Z (la version change à chaque mise en ligne, sinon les télé
 - Y, fonctionnalité : nouvelle fonction visible pour les membres. Section + release.
 - X, version majeure : grande étape (lancement officiel auprès des membres = v2.0.0, refonte…). Section + release.
 
+## v1.13.0 — Calendrier : courses suivies par le club
+
+- Filtre explicite « Suivies par le club » (courses où au moins un membre participe, par défaut) / « Toute la base ».
+- La recherche porte sur le filtre choisi ; un lien « + N courses dans toute la base » permet d'élargir.
+
 ## v1.12.0 — Brouillons et course club sur l'accueil
 
 - Brouillons : une actualité, un message ou une proposition de course en cours d'écriture est gardé sur le téléphone et repris au retour (« Brouillon repris · Effacer »). Effacé une fois publié.

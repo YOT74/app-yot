@@ -9,9 +9,9 @@ import { entete, parMois, ligneCourse, retour } from './communs.js';
 const PERIODES = { '3mois': '3 prochains mois', saison: '12 prochains mois', tout: 'Tout' };
 const TRIS = { date: 'Par date', inscrits: "Plus d'inscrits", interesses: "Plus d'intéressés", engages: "Plus d'engagés" };
 
-// Par défaut : seulement les courses suivies par le club (au moins un engagé).
-// Une recherche, ou « Toute la base », porte sur toutes les courses importées.
-function coursesFiltrees() {
+// Portée : « Suivies par le club » (au moins un membre engagé, par défaut) ou « Toute la base ».
+// La recherche porte sur la portée choisie ; un lien propose d'élargir à toute la base.
+function coursesFiltrees(base = etat.filtres.base) {
   const f = etat.filtres;
   const mots = normalise(f.recherche).split(/\s+/).filter(Boolean);
   const texte = (c) => normalise(`${c.nom} ${c.lieu ?? ''} ${c.departement ?? ''} ${c.format ?? ''}`);
@@ -19,13 +19,22 @@ function coursesFiltrees() {
   const limite = f.periode === '3mois' ? ajouterJours(auj, 91) : f.periode === 'saison' ? ajouterJours(auj, 365) : null;
   const compte = (c) => (f.tri === 'inscrits' ? nbStatut(c, 'inscrit') : f.tri === 'interesses' ? nbStatut(c, 'interesse') : nbEngages(c));
   return etat.courses
-    .filter((c) => (mots.length ? mots.every((m) => texte(c).includes(m)) : f.base || suivieParLeClub(c)))
+    .filter((c) => base || suivieParLeClub(c))
+    .filter((c) => !mots.length || mots.every((m) => texte(c).includes(m)))
     .filter((c) => f.passees || c.date_course >= auj)
     .filter((c) => !limite || c.date_course < auj || c.date_course <= limite)
     .filter((c) => !f.disciplines.length || f.disciplines.includes(c.discipline))
     .filter((c) => !f.club || c.course_club)
     .filter((c) => !f.miennes || !!monStatut(c))
     .sort((a, b) => (f.tri !== 'date' && compte(b) - compte(a)) || a.date_course.localeCompare(b.date_course));
+}
+
+// En recherche sur les courses suivies : proposer d'élargir à toute la base.
+function elargir() {
+  const f = etat.filtres;
+  if (f.base || !f.recherche.trim()) return '';
+  const autres = coursesFiltrees(true).length - coursesFiltrees(false).length;
+  return autres > 0 ? `<button type="button" class="lien-discret elargir" data-action="filtre-portee" data-valeur="base">+ ${autres} course${autres > 1 ? 's' : ''} dans toute la base</button>` : '';
 }
 
 // La liste seule : réaffichée à chaque lettre tapée dans la recherche (garde le focus du champ).
@@ -35,10 +44,10 @@ export function listeCalendrier() {
   const compteur = { inscrits: 'inscrits', interesses: 'interesses' }[f.tri] ?? 'engages';
   const proposer = `<p class="aide">Course introuvable ? <a href="#/proposer">Propose-la au bureau</a>.</p>`;
   if (!liste.length) {
-    if (f.recherche.trim()) return `<p class="vide">Aucune course trouvée pour « ${esc(f.recherche.trim())} ».</p>${proposer}`;
+    if (f.recherche.trim()) return `<p class="vide">Aucune course ${f.base ? '' : 'suivie par le club '}trouvée pour « ${esc(f.recherche.trim())} ».</p>${elargir()}${proposer}`;
     return `<p class="vide">${f.base ? 'Aucune course pour ces filtres.' : 'Aucune course pour ces filtres.'}</p>`;
   }
-  return (f.tri === 'date' ? parMois(liste, { compteur }) : `<div class="liste">${liste.map((c) => ligneCourse(c, { compteur })).join('')}</div>`)
+  return elargir() + (f.tri === 'date' ? parMois(liste, { compteur }) : `<div class="liste">${liste.map((c) => ligneCourse(c, { compteur })).join('')}</div>`)
     + `<p class="aide propose-bas">Une course est absente ? <a href="#/proposer">Propose-la au bureau</a>.</p>`;
 }
 
@@ -57,13 +66,14 @@ export function ecranCalendrier() {
     <p class="sous-titre">${nbAlertes ? `${nbAlertes} clôture${nbAlertes > 1 ? 's' : ''} d'inscription proche${nbAlertes > 1 ? 's' : ''}` : "Aucune clôture d'inscription imminente"}</p>
 
     <div class="champ recherche-course">
-      <input type="search" data-action="recherche-course" value="${esc(f.recherche)}" placeholder="Chercher une course, un lieu, un département…" aria-label="Chercher une course dans toute la base" autocomplete="off">
+      <input type="search" data-action="recherche-course" value="${esc(f.recherche)}" placeholder="Chercher une course, un lieu, un département…" aria-label="Chercher une course" autocomplete="off">
     </div>
 
     <div class="puces puces-defilantes" role="group" aria-label="Afficher">
+      ${puce('filtre-portee', 'suivies', 'Suivies par le club', !f.base)}
+      ${puce('filtre-portee', 'base', 'Toute la base', f.base)}
       ${puce('filtre-bascule', 'miennes', 'Où je vais', f.miennes)}
       ${puce('filtre-bascule', 'club', 'Courses club', f.club)}
-      ${puce('filtre-bascule', 'base', 'Toute la base', f.base)}
     </div>
 
     <details class="filtres" ${actifs ? 'open' : ''}>
