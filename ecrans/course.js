@@ -189,7 +189,7 @@ export function ecranCourse(id) {
 
   return `
     ${retour('#/calendrier', 'Calendrier')}
-    <span class="etiquette">${esc(dateLongue(c.date_course))}${future ? ` · J-${joursAvant(c.date_course)}` : ''}</span>
+    <span class="etiquette">${esc(dateLongue(c.date_course))}${c.date_a_confirmer ? ' · date à confirmer' : future ? ` · J-${joursAvant(c.date_course)}` : ''}</span>
     <h1 class="fiche-titre">${esc(c.nom)}</h1>
     <div class="fiche-meta">
       <span>${[esc(libelleDiscipline(c.discipline)), c.format ? esc(c.format) : '', c.lieu ? `${esc(c.lieu)}${c.departement ? ` (${esc(c.departement)})` : ''}` : ''].filter(Boolean).join(' · ')}</span>

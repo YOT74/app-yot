@@ -54,18 +54,49 @@ async function envoyer(lignes) {
   }
 }
 
+// Courses de la liste déjà publiées par FFTri ou IRONMAN (même année, nom reconnu par sa « cle ») :
+// on ne les envoie plus, et la version estimée est retirée si aucun membre n'y a de statut.
+async function dejaAilleurs(lignes) {
+  const url = process.env.SUPABASE_URL?.replace(/\/$/, '');
+  const cle = process.env.SUPABASE_CLE_SERVICE;
+  if (!url || !cle) return lignes.map(({ cle: _, ...c }) => c);
+  const h = { apikey: cle, Authorization: `Bearer ${cle}` };
+  const gardees = [];
+  for (const { cle: motif, ...c } of lignes) {
+    if (motif) {
+      // même nom (mot entier, expression régulière) et date à 30 jours près de l'estimation
+      const an = c.date_course.slice(0, 4);
+      const jour = (n) => new Date(Date.parse(c.date_course) + n * 864e5).toISOString().slice(0, 10);
+      const rep = await fetch(`${url}/rest/v1/courses?select=id,nom&source=in.(fftri,ironman)&nom=imatch.${encodeURIComponent(`\\m${motif}\\M`)}&date_course=gte.${jour(-30)}&date_course=lte.${jour(30)}&limit=1`, { headers: h });
+      const trouvee = rep.ok ? (await rep.json())[0] : null;
+      if (trouvee) {
+        console.log(`  ${c.nom} ${an} : publiée par la source officielle (« ${trouvee.nom} »)`);
+        const ma = await (await fetch(`${url}/rest/v1/courses?select=id,participations(id)&source=eq.liste&source_ref=eq.${encodeURIComponent(c.source_ref)}`, { headers: h })).json();
+        if (ma[0] && !ma[0].participations?.length) {
+          await fetch(`${url}/rest/v1/courses?id=eq.${ma[0].id}`, { method: 'DELETE', headers: h });
+          console.log('    version estimée retirée');
+        } else if (ma[0]) console.log('    version estimée gardée : des membres y ont un statut (à fusionner dans l’espace bureau)');
+        continue;
+      }
+    }
+    gardees.push(c);
+  }
+  return gardees;
+}
+
 let erreurs = 0;
 for (const nom of aLire) {
   try {
     console.log(`${nom} : lecture…`);
     const lues = await SOURCES[nom].lire({ fichier: fichiers[nom] });
     process.stdout.write('\n');
-    const lignes = lues
+    let lignes = lues
       .filter((c) => c.date_course >= aujourdhui)
       .map((c) => ({ ...c, validee: true }));   // les courses importées n'ont pas à être validées
+    if (nom === 'liste') lignes = await dejaAilleurs(lignes);
     console.log(`${nom} : ${lues.length} lues, ${lignes.length} à venir`);
     if (essai) {
-      for (const c of lignes.slice(0, 15)) console.log(`  ${c.date_course}  ${c.nom}  · ${c.discipline} ${c.format ?? ''} · ${c.lieu ?? ''}${c.departement ? ` (${c.departement})` : ''}`);
+      for (const c of lignes.slice(0, 15)) console.log(`  ${c.date_course}${c.date_a_confirmer ? '?' : ' '} ${c.nom}  · ${c.discipline} ${c.format ?? ''} · ${c.lieu ?? ''}${c.departement ? ` (${c.departement})` : ''}`);
       if (lignes.length > 15) console.log(`  … et ${lignes.length - 15} autres`);
     } else if (sortie) {
       toutes.push(...lignes);

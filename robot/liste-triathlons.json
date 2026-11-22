@@ -1,0 +1,12 @@
+{
+  "_lisez_moi": "Grands triathlons connus, ajoutés avant que leur édition n'apparaisse au calendrier FFTri ou IRONMAN. Une ligne = une course. a_confirmer : true quand l'organisateur n'a annoncé que la période (date estimée, affichée « date à confirmer » dans l'app). cle : mot du nom qui permet de reconnaître la course chez FFTri ou IRONMAN (mot entier, « . » = n'importe quelle lettre) ; dès qu'elle y apparaît à 30 jours près, cette ligne est ignorée et la course estimée est retirée (si aucun membre n'y a de statut). Dates relevées en novembre 2026.",
+  "courses": [
+    { "nom": "Triathlon de Deauville", "date": "2027-06-12", "periode": "mi-juin", "a_confirmer": true, "lieu": "Deauville", "departement": "14", "format": "L", "cle": "deauville", "url": "https://www.triathlondeauville.com" },
+    { "nom": "Altriman", "date": "2027-07-03", "periode": "début juillet", "a_confirmer": true, "lieu": "Les Angles", "departement": "66", "format": "XXL", "cle": "altriman", "url": "https://www.altriman.com" },
+    { "nom": "DATEV Challenge Roth", "date": "2027-07-04", "lieu": "Roth, Allemagne", "format": "XXL", "url": "https://www.challenge-roth.com" },
+    { "nom": "Triathlon de l'Alpe d'Huez", "date": "2027-07-28", "periode": "du 25 au 29 juillet (site officiel), jour du L à confirmer", "a_confirmer": true, "lieu": "Alpe d'Huez", "departement": "38", "format": "L", "cle": "huez", "url": "https://www.alpetriathlon.com" },
+    { "nom": "Embrunman", "date": "2027-08-15", "periode": "mi-août", "a_confirmer": true, "lieu": "Embrun", "departement": "05", "format": "XXL", "cle": "embrunman", "url": "https://www.embrunman.com" },
+    { "nom": "Triathlon de Gérardmer", "date": "2027-09-04", "periode": "début septembre", "a_confirmer": true, "lieu": "Gérardmer", "departement": "88", "format": "L", "cle": "g.rardmer", "url": "https://www.triathlondegerardmer.com" },
+    { "nom": "Natureman Var", "date": "2027-09-25", "periode": "fin septembre", "a_confirmer": true, "lieu": "Var", "departement": "83", "format": "L", "cle": "natureman", "url": "https://www.natureman-var.fr" }
+  ]
+}

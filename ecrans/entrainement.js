@@ -18,9 +18,11 @@ export const groupesConnus = () =>
 // Si le coach ne m'a pas encore donné de niveau, les séances par niveau de cette discipline restent affichées.
 const monNiveau = (s) => (s.discipline === 'course_a_pied' ? etat.moi.niveau_cap : s.discipline === 'velo' ? etat.moi.niveau_velo : null);
 const filtreActif = () => etat.groupe !== 'tous' && !!(etat.moi.groupe || etat.moi.niveau_cap || etat.moi.niveau_velo);
-const seanceDuGroupe = (s) => {
+// toujours = true : on filtre sur mes groupes même si « Toutes les séances » est choisi (accueil)
+export const seanceDuGroupe = (s, toujours = false) => {
   const gs = groupesDe(s);
-  if (!filtreActif() || !gs.length) return true;
+  const actif = toujours ? !!(etat.moi.groupe || etat.moi.niveau_cap || etat.moi.niveau_velo) : filtreActif();
+  if (!actif || !gs.length) return true;
   if (gs.includes(etat.moi.groupe) || (monNiveau(s) && gs.includes(monNiveau(s)))) return true;
   return !monNiveau(s) && gs.every((g) => NIVEAUX.includes(g));
 };

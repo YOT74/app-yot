@@ -1,7 +1,21 @@
 # Versions de l'app
 
 Chaque nouvelle section « ## vX.Y.Z — titre » crée automatiquement une release sur GitHub
-(workflow « Releases »). Les petites retouches (un texte, une couleur) n'ont pas de section.
+(workflow « Releases »).
+
+Numérotation X.Y.Z (la version change à chaque mise en ligne, sinon les téléphones gardent l'ancienne app) :
+- Z, correctif : correction, retouche de texte ou de design. Pas de section ici, donc pas de release.
+- Y, fonctionnalité : nouvelle fonction visible pour les membres. Section + release.
+- X, version majeure : grande étape (lancement officiel auprès des membres = v2.0.0, refonte…). Section + release.
+
+## v1.10.0 — Grands triathlons ajoutés à la base
+
+- Nouvelle liste de grands triathlons (Alpe d'Huez, Embrunman, Challenge Roth, Altriman, Gérardmer, Deauville, Natureman Var), présents avant même leur arrivée au calendrier FFTri.
+- Date encore estimée : badge « Date à confirmer » (jour indicatif).
+- Dès que FFTri ou IRONMAN publie la course (même nom, à 30 jours près), le robot retire la version estimée.
+- Accueil : « Séance du jour » jusqu'à 19 h 30, puis « Séance de demain » (selon ton groupe et tes niveaux), ou « Repos » / « Pas de séance prévue ».
+
+Base de données : colonne `date_a_confirmer` sur `courses`.
 
 ## v1.9.4 — Actualités : mise en forme et photos
 

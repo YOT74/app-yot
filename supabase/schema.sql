@@ -53,6 +53,7 @@ create table courses (
   -- ('fftri', 'ironman', 'liste'…). Les courses importées arrivent déjà validées.
   source text not null default 'membre',
   source_ref text,                                  -- identifiant chez la source (mises à jour du robot)
+  date_a_confirmer boolean not null default false,  -- date estimée : jour pas encore publié par l'organisateur
   url_source text,                                  -- page de la course chez la source
   corrigee boolean not null default false,          -- corrigée par le bureau : le robot ne l'écrase plus
   masquee boolean not null default false,           -- masquée par le bureau (une course importée supprimée reviendrait)

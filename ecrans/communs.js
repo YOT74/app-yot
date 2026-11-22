@@ -50,6 +50,7 @@ export function ligneCourse(c, { membreId = etat.moi.id, compteur = 'engages', d
   const ligne1 = [esc(libelleDiscipline(c.discipline)), c.format ? esc(c.format) : null, lieu || null].filter(Boolean).join(' · ');
   const badges = [];
   if (c.course_club) badges.push('<span class="badge badge-club">Course club</span>');
+  if (c.date_a_confirmer) badges.push('<span class="badge">Date à confirmer</span>');
   const j = alerteCloture(c);
   if (j !== null && membreId === etat.moi.id) badges.push(`<span class="badge alerte">Clôture ${j === 0 ? "aujourd'hui" : `dans ${j} j`}</span>`);
   let detail = `${n ? `${n} ${unite}${n > 1 ? 's' : ''}` : 'personne pour l’instant'}`;

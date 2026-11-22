@@ -6,6 +6,8 @@ import { etat, estBureau, course, alerteCloture, nbNonLues, nomMembre } from '..
 import { esc, icone, aujourdhui, dateLongue, dateCourte, ilYa, jourMois } from '../outils.js';
 import { entete, dossardProchaine, retour, menuAdmin } from './communs.js';
 import { formaterTexte, barreFormat } from '../texte-riche.js';
+import { seanceDuGroupe } from './entrainement.js';
+import { ajouterJours } from '../outils.js';
 
 const partenaireExpire = (p) => p.valable_jusqu_au && p.valable_jusqu_au < aujourdhui();
 
@@ -91,8 +93,14 @@ export function ecranAccueil() {
   const clotures = etat.courses.filter((c) => alerteCloture(c) !== null)
     .sort((a, b) => a.date_limite_inscription.localeCompare(b.date_limite_inscription));
 
-  const seance = etat.seances.filter((s) => s.date >= aujourdhui() && s.discipline !== 'repos')
-    .sort((a, b) => (a.date + (a.heure || '')).localeCompare(b.date + (b.heure || '')))[0];
+  // Séance du jour jusqu'à 19 h 30 (heure des dernières séances), séance de demain ensuite.
+  const maintenant = new Date();
+  const avantSoir = maintenant.getHours() * 60 + maintenant.getMinutes() < 19 * 60 + 30;
+  const jourSeance = avantSoir ? aujourdhui() : ajouterJours(aujourdhui(), 1);
+  const duJour = etat.seances.filter((s) => s.date === jourSeance && seanceDuGroupe(s, true))   // mes séances
+    .sort((a, b) => (a.heure || '').localeCompare(b.heure || ''));
+  const seances = duJour.filter((s) => s.discipline !== 'repos');
+  const repos = !seances.length && duJour.some((s) => s.discipline === 'repos');
 
   const actus = [...etat.actualites].sort((a, b) => (a.epinglee !== b.epinglee ? (a.epinglee ? -1 : 1) : b.publiee_le.localeCompare(a.publiee_le)));
   const visibles = etat.toutesActus ? actus : actus.slice(0, 3);
@@ -113,11 +121,12 @@ export function ecranAccueil() {
         }).join('')}
       </section>` : ''}
 
-    ${seance ? `
+    ${etat.seances.length ? `
       <section class="encart">
-        <h2>Prochaine séance</h2>
-        <a class="encart-lien" href="#/entrainement"><span><strong>${esc(seance.titre)}</strong><br>
-          <span class="aide">${esc(dateCourte(seance.date))}${seance.heure ? ` · ${esc(seance.heure)}` : ''} · ${esc(DISCIPLINES_SEANCE[seance.discipline] ?? seance.discipline)}${seance.groupe ? ` · ${esc(seance.groupe)}` : ''}</span></span>${icone.suivant}</a>
+        <h2>${avantSoir ? 'Séance du jour' : 'Séance de demain'}</h2>
+        ${repos || !seances.length ? `<a class="encart-lien" href="#/entrainement"><span><strong>${repos ? 'Repos' : 'Pas de séance prévue'}</strong></span>${icone.suivant}</a>`
+          : seances.map((s) => `<a class="encart-lien" href="#/entrainement"><span><strong>${esc(s.titre)}</strong><br>
+          <span class="aide">${esc(DISCIPLINES_SEANCE[s.discipline] ?? s.discipline)}${s.heure ? ` · ${esc(s.heure)}` : ''}${s.duree ? ` · ${esc(s.duree)}` : ''}${s.lieu ? ` · ${esc(s.lieu)}` : ''}</span></span>${icone.suivant}</a>`).join('')}
       </section>` : ''}
 
     <div class="mois mois-action">Actualités du club
