@@ -91,7 +91,8 @@ for (const nom of aLire) {
     const lues = await SOURCES[nom].lire({ fichier: fichiers[nom] });
     process.stdout.write('\n');
     let lignes = lues
-      .filter((c) => c.date_course >= aujourdhui)
+      // à venir ; une course dont seul le mois est connu reste jusqu'à la fin de ce mois
+      .filter((c) => c.date_course >= aujourdhui || (c.jour_inconnu && c.date_course.slice(0, 7) >= aujourdhui.slice(0, 7)))
       .map((c) => ({ ...c, validee: true }));   // les courses importées n'ont pas à être validées
     if (nom === 'liste') lignes = await dejaAilleurs(lignes);
     console.log(`${nom} : ${lues.length} lues, ${lignes.length} à venir`);

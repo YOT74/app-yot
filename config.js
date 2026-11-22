@@ -24,7 +24,7 @@ export const NOM_CLUB = 'YOT';
 // --- Version de l'app ---------------------------------------------------
 // À augmenter à chaque publication (et la même valeur dans sw.js),
 // sinon les téléphones gardent l'ancienne version en cache.
-export const VERSION = '1.15.0';
+export const VERSION = '1.16.0';
 
 // Nombre de chiffres du code reçu par email (réglage Supabase : Authentication → Sign In / Providers → Email → Email OTP Length).
 export const LONGUEUR_CODE = 6;
@@ -103,7 +103,7 @@ export const SOURCES = {
   membre: 'Proposée par un membre',
   fftri: 'Calendrier FFTri',
   ironman: 'IRONMAN',
-  liste: 'Grandes courses (liste du club)',
+  liste: 'Liste du club (grandes courses et courses de la région)',
 };
 
 // --- Albums ----------------------------------------------------------------

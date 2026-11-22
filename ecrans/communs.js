@@ -43,14 +43,15 @@ export function pastilleStatut(c, membreId = etat.moi.id) {
 // Une ligne de course dans une liste. compteur = 'engages' | 'inscrits' | 'interesses'
 // droite = HTML qui remplace la pastille de statut (ex. menu « ⋯ » dans Mes courses)
 export function ligneCourse(c, { membreId = etat.moi.id, compteur = 'engages', droite = null } = {}) {
-  const jour = String(enDate(c.date_course).getDate()).padStart(2, '0');
+  // seul le mois est connu : on affiche le mois (« AVR ») à la place d'un jour inventé
+  const jour = c.jour_inconnu ? fMoisCourt(c.date_course) : String(enDate(c.date_course).getDate()).padStart(2, '0');
   const n = compteur === 'inscrits' ? nbStatut(c, 'inscrit') : compteur === 'interesses' ? nbStatut(c, 'interesse') : nbEngages(c);
   const unite = compteur === 'inscrits' ? 'inscrit' : compteur === 'interesses' ? 'intéressé' : 'engagé';
   const lieu = c.lieu ? `${esc(c.lieu)}${c.departement ? ` (${esc(c.departement)})` : ''}` : '';
   const ligne1 = [esc(libelleDiscipline(c.discipline)), c.format ? esc(c.format) : null, lieu || null].filter(Boolean).join(' · ');
   const badges = [];
   if (c.course_club) badges.push('<span class="badge badge-club">Course club</span>');
-  if (c.date_a_confirmer) badges.push('<span class="badge">Date à confirmer</span>');
+  if (c.date_a_confirmer && !c.jour_inconnu) badges.push('<span class="badge">Date à confirmer</span>');
   const j = alerteCloture(c);
   if (j !== null && membreId === etat.moi.id) badges.push(`<span class="badge alerte">Clôture ${j === 0 ? "aujourd'hui" : `dans ${j} j`}</span>`);
   let detail = `${n ? `${n} ${unite}${n > 1 ? 's' : ''}` : 'personne pour l’instant'}`;
@@ -61,7 +62,7 @@ export function ligneCourse(c, { membreId = etat.moi.id, compteur = 'engages', d
   return `
     <div class="ligne${c.course_club ? ' course-club' : ''}${p && membreId === etat.moi.id ? ` statut-${p.statut}` : ''}">
       <a class="ligne-lien" href="#/course/${esc(c.id)}">
-        <span class="ligne-jour" aria-hidden="true">${jour}</span>
+        <span class="ligne-jour${c.jour_inconnu ? ' mois-seul' : ''}" aria-hidden="true">${jour}</span>
         <span class="ligne-texte">
           <span class="ligne-nom">${esc(c.nom)}</span>
           <span class="ligne-detail">${ligne1}</span>
@@ -86,6 +87,8 @@ export function parMois(liste, options) {
 
 // Ma prochaine échéance sous forme de dossard.
 // Choix de ma distance sur un événement à plusieurs distances (feuille de statut et fiche course).
+const fMoisCourt = (d) => enDate(d).toLocaleDateString('fr-FR', { month: 'short' }).replace('.', '').slice(0, 4).toUpperCase();
+
 export function choixDistance(c) {
   const p = maParticipation(c);
   if (!p || p.statut === 'forfait' || !plusieursDistances(c)) return '';
@@ -108,6 +111,12 @@ export function dossardProchaine() {
       <span class="dossard-info">Choisis une course dans le calendrier et indique ton statut.</span>`, '#/calendrier');
   }
   const jours = joursAvant(maDate(p));   // jour de MA distance si l'événement dure plusieurs jours
+  if (p.jour_inconnu) {
+    return dossard(NOM_CLUB, moisAnnee(p.date_course), `
+      <span class="dossard-chiffre petit">${esc(moisAnnee(p.date_course).split(' ')[0])}</span>
+      <span class="dossard-nom">${esc(p.nom)}</span>
+      <span class="dossard-info">Date exacte pas encore annoncée</span>`, `#/course/${esc(p.id)}`);
+  }
   // les autres membres engagés (hors forfait), sans me compter
   const autres = nbEngages(p) - 1;
   const statut = [STATUTS[monStatut(p)]?.libelle, plusieursDistances(p) ? maParticipation(p)?.distance : null].filter(Boolean).join(' · ');

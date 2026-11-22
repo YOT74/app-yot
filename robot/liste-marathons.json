@@ -8,7 +8,6 @@
     { "nom": "Marathon de Paris", "date": "2027-04-04", "lieu": "Paris", "departement": "75", "format": "Marathon" },
     { "nom": "Marathon de Milan", "date": "2027-04-04", "lieu": "Milan, Italie", "format": "Marathon" },
     { "nom": "Marathon de Rotterdam", "date": "2027-04-11", "lieu": "Rotterdam, Pays-Bas", "format": "Marathon" },
-    { "nom": "Marathon du lac d'Annecy", "date": "2027-04-18", "lieu": "Annecy", "departement": "74", "format": "Marathon" },
     { "nom": "Marathon de Vienne", "date": "2027-04-18", "lieu": "Vienne, Autriche", "format": "Marathon" },
     { "nom": "Marathon de Londres", "date": "2027-04-25", "lieu": "Londres, Royaume-Uni", "format": "Marathon" },
     { "nom": "Marathon de Madrid", "date": "2027-04-25", "lieu": "Madrid, Espagne", "format": "Marathon" },

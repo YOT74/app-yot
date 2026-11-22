@@ -55,6 +55,7 @@ create table courses (
   source text not null default 'membre',
   source_ref text,                                  -- identifiant chez la source (mises à jour du robot)
   date_a_confirmer boolean not null default false,  -- date estimée : jour pas encore publié par l'organisateur
+  jour_inconnu boolean not null default false,      -- seul le mois est annoncé (date_course = 1er du mois)
   epreuves jsonb,                                   -- événement sur plusieurs jours : [{"nom": "10 km", "date": "2027-04-17"}, …]
   url_source text,                                  -- page de la course chez la source
   corrigee boolean not null default false,          -- corrigée par le bureau : le robot ne l'écrase plus

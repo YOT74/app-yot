@@ -78,7 +78,8 @@ export const plusieursJours = (c) => new Set(epreuvesDe(c).map((e) => e.date)).s
 export const dernierJour = (c) => epreuvesDe(c).reduce((m, e) => (e.date > m ? e.date : m), c.date_course);
 // date qui me concerne : celle de ma distance si je l'ai choisie, sinon le premier jour
 export const dateDeLaDistance = (c, distance) => epreuvesDe(c).find((e) => e.nom === distance)?.date ?? c.date_course;
-export const aVenir = (c) => dernierJour(c) >= aujourdhui();
+// seul le mois est connu (jour_inconnu) : la course reste « à venir » jusqu'à la fin de ce mois
+export const aVenir = (c) => dernierJour(c) >= aujourdhui() || (!!c.jour_inconnu && c.date_course.slice(0, 7) >= aujourdhui().slice(0, 7));
 export const enAttente = () => etat.courses.filter((c) => !c.validee);
 export const participationDe = (c, membreId) => c.participations.find((p) => p.membre_id === membreId);
 export const maParticipation = (c) => participationDe(c, etat.moi.id);

@@ -3,7 +3,7 @@
 // =====================================================================
 import { STATUTS, TYPES_ALBUM, SOURCES } from '../config.js';
 import { etat, estBureau, course, maParticipation, aVenir, statutPossible, alerteCloture, nomMembre, plusieursDistances, plusieursJours, epreuvesDe, maDate, dernierJour } from '../etat.js';
-import { esc, icone, lienSur, aujourdhui as aujourdhuiIso, dateLongue, jourMois, joursAvant, afficherTemps, ilYa, horodatage } from '../outils.js';
+import { esc, icone, lienSur, aujourdhui as aujourdhuiIso, dateLongue, moisAnnee, jourMois, joursAvant, afficherTemps, ilYa, horodatage } from '../outils.js';
 import { retour, libelleDiscipline, choixDistance } from './communs.js';
 import { avatar } from '../avatar.js';
 import { membre } from '../etat.js';
@@ -182,7 +182,7 @@ export function ecranCourse(id) {
 
   return `
     ${retour('#/calendrier', 'Calendrier')}
-    <span class="etiquette">${plusieursJours(c) ? `Du ${esc(jourMois(c.date_course))} au ${esc(jourMois(dernierJour(c)))}` : esc(dateLongue(c.date_course))}${c.date_a_confirmer ? ' · date à confirmer' : future && maDate(c) >= aujourdhuiIso() ? ` · J-${joursAvant(maDate(c))}${plusieursJours(c) && maParticipation(c)?.distance ? ` (${esc(maParticipation(c).distance)})` : ''}` : ''}</span>
+    <span class="etiquette">${c.jour_inconnu ? `${esc(moisAnnee(c.date_course))} · date exacte pas encore annoncée` : plusieursJours(c) ? `Du ${esc(jourMois(c.date_course))} au ${esc(jourMois(dernierJour(c)))}` : esc(dateLongue(c.date_course))}${c.jour_inconnu ? '' : c.date_a_confirmer ? ' · date à confirmer' : future && maDate(c) >= aujourdhuiIso() ? ` · J-${joursAvant(maDate(c))}${plusieursJours(c) && maParticipation(c)?.distance ? ` (${esc(maParticipation(c).distance)})` : ''}` : ''}</span>
     <h1 class="fiche-titre">${esc(c.nom)}</h1>
     <div class="fiche-meta">
       <span>${[esc(libelleDiscipline(c.discipline)), c.format ? esc(c.format) : '', c.lieu ? `${esc(c.lieu)}${c.departement ? ` (${esc(c.departement)})` : ''}` : ''].filter(Boolean).join(' · ')}</span>

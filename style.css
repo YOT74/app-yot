@@ -762,3 +762,5 @@ button.menu-lien { width: 100%; background: none; border-left: none; border-righ
 .choix-distance { margin: 0; padding: 0; flex-wrap: wrap; overflow: visible; }
 .resume-distances { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0 0 4px; font-size: 14px; }
 .badge.distance { background: var(--teinte); color: var(--accent); border: none; }
+.ligne-jour.mois-seul { font-size: 22px; letter-spacing: 0.02em; }
+.encart .ligne-jour.mois-seul { font-size: 16px; }

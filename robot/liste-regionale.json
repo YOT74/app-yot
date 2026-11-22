@@ -1,0 +1,3068 @@
+{
+ "_lisez_moi": "Courses sur route, trails et cross de la région (Haute-Savoie, Savoie, Rhône, Ain, Isère) et de Genève, relevées en novembre 2026 sur les calendriers publics des organisateurs. La FFA interdit la lecture automatique de son calendrier : cette liste est tenue à la main, à mettre à jour une fois par an. date « AAAA-MM-01 » + jour_inconnu : seul le mois est annoncé (affiché « avril 2027 »). Quelques courses d'octobre-novembre sont reprises au même mois que l'édition précédente, en attendant l'annonce.",
+ "courses": [
+  {
+   "nom": "SaintéLyon",
+   "date": "2026-11-28",
+   "lieu": "Lyon",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "13 km, 24 km, 36 km, 45 km, 80 km, 160 km"
+  },
+  {
+   "nom": "Corrida d'Aix-les-Bains",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Aix-les-Bains",
+   "departement": "73",
+   "discipline": "course_a_pied",
+   "format": "7,5 km"
+  },
+  {
+   "nom": "Corrida de Tarare",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Tarare",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "9 km"
+  },
+  {
+   "nom": "Corrida du Laudon",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Jorioz",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "Corrida du Téléthon",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Epagny Metz-Tessy",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "7,2 km"
+  },
+  {
+   "nom": "Corrida-Trail Ambarroise",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Ambérieu-en-Bugey",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "Course de l'Escalade",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Genève (Suisse)",
+   "discipline": "course_a_pied",
+   "format": "4,8 km, 7,3 km"
+  },
+  {
+   "nom": "Cross de l'EPSM 74",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "La Roche-sur-Foron",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "Cross 8 km"
+  },
+  {
+   "nom": "Festitrail d'Autrans",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Autrans-Méaudre en Vercors",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "22 km"
+  },
+  {
+   "nom": "Foulées de l'Île Barlet",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Romain-en-Gal",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "8 km, 14 km"
+  },
+  {
+   "nom": "La Sibérienne",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Laffrey",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "7 km, 15 km, 24 km"
+  },
+  {
+   "nom": "La Voironnaise",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Voiron",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "8 km"
+  },
+  {
+   "nom": "Night & Run",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chambéry",
+   "departement": "73",
+   "discipline": "course_a_pied",
+   "format": "12,5 km"
+  },
+  {
+   "nom": "Novatrail",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Novalaise",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "9 km, 15 km"
+  },
+  {
+   "nom": "Trail Nocturne Haut Bugey",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Plateau d'Hauteville",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "7 km, 14 km"
+  },
+  {
+   "nom": "Trail de Noël - Les Saisies",
+   "date": "2026-12-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Les Saisies",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 20 km"
+  },
+  {
+   "nom": "Relais du Muscle",
+   "date": "2026-12-06",
+   "lieu": "Lyon",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "7 km, 14 km"
+  },
+  {
+   "nom": "Spartan Morzine Winter Trail",
+   "date": "2026-12-13",
+   "lieu": "Morzine",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "10 km, 21 km"
+  },
+  {
+   "nom": "Foulée des Monts d'Or",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Romain-au-Mont-d'Or",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "25 km"
+  },
+  {
+   "nom": "La Barque Lait Jura",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bellegarde-sur-Valserine",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "50 km"
+  },
+  {
+   "nom": "La Dragonale Givrée",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Praz-sur-Arly",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "12 km"
+  },
+  {
+   "nom": "La Saintlo",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Laurent-d'Agny",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "9 km, 15 km"
+  },
+  {
+   "nom": "Le Bélier Blanc",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "La Clusaz",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "6 km, 8 km, 14 km"
+  },
+  {
+   "nom": "Raidlight Winter Trail",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Pierre-de-Chartreuse",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "10 km, 15 km, 20 km, 25 km"
+  },
+  {
+   "nom": "Trail Blanc du Corbier",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Corbier",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "5 km, 11,5 km"
+  },
+  {
+   "nom": "Trail Blanc du Semnoz",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Annecy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "11,5 km"
+  },
+  {
+   "nom": "Trail Givré",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Montanay",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "9,5 km, 25,1 km"
+  },
+  {
+   "nom": "Trail Hivernal des Coursières",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Martin-en-Haut",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "16 km, 33 km"
+  },
+  {
+   "nom": "Trail Hivernal du Vercors",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Corrençon-en-Vercors",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "15 km"
+  },
+  {
+   "nom": "Trail d'Hiver des Gets",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Les Gets",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "10 km, 20 km"
+  },
+  {
+   "nom": "Trail de l'Inuit",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Pralognan-la-Vanoise",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "7,5 km, 15 km"
+  },
+  {
+   "nom": "Trail des Coteaux du Lyonnais",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Taluyers",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "11 km, 22 km, 30 km"
+  },
+  {
+   "nom": "Val Tho Trail",
+   "date": "2027-01-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Val Thorens",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "8 km"
+  },
+  {
+   "nom": "Abrénaline",
+   "date": "2027-01-30",
+   "lieu": "Les Abrets en Dauphiné",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "10 km"
+  },
+  {
+   "nom": "10 km de Bron",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bron",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "10 km"
+  },
+  {
+   "nom": "Antigel Run",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Genève (Suisse)",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "Foulées San-Priotes",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Priest",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5,8 km, 10 km, 21 km"
+  },
+  {
+   "nom": "La Massingienne",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Massingy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "9 km, 18 km, 33 km"
+  },
+  {
+   "nom": "La Run Givrée",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-André-le-Gaz",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, 15 km"
+  },
+  {
+   "nom": "Semi-marathon & 10 km de Bourg-en-Bresse",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bourg-en-Bresse",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, Semi"
+  },
+  {
+   "nom": "Sous la lune de Saint-Jean",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Jean-de-Niost",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "Trace des Maquisards",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Oyonnax",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "10 km, 28 km, 42 km, 100 km"
+  },
+  {
+   "nom": "Trail Blanc de la Rosière",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Montvalezan",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "5 km, 10 km, 20 km"
+  },
+  {
+   "nom": "Trail des Cabornis",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chasselay",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "13 km, 25 km, 41 km"
+  },
+  {
+   "nom": "Trail la Fée Blanche",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Aillon-le-Jeune",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km"
+  },
+  {
+   "nom": "Winter Trail d'Alix",
+   "date": "2027-02-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Alix",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "9 km, 17 km, 26 km"
+  },
+  {
+   "nom": "La Maraîchère",
+   "date": "2027-02-06",
+   "lieu": "Feillens",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "10 km Oullins-Pierre-Bénite",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Oullins",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "10 km"
+  },
+  {
+   "nom": "10 km d'Aix-les-Bains",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Aix-les-Bains",
+   "departement": "73",
+   "discipline": "course_a_pied",
+   "format": "10 km"
+  },
+  {
+   "nom": "Caluire Urban Trail",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Caluire-et-Cuire",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "8 km, 16 km, 24 km, 32 km"
+  },
+  {
+   "nom": "ChaveyNo'Z Tour",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chaveyriat",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "7,3 km, 11,6 km, 21,3 km"
+  },
+  {
+   "nom": "Course du Bord de Saône",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Bernard",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "6 km, 14,1 km, 21,8 km"
+  },
+  {
+   "nom": "Ekiden Bron Lyon Métropole",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bron",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "Marathon"
+  },
+  {
+   "nom": "L'Anthychoise",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Anthy-sur-Léman",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "7 km, 14 km, 21 km"
+  },
+  {
+   "nom": "La Menthonnaise",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Menthon-Saint-Bernard",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "10,5 km"
+  },
+  {
+   "nom": "La Saint-Albanaise",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Alban-de-Roche",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "10 km, 12 km, 15 km, 21 km"
+  },
+  {
+   "nom": "La Vourloise",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Vourles",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "12 km, 17 km, 24 km"
+  },
+  {
+   "nom": "Les Arcs Star Trail",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bourg-Saint-Maurice",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "11 km"
+  },
+  {
+   "nom": "Les Princes en Foulées",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Seyssel",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "9 km, 16 km, 26 km, 35 km"
+  },
+  {
+   "nom": "Lyaud Trail",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Lyaud",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "9 km, 20 km"
+  },
+  {
+   "nom": "Printemps d'Ozon Courir",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Symphorien-d'Ozon",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, 20 km, 30 km"
+  },
+  {
+   "nom": "Sacré Trail des Collines",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Tullins",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "15 km, 27 km, 37 km"
+  },
+  {
+   "nom": "Trail de Pérouges",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Pérouges",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "7 km, 12,3 km"
+  },
+  {
+   "nom": "Trail de la Côte Châtillonnaise",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Massingy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "8,5 km, 11 km, 17 km, 25 km"
+  },
+  {
+   "nom": "Trail des Chamois",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Coligny",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "10 km, 19 km, 31 km, 42 km, 67 km"
+  },
+  {
+   "nom": "Trail des Grottes",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Christophe",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 21 km"
+  },
+  {
+   "nom": "Trail du Mont Grêle",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Béron",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "12 km, 23 km, 40 km"
+  },
+  {
+   "nom": "Trail du Printemps",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Pierre-d'Albigny",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 12 km, 25 km"
+  },
+  {
+   "nom": "Trail du Sanglier",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Igny-de-Vers",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "10 km, 15 km, 27 km, 40 km"
+  },
+  {
+   "nom": "VeyziaTrail",
+   "date": "2027-03-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Veyziat",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "5 km, 11 km, 22 km, 31 km"
+  },
+  {
+   "nom": "10 kil de Cluses",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Cluses",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "10 km"
+  },
+  {
+   "nom": "Course des Ponts",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Genève (Suisse)",
+   "discipline": "course_a_pied",
+   "format": "8 km, 10 km"
+  },
+  {
+   "nom": "Courses de Chassieu",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chassieu",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, Semi"
+  },
+  {
+   "nom": "Déci'Run",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Décines-Charpieu",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "5 km, 12 km, 28 km"
+  },
+  {
+   "nom": "Entrelacs Run and Trail",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Albens",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "13 km, 23 km, 45 km, 60 km"
+  },
+  {
+   "nom": "Foulées de Villeurbanne",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Villeurbanne",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, Semi"
+  },
+  {
+   "nom": "Grenoble-Vizille",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Eybens",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "11 km, 20 km"
+  },
+  {
+   "nom": "Hardloop Trail d'Annecy Les Glaisins",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Annecy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "11 km, 20 km, 32 km"
+  },
+  {
+   "nom": "Humani'Run",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Meylan",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "L'Odyssée Beaujolaise",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Fleurie",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "12 km, 21 km, 33 km, 42 km, 60 km"
+  },
+  {
+   "nom": "La Capeçone",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Publier",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "8 km, 13 km"
+  },
+  {
+   "nom": "La Chatvoyarde",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Jean-de-Chevelu",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 21 km, 35 km"
+  },
+  {
+   "nom": "La Montée du Funi des Arcs",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bourg-Saint-Maurice",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "5,1 km"
+  },
+  {
+   "nom": "La Saint Ju'Trail",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Julien",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "10 km, 19 km, 39 km, 68 km"
+  },
+  {
+   "nom": "La Vauxoise",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Vaux-en-Bugey",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "11 km, 21 km"
+  },
+  {
+   "nom": "Les Foulées San-Rémoises",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Rémy",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "Lyon Urban Trail",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Lyon",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "12 km, 18 km, 25 km, 35 km"
+  },
+  {
+   "nom": "Marathon Bresse Dombes",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Châtillon-sur-Chalaronne",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "10 km, Semi, Marathon"
+  },
+  {
+   "nom": "Marathon du Grésivaudan",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Versoud",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "12 km, 21 km, 42 km"
+  },
+  {
+   "nom": "Mont d'Or Trail",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Poleymieux-au-Mont-d'Or",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "10 km, 19 km"
+  },
+  {
+   "nom": "Rémy Trail",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Rémy-de-Maurienne",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "7 km, 14 km, 25 km"
+  },
+  {
+   "nom": "ToussOtrail",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Toussieu",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "10 km, 13 km, 25 km"
+  },
+  {
+   "nom": "Trail de Douvres",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Douvres",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "13 km, 21 km, 30 km"
+  },
+  {
+   "nom": "Trail de la Mandallaz",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "La Balme-de-Sillingy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "10,4 km, 21,6 km"
+  },
+  {
+   "nom": "Trail de la Michaille",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Valserhône",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "12 km, 22 km, 32 km"
+  },
+  {
+   "nom": "Trail des 3 Couvents",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Laurent-du-Pont",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "13 km, 24 km, 53 km"
+  },
+  {
+   "nom": "Trail des 3 Pucelles",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Seyssins",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "12 km, 15 km, 23 km"
+  },
+  {
+   "nom": "Trail des Dahus Sallanchards",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Sallanches",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "13,8 km, 23,6 km"
+  },
+  {
+   "nom": "Trail du Lac de Paladru",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Montferrat",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "12 km, 16,7 km, 32,5 km, 49 km, 84 km"
+  },
+  {
+   "nom": "Trail du Mont Saint-Michel",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chambéry",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 17 km, 27 km"
+  },
+  {
+   "nom": "Évian Urban Trail",
+   "date": "2027-04-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Évian-les-Bains",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "8 km, 16 km, 30 km"
+  },
+  {
+   "nom": "Thonon-les-Bains Running Race",
+   "date": "2027-04-23",
+   "lieu": "Thonon-les-Bains",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "Marathon du Lac d'Annecy",
+   "date": "2027-04-24",
+   "lieu": "Annecy",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, Semi, Marathon"
+  },
+  {
+   "nom": "Beaujol'Trail Morgon",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Villié-Morgon",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "8 km, 12 km, 32 km"
+  },
+  {
+   "nom": "Chartreuse Trail Festival",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Pierre-de-Chartreuse",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "16 km, 24 km, 33 km, 47 km"
+  },
+  {
+   "nom": "Courir pour Elles",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Lyon",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "Course Nature de la Saint-Bruno",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Contamine-sur-Arve",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "6 km, 11 km"
+  },
+  {
+   "nom": "Courses des Balcons",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Morestel",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "10 km, Semi"
+  },
+  {
+   "nom": "Eco-Run des Cardons",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Vaulx-en-Velin",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "5 km, 11 km, 22 km"
+  },
+  {
+   "nom": "Foulées de Gruffy",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Gruffy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "10,5 km, 14,5 km, 31 km"
+  },
+  {
+   "nom": "Gend'trail",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Samoëns",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "31 km"
+  },
+  {
+   "nom": "Grand Raid 73",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Cruet",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 23 km, 50 km, 74,5 km"
+  },
+  {
+   "nom": "L'Allingeoise",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Allinges",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "9 km, 19 km"
+  },
+  {
+   "nom": "La Douze Mont-Blanc Passy",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Passy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "6,8 km, 11,5 km, 18,7 km"
+  },
+  {
+   "nom": "La Sévérun",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Civrieux",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, 21 km"
+  },
+  {
+   "nom": "La Tartencelloise",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Margencel",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "9 km, 15 km"
+  },
+  {
+   "nom": "Le Trèfle Talançonnais",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Reyrieux",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, Semi"
+  },
+  {
+   "nom": "Marathon des Alpes",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bourg-Saint-Maurice",
+   "departement": "73",
+   "discipline": "course_a_pied",
+   "format": "5,5 km, 10 km, Semi, Marathon"
+  },
+  {
+   "nom": "Marathon du Clair de Lune",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Doussard",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "Marathon"
+  },
+  {
+   "nom": "Maxi-Race",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Annecy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "19 km, 42 km, 55 km, 100 km"
+  },
+  {
+   "nom": "Odysséa Chambéry",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chambéry",
+   "departement": "73",
+   "discipline": "course_a_pied",
+   "format": "8 km"
+  },
+  {
+   "nom": "R2A Marathon",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "La Roche-sur-Foron",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "22 km, 42,7 km"
+  },
+  {
+   "nom": "Run Écully",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Écully",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "6,5 km, 10 km, 20 km"
+  },
+  {
+   "nom": "SkyRace des Matheysins",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Honoré",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "10 km, 18 km, 25 km, 43,5 km"
+  },
+  {
+   "nom": "Tour Pédestre du Canton de Genève",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Genève (Suisse)",
+   "discipline": "course_a_pied",
+   "format": "8,9 km, 11,5 km"
+  },
+  {
+   "nom": "Tour du Lac d'Aiguebelette",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Aiguebelette-le-Lac",
+   "departement": "73",
+   "discipline": "course_a_pied",
+   "format": "17 km"
+  },
+  {
+   "nom": "Trail Nivolet Revard",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Voglans",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "7 km, 14 km, 28 km, 53 km"
+  },
+  {
+   "nom": "Trail SO Bugey",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Lhuis",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "13 km, 19 km, 40 km"
+  },
+  {
+   "nom": "Trail Thoiry Reculet",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Thoiry",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "10 km, 12 km, 31 km"
+  },
+  {
+   "nom": "Trail Vertical de Tsorette",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Mercury",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 16 km"
+  },
+  {
+   "nom": "Trail de la Grande Montagne",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Poizat-Lalleyriat",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "12 km, 25 km, 42 km"
+  },
+  {
+   "nom": "Trail du Bostet",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Naves",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "5 km, 11 km, 21 km"
+  },
+  {
+   "nom": "Trail du Fort de Tamié",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Mercury",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "11 km, 15 km, 25 km"
+  },
+  {
+   "nom": "Trail du Gerbier",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Gua",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "11 km, 22 km, 37 km"
+  },
+  {
+   "nom": "Trail du Grand Genève",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Genève (Suisse)",
+   "discipline": "trail",
+   "format": "8 km, 12 km, 25 km, 40 km"
+  },
+  {
+   "nom": "Trail du Laudon",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Jorioz",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "14 km, 26 km, 42 km"
+  },
+  {
+   "nom": "Trail du Moucherotte",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Nizier-du-Moucherotte",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "11 km, 23 km, 41 km"
+  },
+  {
+   "nom": "Trails de la Vallée du Brevon",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bellevaux",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "10 km, 20 km, 35 km, 55 km"
+  },
+  {
+   "nom": "Ultra Montée Thollon les Mémises",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Thollon-les-Mémises",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "2h, 4h, 8h"
+  },
+  {
+   "nom": "Ultra Tour du Môle",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Marignier",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "36 km"
+  },
+  {
+   "nom": "Ultra-Trail des Coursières",
+   "date": "2027-05-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Martin-en-Haut",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "12 km, 24 km, 52 km, 104 km, 163 km"
+  },
+  {
+   "nom": "Genève Marathon",
+   "date": "2027-05-08",
+   "lieu": "Genève (Suisse)",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, Semi, Marathon"
+  },
+  {
+   "nom": "10 km de Chambéry",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chambéry",
+   "departement": "73",
+   "discipline": "course_a_pied",
+   "format": "10 km"
+  },
+  {
+   "nom": "Aravistrail",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Thônes",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "5 km, 11 km, 20 km, 28 km, 48 km, 65 km"
+  },
+  {
+   "nom": "Bernex Trail Challenge",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bernex",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "8 km, 21 km, 30 km, 62 km"
+  },
+  {
+   "nom": "Course des Héros Lyon",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Lyon",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "Cusy'Hard",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Cusy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "7 km, 13 km, 23 km"
+  },
+  {
+   "nom": "Dix'Vonne",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Divonne-les-Bains",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "12 km"
+  },
+  {
+   "nom": "Eco Ekiden de Savoie",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Bourget-du-Lac",
+   "departement": "73",
+   "discipline": "course_a_pied",
+   "format": "Marathon"
+  },
+  {
+   "nom": "EcoTrail Genève",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Genève (Suisse)",
+   "discipline": "trail",
+   "format": "10 km, 20 km, 30 km, 46 km"
+  },
+  {
+   "nom": "Foulées de Voreppe",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Voreppe",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, 15 km, 23 km"
+  },
+  {
+   "nom": "Franchevill'trail",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Francheville",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "10,5 km, 22 km, 31 km"
+  },
+  {
+   "nom": "Grand Duc - Trail de Chartreuse",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Sappey-en-Chartreuse",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "24 km, 46 km, 77 km"
+  },
+  {
+   "nom": "La Comblorane",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Combloux",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "7 km, 15 km, 25 km, 42 km"
+  },
+  {
+   "nom": "La Tribu du Running",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Tassin-la-Demi-Lune",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, 21 km"
+  },
+  {
+   "nom": "Marathon du Mont-Blanc",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chamonix-Mont-Blanc",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "10 km, 23 km, 42 km, 92 km"
+  },
+  {
+   "nom": "Marathon du Vercors",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Villard-de-Lans",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "10 km, 20 km, Marathon"
+  },
+  {
+   "nom": "Marvel Human Seyssel",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Seyssel",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "10 km, Semi"
+  },
+  {
+   "nom": "Megève Nature Trail",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Megève",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "13 km, 18 km, 35 km"
+  },
+  {
+   "nom": "Montée de l'Alpe d'Huez",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Huez",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "14 km"
+  },
+  {
+   "nom": "Mésy'Trail",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Mésigny",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "11 km, 17 km, 27 km"
+  },
+  {
+   "nom": "RunThrough Trails Morzine-Avoriaz",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Morzine",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "12,7 km, 24,5 km, 48,8 km, 97,1 km"
+  },
+  {
+   "nom": "Semi-marathon de l'Alpe d'Huez",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "L'Alpe d'Huez",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "Semi"
+  },
+  {
+   "nom": "Trail de Brénod",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Brénod",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "8 km, 16 km, 24 km, 42 km"
+  },
+  {
+   "nom": "Trail de la Fontaine des Ânes",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Rivolet",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "13 km, 20 km, 39 km, 61 km, 88 km"
+  },
+  {
+   "nom": "Trail de la Gi Jy Monte",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Plateau d'Hauteville",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "8 km, 16 km, 35 km"
+  },
+  {
+   "nom": "Trail de la Valserine",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Champfromier",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "105 km"
+  },
+  {
+   "nom": "Trail des Bauges",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Châtelard",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 21 km, 48 km"
+  },
+  {
+   "nom": "Trail des Crêtes du Chablais",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Vacheresse",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "18 km, 35 km, 53 km, 92 km"
+  },
+  {
+   "nom": "Trail des Pierres Dorées",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Anse",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "10 km, 15 km, 24 km"
+  },
+  {
+   "nom": "Trail du Circuit de la Sure",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Voiron",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "12 km, 32 km, 59 km"
+  },
+  {
+   "nom": "Trail du Granier",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Baldoph",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 24 km"
+  },
+  {
+   "nom": "Trail du Gypaète",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Marnaz",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "14,5 km, 31 km, 45 km, 57 km, 76 km"
+  },
+  {
+   "nom": "Trail du Lac Noir",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Montsapey",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "12,5 km, 25 km"
+  },
+  {
+   "nom": "Trail du Salève",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Blaise",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "17,8 km, 24,8 km, 37,8 km"
+  },
+  {
+   "nom": "Trails de Bozel Mont-Jovet",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bozel",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "9 km, 22 km, 30 km"
+  },
+  {
+   "nom": "Ugine Trail Running",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Ugine",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km"
+  },
+  {
+   "nom": "Ultra-Trail du Haut-Giffre",
+   "date": "2027-06-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Samoëns",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "9 km, 18 km, 33 km, 53 km, 96 km, 128 km"
+  },
+  {
+   "nom": "Argentrail",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chamonix-Mont-Blanc",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "14 km, 27 km"
+  },
+  {
+   "nom": "Grand Raid 3 Vallées",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Moûtiers",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 25 km, 50 km, 70 km, 110 km, 165 km"
+  },
+  {
+   "nom": "High Trail Vanoise",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Val-d'Isère",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "8 km, 20 km, 35 km, 67 km"
+  },
+  {
+   "nom": "La 6000D",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "La Plagne",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "11 km, 21 km, 30 km, 43 km, 69 km, 94 km"
+  },
+  {
+   "nom": "La Montagn'hard",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Gervais-les-Bains",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "27 km, 50 km, 70 km, 108 km"
+  },
+  {
+   "nom": "Mad'trail",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Les Avanchers-Valmorel",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "8,5 km, 16 km, 29 km, 45 km, 63 km"
+  },
+  {
+   "nom": "Montée des Pavés Taninges Praz de Lys",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Taninges",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "7 km, 12 km"
+  },
+  {
+   "nom": "Montée du Nid d'Aigle",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Gervais-les-Bains",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "19,3 km"
+  },
+  {
+   "nom": "Oisans Trail Tour",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Vaujany",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "9 km, 23 km, 38 km, 84 km"
+  },
+  {
+   "nom": "Pierra Menta été",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Beaufort",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "15 km, 20 km, 25 km, 70 km"
+  },
+  {
+   "nom": "Tour des Glaciers de la Vanoise",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Pralognan-la-Vanoise",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "15 km, 25 km, 41 km, 73 km"
+  },
+  {
+   "nom": "Trail Frison-Roche",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Beaufort",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "7 km, 17 km, 42 km"
+  },
+  {
+   "nom": "Trail Val Cenis",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Val-Cenis",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 15 km, 29 km, 43 km, 58 km, 73 km"
+  },
+  {
+   "nom": "Trail de l'Aigle",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Manigod",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "11 km, 26 km"
+  },
+  {
+   "nom": "Trail de l'Étendard",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Bourg-d'Oisans",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "16 km, 22 km, 44 km, 65 km"
+  },
+  {
+   "nom": "Trail de la Bambée",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Hauteluce",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "11 km, 20 km, 32 km"
+  },
+  {
+   "nom": "Trail de la Biche",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Giron",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "10 km, 12 km, 26 km"
+  },
+  {
+   "nom": "Trail de la Rosière",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Montvalezan",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "15 km, 22 km, 40 km"
+  },
+  {
+   "nom": "Trail des 7 Laux",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Prapoutel",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "10 km, 18 km, 25 km"
+  },
+  {
+   "nom": "Trail des Belleville",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Les Belleville",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "7 km, 14 km, 22 km, 40 km"
+  },
+  {
+   "nom": "Trail des Gets",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Les Gets",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "11 km, 21 km, 42 km"
+  },
+  {
+   "nom": "Trail des Passerelles du Monteynard",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Treffort",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "13 km, 27 km, 40 km, 62 km"
+  },
+  {
+   "nom": "Trail du Tour des Fiz",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Passy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "14 km, 25 km, 34 km"
+  },
+  {
+   "nom": "Trail déraille au Lac des Sapins",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Cublize",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "12 km, 24 km, 32 km"
+  },
+  {
+   "nom": "UT4M",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Grenoble",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "20,6 km, 41 km, 96,6 km, 176,8 km"
+  },
+  {
+   "nom": "Ultra 01",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Oyonnax",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "13 km, 25 km, 45 km, 63 km, 98 km, 170 km"
+  },
+  {
+   "nom": "Ultra Tour du Beaufortain",
+   "date": "2027-07-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Queige",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "110 km"
+  },
+  {
+   "nom": "Course du Mandement",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Satigny, Suisse",
+   "discipline": "course_a_pied",
+   "format": "10 km, Semi, 30 km, Marathon"
+  },
+  {
+   "nom": "L'Échappée Belle",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Vizille",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "21 km, 42 km, 63 km, 96 km, 152 km"
+  },
+  {
+   "nom": "La Dagnarde",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Dagneux",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, 20 km"
+  },
+  {
+   "nom": "La Dragonale été",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Praz-sur-Arly",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "15 km, 30 km"
+  },
+  {
+   "nom": "Le Bélier",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "La Clusaz",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "13 km, 24 km, 42 km, 84 km"
+  },
+  {
+   "nom": "Méribel Trail",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Les Allues",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "5 km, 10 km, 22 km, 25 km, 42 km"
+  },
+  {
+   "nom": "Tignes Trail",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Tignes",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "13,7 km, 25,9 km, 41,9 km"
+  },
+  {
+   "nom": "Trail des Aiguilles d'Arves",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Albiez-Montrond",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "4,9 km, 25 km"
+  },
+  {
+   "nom": "Trail des Hauts Forts",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Morzine",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "23 km, 36 km, 52 km"
+  },
+  {
+   "nom": "Trail du Corbier",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Corbier",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "5,2 km, 9,5 km, 16 km, 32 km"
+  },
+  {
+   "nom": "Trail du Galibier-Thabor",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Valloire",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 23 km, 32 km, 52 km, 67 km"
+  },
+  {
+   "nom": "Trail à 4 Feuilles",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Fontcouverte-la-Toussuire",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "8,9 km, 19,2 km, 31,5 km, 41,1 km"
+  },
+  {
+   "nom": "Trails Alpins du Grand Bec",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Champagny-en-Vanoise",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "8 km, 16 km, 30 km, 42 km"
+  },
+  {
+   "nom": "Trails du Tour de la Grande Casse",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Pralognan-la-Vanoise",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "21 km, 42 km, 66 km"
+  },
+  {
+   "nom": "UTMB",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chamonix-Mont-Blanc",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "15 km, 40 km, 60 km, 101 km, 148 km, 180 km"
+  },
+  {
+   "nom": "UniverTrail d'Arêches",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Beaufort",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "16 km, 27 km"
+  },
+  {
+   "nom": "Val Tho Summit Games",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Les Belleville",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "6 km, 10 km, 20 km, 42 km"
+  },
+  {
+   "nom": "Verti'Trail du Môle",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Jeoire",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "13,9 km"
+  },
+  {
+   "nom": "XTrail Courchevel",
+   "date": "2027-08-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Courchevel",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "11 km, 22 km, 33 km, 44 km, 55 km, 66 km"
+  },
+  {
+   "nom": "10 km de Saint-Martin-d'Hères",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Martin-d'Hères",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "10 km de la Foire de Savoie",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chambéry",
+   "departement": "73",
+   "discipline": "course_a_pied",
+   "format": "10 km"
+  },
+  {
+   "nom": "5 & 10 km de Parilly",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bron",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "Ainbattable",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Ceyzériat",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "5 km, 10 km, 18 km"
+  },
+  {
+   "nom": "Chens'tastic",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chens-sur-Léman",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "13 km"
+  },
+  {
+   "nom": "Gravity Race Trail",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Nantua",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "6 km, 16 km, 26 km, 44 km"
+  },
+  {
+   "nom": "Grimpée du Pays Rochois",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "La Roche-sur-Foron",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "10,6 km"
+  },
+  {
+   "nom": "La Band'Rill",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Rillieux-la-Pape",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, 15 km"
+  },
+  {
+   "nom": "La Basti'Trail",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Grenoble",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "17,1 km, 31,7 km"
+  },
+  {
+   "nom": "La Grenobloise",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Grenoble",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "8,2 km"
+  },
+  {
+   "nom": "La Grésylienne",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Grésy-sur-Aix",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "9,7 km, 15,8 km, 25 km, 40,5 km"
+  },
+  {
+   "nom": "La Mornantaise",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Mornant",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "10 km, 15 km, 27 km"
+  },
+  {
+   "nom": "La Nuit AJT",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Trévoux",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, 21 km"
+  },
+  {
+   "nom": "La Ronde des Grangeons",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Ambérieu-en-Bugey",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "10 km, 17,5 km, 35,5 km"
+  },
+  {
+   "nom": "La Scintillante",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Lyon",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 9 km"
+  },
+  {
+   "nom": "Le Demi de Jussy",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Jussy, Suisse",
+   "discipline": "course_a_pied",
+   "format": "10 km, 20 km"
+  },
+  {
+   "nom": "Les Montées du Revard",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Aix-les-Bains",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "13,5 km, 21 km"
+  },
+  {
+   "nom": "Manigod Trail Challenge",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Manigod",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "10 km, 18 km, 30 km"
+  },
+  {
+   "nom": "Run & Fun du Giffre",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Samoëns",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, Semi, Marathon"
+  },
+  {
+   "nom": "Run in 2 Mure",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Bonnet-de-Mure",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "10 km, 21 km"
+  },
+  {
+   "nom": "RunÔLac",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Divonne-les-Bains",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "9 km, 21 km, 60 km"
+  },
+  {
+   "nom": "Saint-Jeoire Trail Festival",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Jeoire",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "13 km, 25 km, 34,3 km, 82,6 km"
+  },
+  {
+   "nom": "Semi-marathon des Sources du Lac d'Annecy",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Doussard",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "10 km, Semi"
+  },
+  {
+   "nom": "Semi-marathon du Grand Fond Bressan",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Just",
+   "departement": "01",
+   "discipline": "course_a_pied",
+   "format": "10 km, Semi"
+  },
+  {
+   "nom": "Skytrail Albertville",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Albertville",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "8 km, 25 km"
+  },
+  {
+   "nom": "Trail Combe Bénite",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Aime-la-Plagne",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 19 km, 30 km"
+  },
+  {
+   "nom": "Trail de la Croix des Têtes",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Julien-Mont-Denis",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "5 km, 12 km, 21 km"
+  },
+  {
+   "nom": "Trail des 3 Brasseries de Chartreuse",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Laurent-du-Pont",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "12 km, 26 km, 42 km, 64 km"
+  },
+  {
+   "nom": "Trail des Aiguilles Rouges",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chamonix-Mont-Blanc",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "8,5 km, 16 km, 55 km"
+  },
+  {
+   "nom": "Trail du Néron",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Égrève",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "15 km, 21 km, 43 km, 62 km"
+  },
+  {
+   "nom": "Trail du Petit Saint-Bernard",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Séez",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "5 km, 10 km, 21 km, 35 km, 43 km, 68 km"
+  },
+  {
+   "nom": "Ultra Beaujolais Villages Trail",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Perréon",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "12 km, 26 km, 42 km, 63 km, 90 km"
+  },
+  {
+   "nom": "Ultra Trail Grand Colombier",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Culoz",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "10 km, 16 km, 30 km, 45 km, 80 km, 120 km"
+  },
+  {
+   "nom": "Ultra Trail du Vercors",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Autrans-Méaudre en Vercors",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "8 km, 48 km, 82 km"
+  },
+  {
+   "nom": "Uriage Trail Belledonne",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Martin-d'Uriage",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "12 km, 20 km, 43 km"
+  },
+  {
+   "nom": "Zeoff Jura",
+   "date": "2027-09-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bellegarde-sur-Valserine",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "60 km, 78 km"
+  },
+  {
+   "nom": "10 km de la Bastille",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Grenoble",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "10 km"
+  },
+  {
+   "nom": "20 km de Genève",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Genève (Suisse)",
+   "discipline": "course_a_pied",
+   "format": "10 km, 20 km"
+  },
+  {
+   "nom": "Berjatrail",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bourgoin-Jallieu",
+   "departement": "38",
+   "discipline": "trail",
+   "format": "9 km, 16 km, 24 km"
+  },
+  {
+   "nom": "Courir à Vienne",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Vienne",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "10 km, 20 km"
+  },
+  {
+   "nom": "DIXkm de Caluire",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Caluire-et-Cuire",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, 20 km"
+  },
+  {
+   "nom": "Dardi'Trail",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Dardilly",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "7 km, 15 km, 25 km"
+  },
+  {
+   "nom": "Défi de Fort l'Écluse",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Léaz",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "12 km, 19 km"
+  },
+  {
+   "nom": "Eco Trail du Massif des Brasses",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Onnion",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "9 km, 19 km, 36,5 km"
+  },
+  {
+   "nom": "Ekiden de Grenoble",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Grenoble",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "Marathon"
+  },
+  {
+   "nom": "Foulée de Drumettaz-Clarafond",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Drumettaz-Clarafond",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 18 km"
+  },
+  {
+   "nom": "Grand Trail du Lac",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Bourget-du-Lac",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "34 km, 75 km"
+  },
+  {
+   "nom": "La Foulée des Monts d'Ain",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Port",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "8 km, 23 km, 43 km, 77 km"
+  },
+  {
+   "nom": "La Mégevanne",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Megève",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "9,3 km, 16,5 km"
+  },
+  {
+   "nom": "La Neyrolande",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Neyron",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "11 km, 22 km, 33 km"
+  },
+  {
+   "nom": "La Run & Moi",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Georges-de-Reneins",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "10 km, Semi"
+  },
+  {
+   "nom": "La Seillonnaise",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Bourg-en-Bresse",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "10 km, 17 km"
+  },
+  {
+   "nom": "La Val'Lyonnaise",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Vaugneray",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "11 km, 21 km, 29 km"
+  },
+  {
+   "nom": "Les 9 Clochers en Beaujolais",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chazay-d'Azergues",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "6 km, 12 km, 25 km"
+  },
+  {
+   "nom": "Les Boucles du Cœur",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Veyrier-du-Lac",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "Montée Sèche du Salève",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Etrembières",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "3,2 km"
+  },
+  {
+   "nom": "Run In Lyon",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Lyon",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, Semi, Marathon"
+  },
+  {
+   "nom": "Saint-Fé Trail Solidaire",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Ferréol",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "7 km, 11 km"
+  },
+  {
+   "nom": "Semi-marathon de la Noix",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Tullins",
+   "departement": "38",
+   "discipline": "course_a_pied",
+   "format": "11 km, Semi"
+  },
+  {
+   "nom": "Thusy en Trail",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Thusy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "12 km, 24 km"
+  },
+  {
+   "nom": "Trail Faverges-Seythenex",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Faverges",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "12 km, 15 km, 26 km, 42 km"
+  },
+  {
+   "nom": "Trail La Cépienne",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Jean-de-la-Porte",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "12 km, 24 km"
+  },
+  {
+   "nom": "Trail de l'Aqueduc de Sainte-Foy",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Sainte-Foy-lès-Lyon",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "11 km, 22 km, 42 km"
+  },
+  {
+   "nom": "Trail de la Côtière",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Beynost",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "9 km, 14 km, 21 km"
+  },
+  {
+   "nom": "Trail de la Dent du Chat",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Le Bourget-du-Lac",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "12 km, 27 km"
+  },
+  {
+   "nom": "Trail de la Semine",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Saint-Germain-sur-Rhône",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "12,3 km, 19,6 km"
+  },
+  {
+   "nom": "Trail des Glières",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Thorens-Glières",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "11 km, 20 km, 47 km"
+  },
+  {
+   "nom": "Trail des Vallées d'Aigueblanche",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Grand-Aigueblanche",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "13 km, 23 km, 48 km, 66 km"
+  },
+  {
+   "nom": "Trail du Vuache",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Vulbens",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "10,6 km, 24,3 km"
+  },
+  {
+   "nom": "Trail en Côte-Rôtie",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Ampuis",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "13 km, 25 km, 46 km"
+  },
+  {
+   "nom": "Ultra Trail du Beaujolais Vert",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Cublize",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "11 km, 23 km, 42 km, 82 km"
+  },
+  {
+   "nom": "Urban Trail Oyonnax",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Oyonnax",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "9 km, 18 km"
+  },
+  {
+   "nom": "Urban Trail Thonon",
+   "date": "2027-10-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Thonon-les-Bains",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "7 km"
+  },
+  {
+   "nom": "Agglo City Run",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Annecy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "12,2 km, 16 km"
+  },
+  {
+   "nom": "Course des Lumières",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Lyon",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km"
+  },
+  {
+   "nom": "Foulée Vénissiane",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Vénissieux",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, Semi"
+  },
+  {
+   "nom": "LUT By Night",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Lyon",
+   "departement": "69",
+   "discipline": "trail",
+   "format": "10 km, 20 km, 30 km"
+  },
+  {
+   "nom": "La Chambérienne",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Chambéry",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 21 km"
+  },
+  {
+   "nom": "La Vitalavie",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Annecy",
+   "departement": "74",
+   "discipline": "course_a_pied",
+   "format": "16 km, 20,9 km"
+  },
+  {
+   "nom": "Marathon du Beaujolais",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Villefranche-sur-Saône",
+   "departement": "69",
+   "discipline": "course_a_pied",
+   "format": "12 km, Semi, Marathon"
+  },
+  {
+   "nom": "Meyrin Run",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Meyrin, Suisse",
+   "discipline": "course_a_pied",
+   "format": "5 km, 10 km, 14 km"
+  },
+  {
+   "nom": "Toussi'Trail",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Toussieux",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "5 km, 12 km, 21 km"
+  },
+  {
+   "nom": "Trail de l'Épine",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "La Motte-Servolex",
+   "departement": "73",
+   "discipline": "trail",
+   "format": "10 km, 16 km, 24 km"
+  },
+  {
+   "nom": "Trail des Roches",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Poncin",
+   "departement": "01",
+   "discipline": "trail",
+   "format": "10 km, 21 km, 31 km"
+  },
+  {
+   "nom": "Urban Race Seynod",
+   "date": "2027-11-01",
+   "jour_inconnu": true,
+   "a_confirmer": true,
+   "lieu": "Annecy",
+   "departement": "74",
+   "discipline": "trail",
+   "format": "7 km, 13 km"
+  }
+ ]
+}

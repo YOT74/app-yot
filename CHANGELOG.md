@@ -8,6 +8,13 @@ Numérotation X.Y.Z (la version change à chaque mise en ligne, sinon les télé
 - Y, fonctionnalité : nouvelle fonction visible pour les membres. Section + release.
 - X, version majeure : grande étape (lancement officiel auprès des membres = v2.0.0, refonte…). Section + release.
 
+## v1.16.0 — Courses de la région
+
+- 309 courses sur route, trails et cross ajoutées à la base : Haute-Savoie, Savoie, Rhône, Ain, Isère et Genève (marathon d'Annecy, Run in Lyon, foulées de Villeurbanne, semi de Bourg-en-Bresse, Grenoble-Vizille, Marathon de Genève, Escalade, Maxi-Race, UTMB, SaintéLyon…). Liste tenue à la main : la FFA interdit la lecture automatique de son calendrier.
+- Quand seul le mois est annoncé : le mois s'affiche à la place du jour (« MAI ») et la fiche indique « mai 2027 · date exacte pas encore annoncée », sans compte à rebours inventé.
+
+Base de données : colonne `jour_inconnu` sur `courses`.
+
 ## v1.15.0 — Événements à plusieurs distances
 
 - Une course peut proposer plusieurs distances (« 10 km, Semi, Marathon ») : chacun choisit la sienne avec son statut, et la fiche montre combien du club sur chaque distance, avec la distance à côté de chaque nom.
