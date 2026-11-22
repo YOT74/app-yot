@@ -5,6 +5,7 @@ import { DISCIPLINES_SEANCE } from '../config.js';
 import { etat, estBureau, course, alerteCloture, nbNonLues, nomMembre } from '../etat.js';
 import { esc, icone, aujourdhui, dateLongue, dateCourte, ilYa, jourMois } from '../outils.js';
 import { entete, dossardProchaine, retour, menuAdmin } from './communs.js';
+import { formaterTexte, barreFormat } from '../texte-riche.js';
 
 const partenaireExpire = (p) => p.valable_jusqu_au && p.valable_jusqu_au < aujourdhui();
 
@@ -12,8 +13,31 @@ const partenaireExpire = (p) => p.valable_jusqu_au && p.valable_jusqu_au < aujou
 function texteActu(a) {
   const long = a.contenu.length > 160 || a.contenu.split('\n').length > 3;
   const ouvert = etat.actusOuvertes.includes(a.id);
-  return `<p class="texte-libre${long && !ouvert ? ' coupe' : ''}">${esc(a.contenu)}</p>
+  return `<div class="texte-riche${long && !ouvert ? ' coupe' : ''}">${formaterTexte(a.contenu)}</div>
     ${long ? `<button class="lien-mini" type="button" data-action="lire-actu" data-id="${esc(a.id)}">${ouvert ? 'Réduire' : 'Lire la suite'}</button>` : ''}`;
+}
+
+// Adresse d'image acceptée : stockage Supabase (https) ou image locale du mode démo.
+export const imageSure = (u) => (/^https:\/\//i.test(u || '') || /^data:image\/jpeg;base64,/i.test(u || '') ? u : null);
+
+// Photos d'une actualité : vignettes, ouvertes en grand au toucher.
+function galerie(photos) {
+  const sures = photos.map(imageSure).filter(Boolean);
+  return `<div class="galerie n${Math.min(sures.length, 4)}">${sures.map((u) => `
+    <button type="button" data-action="voir-photo" data-valeur="${esc(u)}" aria-label="Agrandir la photo">
+      <img src="${esc(u)}" alt="" loading="lazy" decoding="async"></button>`).join('')}</div>`;
+}
+
+// Vignettes du formulaire : photos déjà publiées puis nouvelles, chacune avec sa croix.
+export function vignettesActu() {
+  const e = etat.photosActu;
+  const toutes = [...e.gardees.map((u) => ({ src: imageSure(u), type: 'gardee', u })), ...e.nouvelles.map((n, i) => ({ src: n.apercu, type: 'nouvelle', u: String(i) }))];
+  return `<div class="vignettes-actu" id="vignettes-actu">
+    ${toutes.map((p) => `<div class="vignette"><img src="${esc(p.src)}" alt="">
+      <button type="button" data-action="retirer-photo-actu" data-id="${p.type}" data-valeur="${esc(p.u)}" aria-label="Retirer la photo">×</button></div>`).join('')}
+    ${toutes.length < 4 ? `<label class="vignette vignette-ajout">${icone.ajouter}<span>Photo</span>
+      <input type="file" accept="image/*" multiple hidden data-action="photos-actu"></label>` : ''}
+  </div>`;
 }
 
 // Sondage : un bouton par choix, avec la barre des résultats ; toucher son choix l'annule.
@@ -51,6 +75,7 @@ function carteActu(a) {
       </div>
       <h3>${esc(a.titre)}</h3>
       ${a.contenu ? texteActu(a) : ''}
+      ${a.photos?.length ? galerie(a.photos) : ''}
       ${a.sondage_options ? blocSondage(a) : ''}
       ${c ? `<a class="lien-course" href="#/course/${esc(c.id)}">${esc(c.nom)} · ${esc(jourMois(c.date_course))} ${icone.suivant}</a>` : ''}
       <p class="aide" style="margin:0">Par ${esc(nomMembre(a.cree_par))}</p>
@@ -109,12 +134,20 @@ export function ecranFormulaireActu(id) {
   const a = id ? etat.actualites.find((x) => x.id === id) : null;
   if (id && !a) return `${retour('#/', 'Accueil')}<p class="vide">Cette actualité n'existe plus.</p>`;
   const futures = etat.courses.filter((c) => c.validee && c.date_course >= aujourdhui());
+  // photos en cours d'édition, gardées entre deux affichages du formulaire
+  if (etat.photosActu?.pour !== (id || 'nouvelle')) {
+    etat.photosActu = { pour: id || 'nouvelle', gardees: [...(a?.photos ?? [])], nouvelles: [], retirees: [] };
+  }
   return `
     ${retour('#/', 'Accueil')}
     <h1 class="fiche-titre">${a ? "Modifier l'actualité" : 'Publier une actualité'}</h1>
     <form data-form="actualite" data-id="${esc(a?.id ?? '')}">
       <div class="champ"><label for="titre">Titre</label><input id="titre" name="titre" required maxlength="120" value="${esc(a?.titre ?? '')}"></div>
-      <div class="champ"><label for="contenu">Texte</label><textarea id="contenu" name="contenu" maxlength="2000" rows="6">${esc(a?.contenu ?? '')}</textarea></div>
+      <div class="champ"><label for="contenu">Texte</label>
+        ${barreFormat('contenu')}
+        <textarea id="contenu" name="contenu" maxlength="4000" rows="7">${esc(a?.contenu ?? '')}</textarea>
+        <span class="aide">Sélectionne un mot puis touche <strong>G</strong>, <em>I</em> ou le lien. Un lien collé devient cliquable.</span></div>
+      <div class="champ"><span class="libelle">Photos (4 au plus)</span>${vignettesActu()}</div>
       <div class="champ"><label for="course_id">Course liée (facultatif)</label>
         <select id="course_id" name="course_id"><option value="">—</option>
           ${futures.map((c) => `<option value="${esc(c.id)}" ${a?.course_id === c.id ? 'selected' : ''}>${esc(c.nom)} · ${esc(jourMois(c.date_course))}</option>`).join('')}

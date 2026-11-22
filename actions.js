@@ -16,6 +16,9 @@ import { preparerPhoto } from './avatar.js';
 import { detailSeance } from './ecrans/entrainement.js';
 import { groupeActif, sansGroupe } from './etat.js';
 import { etapesIphone } from './installation.js';
+import { appliquerFormat } from './texte-riche.js';
+import { vignettesActu, imageSure } from './ecrans/accueil.js';
+import { reduireImage } from './avatar.js';
 
 const bloquerSiHorsLigne = () => {
   if (etat.horsLigne) { message('Tu es hors ligne. Réessaie lorsque la connexion sera rétablie.'); return true; }
@@ -195,7 +198,26 @@ document.addEventListener('click', async (ev) => {
     case 'supprimer-actu':
       confirmer({ titre: 'Supprimer cette actualité ?', texte: 'Elle disparaîtra de l’accueil de tous les membres.', bouton: 'Supprimer', action: 'confirmer-supprimer-actu', id });
       break;
-    case 'confirmer-supprimer-actu': feuille.close(); await ecrire(() => donnees.supprimerActualite(id), 'Actualité supprimée.'); break;
+    case 'confirmer-supprimer-actu': {
+      feuille.close();
+      const photos = etat.actualites.find((a) => a.id === id)?.photos ?? [];
+      await ecrire(async () => { await donnees.supprimerActualite(id); await donnees.supprimerPhotosActu(photos); }, 'Actualité supprimée.');
+      break;
+    }
+    case 'format': appliquerFormat(document.getElementById(el.dataset.cible), valeur); break;
+    case 'voir-photo':
+      if (!imageSure(valeur)) break;
+      feuille.innerHTML = `<div class="feuille-corps"><img class="photo-grande" src="${esc(valeur)}" alt="">
+        <button class="bouton contour" type="button" data-action="fermer-feuille">Fermer</button></div>`;
+      feuille.showModal();
+      break;
+    case 'retirer-photo-actu': {
+      const e = etat.photosActu;
+      if (id === 'gardee') { e.gardees = e.gardees.filter((u) => u !== valeur); e.retirees.push(valeur); }
+      else { const [n] = e.nouvelles.splice(Number(valeur), 1); if (n) URL.revokeObjectURL(n.apercu); }
+      document.getElementById('vignettes-actu').outerHTML = vignettesActu();
+      break;
+    }
 
     // calendrier
     case 'filtre-discipline':
@@ -448,6 +470,18 @@ document.addEventListener('change', async (ev) => {
       if (!(await ecrire(() => donnees.changerGroupe(id, el.value), `${m.prenom} : ${el.value ? `groupe ${el.value}` : 'sans groupe'}.`))) afficher();
       break;
     }
+    case 'photos-actu': {
+      const e = etat.photosActu;
+      const place = 4 - e.gardees.length - e.nouvelles.length;
+      const fichiers = [...(el.files ?? [])].slice(0, Math.max(place, 0));
+      if (el.files?.length > fichiers.length) message('4 photos au plus par actualité.');
+      for (const f of fichiers) {
+        try { const blob = await reduireImage(f); e.nouvelles.push({ blob, apercu: URL.createObjectURL(blob) }); }
+        catch { message('Une des images n’a pas pu être lue.'); }
+      }
+      document.getElementById('vignettes-actu').outerHTML = vignettesActu();
+      return;
+    }
     case 'choisir-photo': {
       const fichier = el.files?.[0];
       if (!fichier) return;
@@ -696,8 +730,17 @@ document.addEventListener('submit', async (ev) => {
       const a = { titre: champs.titre.trim(), contenu: vide(champs.contenu), course_id: vide(champs.course_id), epinglee: champs.epinglee === 'on',
         sondage_options: options.length ? options : null, sondage_multiple: champs.multiple === 'on' };
       bouton.disabled = true;
-      const ok = await ecrire(() => donnees.enregistrerActualite(form.dataset.id || null, a), form.dataset.id ? 'Actualité modifiée.' : 'Actualité publiée.');
-      if (ok) location.hash = '#/';
+      const p = etat.photosActu;
+      let nouvelles = [];
+      const ok = await ecrire(async () => {
+        if (p.nouvelles.length) { message('Envoi des photos…'); nouvelles = await donnees.envoyerPhotosActu(p.nouvelles.map((n) => n.blob)); }
+        a.photos = [...p.gardees, ...nouvelles];
+        if (!a.photos.length) a.photos = null;
+        try { await donnees.enregistrerActualite(form.dataset.id || null, a); }
+        catch (e) { await donnees.supprimerPhotosActu(nouvelles); throw e; }   // pas de photo orpheline
+        await donnees.supprimerPhotosActu(p.retirees);
+      }, form.dataset.id ? 'Actualité modifiée.' : 'Actualité publiée.');
+      if (ok) { p.nouvelles.forEach((n) => URL.revokeObjectURL(n.apercu)); etat.photosActu = null; location.hash = '#/'; }
       else bouton.disabled = false;
       break;
     }

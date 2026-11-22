@@ -46,7 +46,7 @@ export function ecranConnexion() {
   return `
     <section class="connexion">
       ${dossard(NOM_CLUB, 'Bienvenue', `
-        <span class="dossard-chiffre petit">Inscription</span>
+        <span class="dossard-chiffre petit">Connexion</span>
         <span class="dossard-info">Renseigne ton adresse email pour recevoir un code de connexion.</span>`)}
       ${formulaire}
       ${c.etape === 'email' && !MODE_DEMO && (CONNEXION_GOOGLE || CONNEXION_APPLE) ? `

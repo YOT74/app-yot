@@ -3,6 +3,14 @@
 Chaque nouvelle section « ## vX.Y.Z — titre » crée automatiquement une release sur GitHub
 (workflow « Releases »). Les petites retouches (un texte, une couleur) n'ont pas de section.
 
+## v1.9.4 — Actualités : mise en forme et photos
+
+- Texte des actus : gras, italique, liens et listes, avec une barre d'outils (G, I, lien, liste). Un lien collé devient cliquable.
+- Jusqu'à 4 photos par actu, réduites avant l'envoi ; vignettes dans l'actu, ouvertes en grand au toucher. Supprimer une actu supprime ses photos.
+- L'écran de connexion affiche « Connexion » au lieu de « Inscription ».
+
+Base de données : colonne `photos` sur `actualites`, dossier de stockage « actualites » (lecture pour tous, dépôt réservé au bureau).
+
 ## v1.9.3 — Installer l'app, planning plus léger
 
 - Bouton « Installer l'app » sur l'écran de connexion et dans Plus : fenêtre d'installation sur Android, étapes illustrées sur iPhone. Il disparaît une fois l'app installée.

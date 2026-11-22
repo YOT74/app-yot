@@ -53,6 +53,17 @@ export function avatar(m, taille = 36) {
 }
 
 // Recadre une image choisie en carré 320 px, en JPEG (photo légère, envoi rapide).
+// Photo d'actualité : côté le plus long ramené à 1600 px, JPEG (≈ 200 à 400 Ko).
+export async function reduireImage(fichier, cote = 1600) {
+  const image = await createImageBitmap(fichier);
+  const echelle = Math.min(1, cote / Math.max(image.width, image.height));
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(image.width * echelle);
+  canvas.height = Math.round(image.height * echelle);
+  canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
+  return new Promise((ok, ko) => canvas.toBlob((b) => (b ? ok(b) : ko(new Error('Image illisible.'))), 'image/jpeg', 0.82));
+}
+
 export async function preparerPhoto(fichier) {
   const image = await createImageBitmap(fichier);
   const cote = Math.min(image.width, image.height);

@@ -266,6 +266,22 @@ async function voter(actualiteId, option, retirer) {
   verifier(error, "Impossible d'enregistrer ton vote (le sondage est peut-être clos).");
 }
 
+// Photos d'actualité : déposées dans le dossier public « actualites », sous un nom aléatoire.
+async function envoyerPhotosActu(blobs) {
+  const adresses = [];
+  for (const blob of blobs) {
+    const chemin = `${crypto.randomUUID()}.jpg`;
+    const { error } = await supabase.storage.from('actualites').upload(chemin, blob, { contentType: 'image/jpeg' });
+    if (error) { await supprimerPhotosActu(adresses); verifier(error, "Impossible d'envoyer les photos."); }
+    adresses.push(supabase.storage.from('actualites').getPublicUrl(chemin).data.publicUrl);
+  }
+  return adresses;
+}
+async function supprimerPhotosActu(adresses) {
+  const chemins = (adresses ?? []).map((u) => u.split('/actualites/')[1]).filter(Boolean);
+  if (chemins.length) await supabase.storage.from('actualites').remove(chemins);
+}
+
 async function supprimerActualite(id) {
   const { error } = await supabase.from('actualites').delete().eq('id', id);
   verifier(error, "Impossible de supprimer l'actualité.");
@@ -288,7 +304,7 @@ const reel = {
   proposerCourse, modifierCourse, validerCourse, supprimerCourse, refuserCourse, masquerCourse, messageEngages, modifierMembre,
   ajouterAlbum, supprimerAlbum,
   enregistrerSeance, supprimerSeance, remplacerSeances, repondrePresence, changerGroupe, changerNiveau, accepterMembre, refuserMembre,
-  enregistrerPartenaire, supprimerPartenaire, enregistrerActualite, supprimerActualite, voter,
+  enregistrerPartenaire, supprimerPartenaire, enregistrerActualite, supprimerActualite, envoyerPhotosActu, supprimerPhotosActu, voter,
   marquerLues,
 };
 

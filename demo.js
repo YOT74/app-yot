@@ -355,6 +355,12 @@ export const demo = {
     if (!a.sondage_multiple) db.votes = db.votes.filter((v) => !(v.actualite_id === actualiteId && v.membre_id === moi.id));
     if (!db.votes.some((v) => v.actualite_id === actualiteId && v.membre_id === moi.id && v.option === option)) db.votes.push({ actualite_id: actualiteId, membre_id: moi.id, option });
   },
+  async envoyerPhotosActu(blobs) {
+    await pause();
+    if (!estBureau()) refuse();
+    return Promise.all(blobs.map((b) => new Promise((ok) => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(b); })));
+  },
+  async supprimerPhotosActu() { await pause(); },
   async supprimerActualite(id) {
     await pause();
     if (!estBureau()) refuse();

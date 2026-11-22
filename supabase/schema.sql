@@ -145,7 +145,8 @@ create table actualites (
   -- sondage facultatif : la question est le titre, les choix sont listés ici
   sondage_options text[] check (sondage_options is null or array_length(sondage_options, 1) between 2 and 10),
   sondage_multiple boolean not null default false,   -- plusieurs réponses possibles
-  sondage_clos boolean not null default false        -- le bureau a clos le sondage
+  sondage_clos boolean not null default false,       -- le bureau a clos le sondage
+  photos text[] check (photos is null or array_length(photos, 1) <= 4)   -- adresses publiques, dossier « actualites »
 );
 
 create table votes_sondage (
@@ -554,6 +555,14 @@ begin
       using (bucket_id = 'avatars' and name = public.mon_membre_id()::text || '.jpg')$p$;
     execute $p$create policy "je retire ma photo" on storage.objects for delete to authenticated
       using (bucket_id = 'avatars' and name = public.mon_membre_id()::text || '.jpg')$p$;
+    -- photos des actualités : tout le monde voit, seul le bureau dépose ou retire (JPEG, 2 Mo au plus)
+    insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+      values ('actualites', 'actualites', true, 2097152, array['image/jpeg']) on conflict (id) do nothing;
+    execute $p$create policy "photos d'actus lisibles" on storage.objects for select using (bucket_id = 'actualites')$p$;
+    execute $p$create policy "le bureau dépose les photos d'actus" on storage.objects for insert to authenticated
+      with check (bucket_id = 'actualites' and public.est_bureau())$p$;
+    execute $p$create policy "le bureau retire les photos d'actus" on storage.objects for delete to authenticated
+      using (bucket_id = 'actualites' and public.est_bureau())$p$;
   end if;
 end $$;
 
