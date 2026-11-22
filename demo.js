@@ -176,6 +176,21 @@ export const demo = {
     return photo;
   },
   async retirerPhoto() { await pause(); moi.photo = null; },
+  async fusionnerCourses(garder, retirer) {
+    await pause();
+    if (!estBureau()) refuse();
+    const rang = ['forfait', 'interesse', 'cherche_dossard', 'vend_dossard', 'inscrit', 'finisher'];
+    for (const p of db.participations.filter((x) => x.course_id === retirer)) {
+      const deja = db.participations.find((x) => x.course_id === garder && x.membre_id === p.membre_id);
+      if (deja) { if (rang.indexOf(p.statut) > rang.indexOf(deja.statut)) deja.statut = p.statut; deja.temps ??= p.temps; }
+      else p.course_id = garder;
+    }
+    db.participations = db.participations.filter((x) => x.course_id !== retirer);
+    for (const t of ['messages', 'albums']) for (const x of db[t] ?? []) if (x.course_id === retirer) x.course_id = garder;
+    const g = db.courses.find((c) => c.id === garder); const r = db.courses.find((c) => c.id === retirer);
+    g.course_club = g.course_club || r.course_club; g.infos ??= r.infos; g.url_inscription ??= r.url_inscription;
+    db.courses = db.courses.filter((c) => c.id !== retirer);
+  },
   async supprimerMonCompte() { await pause(); db.membres = db.membres.filter((m) => m.id !== moi.id); moi = null; },
 
   // discussion : mêmes règles que la base (un seul niveau de réponse, notifications)

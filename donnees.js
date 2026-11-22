@@ -97,6 +97,12 @@ async function supprimerMonCompte() {
   await supabase.auth.signOut({ scope: 'local' });
 }
 
+// Fusion de deux courses en double (bureau) : tout passe sur « garder », « retirer » est supprimée.
+async function fusionnerCourses(garder, retirer) {
+  const { error } = await supabase.rpc('fusionner_courses', { garder, retirer });
+  verifier(error, 'Impossible de fusionner ces courses.');
+}
+
 async function modifierMaFiche(champs) {
   const { error } = await supabase.from('membres').update(champs).eq('id', moiId);
   verifier(error, "Impossible d'enregistrer.");
@@ -312,7 +318,7 @@ const reel = {
   proposerCourse, modifierCourse, validerCourse, supprimerCourse, refuserCourse, masquerCourse, messageEngages, modifierMembre,
   ajouterAlbum, supprimerAlbum,
   enregistrerSeance, supprimerSeance, remplacerSeances, repondrePresence, changerGroupe, changerNiveau, accepterMembre, refuserMembre,
-  enregistrerPartenaire, supprimerPartenaire, supprimerMonCompte, enregistrerActualite, supprimerActualite, envoyerPhotosActu, supprimerPhotosActu, voter,
+  enregistrerPartenaire, supprimerPartenaire, supprimerMonCompte, fusionnerCourses, enregistrerActualite, supprimerActualite, envoyerPhotosActu, supprimerPhotosActu, voter,
   marquerLues,
 };
 

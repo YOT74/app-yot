@@ -292,6 +292,49 @@ function tableauDeBord() {
     </section>`;
 }
 
+// Doublons possibles parmi les courses à venir : une course proposée par un membre (ou estimée,
+// de la liste) qui ressemble à une autre. On propose de garder la version importée (officielle).
+function doublonsAFusionner() {
+  const auj = aujourdhui();
+  const avenir = etat.courses.filter((c) => c.validee && c.date_course >= auj);
+  const vues = new Set();
+  const paires = [];
+  for (const c of avenir.filter((x) => !x.source || x.source === 'membre' || x.source === 'liste')) {
+    for (const autre of doublonsPossibles(c.nom, c.date_course, c.id).filter((x) => x.validee && x.date_course >= auj)) {
+      const cle = [c.id, autre.id].sort().join('|');
+      if (vues.has(cle)) continue;
+      vues.add(cle);
+      // garder : la version importée par le robot, sinon celle qui a le plus d'engagés
+      const officielle = (x) => x.source && x.source !== 'membre' && x.source !== 'liste';
+      const [garder, retirer] = officielle(autre) && !officielle(c) ? [autre, c]
+        : officielle(c) && !officielle(autre) ? [c, autre]
+        : nbEngages(autre) >= nbEngages(c) ? [autre, c] : [c, autre];
+      paires.push({ garder, retirer });
+    }
+  }
+  return paires;
+}
+
+function blocDoublons() {
+  const paires = doublonsAFusionner();
+  if (!paires.length) return '';
+  const fiche = (c) => `<a href="#/course/${esc(c.id)}"><strong>${esc(c.nom)}</strong></a>
+    <span class="ligne-detail">${esc(avecAnnee(dateCourte(c.date_course), c.date_course))} · ${esc(SOURCES[c.source] ?? SOURCES.membre)} · ${nbEngages(c)} engagé${nbEngages(c) > 1 ? 's' : ''}</span>`;
+  return `<section class="bloc">
+    <h2>Doublons possibles <span class="compteur">${paires.length}</span></h2>
+    <p class="aide" style="margin:0">La fusion déplace statuts, résultats, messages et albums sur la course gardée, puis supprime l’autre.</p>
+    ${paires.map(({ garder, retirer }) => `
+      <div class="a-valider doublon">
+        <div class="ligne-texte"><span class="etiquette">Garder</span>${fiche(garder)}</div>
+        <div class="ligne-texte"><span class="etiquette">Fusionner dedans</span>${fiche(retirer)}</div>
+        <div class="rangee">
+          <button class="bouton petit" type="button" data-action="fusionner" data-id="${esc(garder.id)}" data-valeur="${esc(retirer.id)}">Fusionner</button>
+          <button class="bouton petit discret" type="button" data-action="fusionner" data-id="${esc(retirer.id)}" data-valeur="${esc(garder.id)}">Garder plutôt la seconde</button>
+        </div>
+      </div>`).join('')}
+  </section>`;
+}
+
 export function ecranBureau() {
   const attente = enAttente();
   const masquees = etat.coursesMasquees;
@@ -310,6 +353,7 @@ export function ecranBureau() {
           </div>
         </div>`).join('')}
     </section>` : ''}
+    ${blocDoublons()}
     <section class="bloc">
       <h2>À valider ${attente.length ? `<span class="compteur">${attente.length}</span>` : ''}</h2>
       ${attente.length ? attente.map((c) => {

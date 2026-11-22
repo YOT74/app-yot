@@ -487,6 +487,7 @@ create trigger messages_notifier after insert on messages
 create function notifier_participation() returns trigger
 language plpgsql security definer set search_path = public as $$
 begin
+  if current_setting('app.fusion', true) = 'oui' then return new; end if;   -- pas de notification pendant une fusion
   -- quelqu'un passe « inscrit » → les autres inscrits de la course
   if new.statut = 'inscrit' and (tg_op = 'INSERT' or old.statut <> 'inscrit') then
     insert into notifications (destinataire, type, course_id, auteur)
@@ -581,6 +582,46 @@ begin
     perform cron.schedule('rappels-cloture', '0 7 * * *', 'select public.envoyer_rappels()');
   end if;
 end $$;
+
+-- Fusionner deux courses en double (bureau) : tout ce qui est sur « retirer » passe sur « garder »,
+-- puis « retirer » est supprimée. Un membre présent sur les deux garde son statut le plus avancé.
+create function fusionner_courses(garder uuid, retirer uuid) returns void
+language plpgsql security definer set search_path = public as $$
+declare
+  r record;
+  rang constant text[] := array['forfait', 'interesse', 'cherche_dossard', 'vend_dossard', 'inscrit', 'finisher'];
+begin
+  if not est_bureau() then raise exception 'Réservé au bureau'; end if;
+  if garder = retirer then raise exception 'Choisis deux courses différentes'; end if;
+  if not exists (select 1 from courses where id = garder) or not exists (select 1 from courses where id = retirer) then
+    raise exception 'Course introuvable';
+  end if;
+  perform set_config('app.fusion', 'oui', true);
+  for r in select * from participations where course_id = retirer loop
+    if exists (select 1 from participations where course_id = garder and membre_id = r.membre_id) then
+      update participations p set
+        statut = case when array_position(rang, r.statut::text) > array_position(rang, p.statut::text) then r.statut else p.statut end,
+        temps = coalesce(p.temps, r.temps),
+        classement = coalesce(p.classement, r.classement)
+      where p.course_id = garder and p.membre_id = r.membre_id;
+      delete from participations where course_id = retirer and membre_id = r.membre_id;
+    else
+      update participations set course_id = garder where course_id = retirer and membre_id = r.membre_id;
+    end if;
+  end loop;
+  update messages set course_id = garder where course_id = retirer;
+  update albums set course_id = garder where course_id = retirer;
+  update notifications set course_id = garder where course_id = retirer;
+  update actualites set course_id = garder where course_id = retirer;
+  update courses g set
+    course_club = g.course_club or x.course_club,
+    infos = coalesce(g.infos, x.infos),
+    url_inscription = coalesce(g.url_inscription, x.url_inscription),
+    date_limite_inscription = coalesce(g.date_limite_inscription, x.date_limite_inscription)
+  from courses x where g.id = garder and x.id = retirer;
+  delete from courses where id = retirer;
+end $$;
+grant execute on function fusionner_courses(uuid, uuid) to authenticated;
 
 -- 9. Photos de profil (Supabase Storage) ------------------------------------
 -- Dossier public « avatars » ; chacun dépose, remplace ou retire SA photo (<son id>.jpg).

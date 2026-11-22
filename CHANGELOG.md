@@ -8,6 +8,14 @@ Numérotation X.Y.Z (la version change à chaque mise en ligne, sinon les télé
 - Y, fonctionnalité : nouvelle fonction visible pour les membres. Section + release.
 - X, version majeure : grande étape (lancement officiel auprès des membres = v2.0.0, refonte…). Section + release.
 
+## v1.14.0 — Fusion des courses en double
+
+- Espace bureau : liste « Doublons possibles » (course proposée par un membre ou estimée qui ressemble à une autre, à quelques jours près).
+- Bouton « Fusionner » : statuts, résultats, messages, albums et infos saisies passent sur la course gardée (la version officielle par défaut), l'autre est supprimée. Un membre présent sur les deux garde son statut le plus avancé. Aucune notification n'est envoyée pendant la fusion.
+- Messages de confirmation affichés en bas de l'écran, sans bloquer la flèche retour.
+
+Base de données : fonction `fusionner_courses`.
+
 ## v1.13.0 — Calendrier : courses suivies par le club
 
 - Filtre explicite « Suivies par le club » (courses où au moins un membre participe, par défaut) / « Toute la base ».

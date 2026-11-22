@@ -756,3 +756,5 @@ button.menu-lien { width: 100%; background: none; border-left: none; border-righ
 .elargir { display: block; margin: 4px 0 8px; }
 /* messages brefs : en bas, au-dessus de la barre d'onglets, sans gêner les touchers */
 .bandeau.info { top: auto; bottom: calc(96px + env(safe-area-inset-bottom)); pointer-events: none; justify-content: center; text-align: center; box-shadow: var(--ombre); }
+.doublon { display: flex; flex-direction: column; gap: 8px; }
+.doublon .ligne-texte a { color: inherit; text-decoration: none; }

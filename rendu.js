@@ -177,12 +177,12 @@ export function ouvrirFeuilleStatut(id) {
 }
 
 // Confirmation avant une suppression. action = action à déclencher si l'on confirme.
-export function confirmer({ titre, texte, bouton, action, id }) {
+export function confirmer({ titre, texte, bouton, action, id, valeur }) {
   feuille.innerHTML = `
     <div class="feuille-corps">
       <h2 id="feuille-titre">${esc(titre)}</h2>
       <p style="margin:0">${esc(texte)}</p>
-      <button class="bouton danger" type="button" data-action="${action}" data-id="${esc(id)}">${esc(bouton)}</button>
+      <button class="bouton danger" type="button" data-action="${action}" data-id="${esc(id ?? '')}"${valeur ? ` data-valeur="${esc(valeur)}"` : ''}>${esc(bouton)}</button>
       <button class="bouton contour" type="button" data-action="fermer-feuille">Annuler</button>
     </div>`;
   feuille.showModal();

@@ -221,6 +221,15 @@ document.addEventListener('click', async (ev) => {
       await ecrire(async () => { await donnees.supprimerActualite(id); await donnees.supprimerPhotosActu(photos); }, 'Actualité supprimée.');
       break;
     }
+    case 'fusionner': {
+      const g = course(id); const r = course(valeur);
+      confirmer({ titre: 'Fusionner ces deux courses ?', texte: `Les statuts, résultats, messages et albums de « ${r?.nom ?? ''} » passent sur « ${g?.nom ?? ''} », puis « ${r?.nom ?? ''} » est supprimée.`, bouton: 'Fusionner', action: 'confirmer-fusion', id, valeur });
+      break;
+    }
+    case 'confirmer-fusion':
+      feuille.close();
+      await ecrire(() => donnees.fusionnerCourses(id, valeur), 'Courses fusionnées.');
+      break;
     case 'jeter-brouillon': {
       const f = el.closest('form[data-brouillon]');
       effacerBrouillon(f.dataset.brouillon);
