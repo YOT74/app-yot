@@ -23,8 +23,6 @@ function blocParticipation(c) {
       <h2>Ma participation</h2>
       <div class="choix-statut">${boutons}</div>
       ${p ? '<span class="aide">Touche à nouveau la pastille pour annuler.</span>' : ''}
-      ${p && c.course_club && aVenir(c) ? `
-        <label class="champ champ-case"><input type="checkbox" data-action="dispo" data-id="${esc(c.id)}" ${p.dispo_equipe ? 'checked' : ''}> Je suis disponible pour l'équipe du club</label>` : ''}
       ${p?.statut === 'finisher' ? `
         <form data-form="resultat" data-id="${esc(c.id)}">
           <div class="deux">
@@ -65,19 +63,6 @@ function blocClub(c) {
   }).join('');
   const vide = passee ? 'Personne du club.' : 'Personne pour l’instant.';
   return `<section class="bloc"><h2>Le club sur cette course</h2>${groupes || `<p class="aide" style="margin:0">${vide}</p>`}</section>`;
-}
-
-function blocBureau(c) {
-  const dispos = c.participations.filter((x) => x.dispo_equipe === true);
-  const non = c.participations.filter((x) => x.dispo_equipe === false).length;
-  const sans = c.participations.length - dispos.length - non;
-  return `
-    <section class="bloc bureau">
-      <h2>Équipe du club · vue bureau</h2>
-      <p class="jauge"><strong>${dispos.length}</strong> dispo${dispos.length > 1 ? 's' : ''} sur ${c.participations.length} engagé${c.participations.length > 1 ? 's' : ''}</p>
-      ${dispos.length ? `<ul class="engages">${dispos.map((x) => `<li><span class="engage-nom">${avatar(membre(x.membre_id), 28)} ${esc(nomMembre(x.membre_id))}</span><span class="chrono">${esc(STATUTS[x.statut]?.libelle ?? '')}</span></li>`).join('')}</ul>` : '<p class="aide" style="margin:0">Aucun dispo.</p>'}
-      <p class="aide" style="margin:0">${non} indisponible${non > 1 ? 's' : ''}, ${sans} sans réponse.</p>
-    </section>`;
 }
 
 // Bureau : écrire aux engagés de la course, exporter la liste.
@@ -128,13 +113,13 @@ function blocDiscussion(c) {
           ${carteMessage(r)}
           ${tous.filter((m) => m.parent_id === r.id).map((m) => carteMessage(m, true)).join('')}
           ${etat.reponseA?.id === r.id ? `
-            <form data-form="message" data-id="${esc(c.id)}" data-parent="${esc(r.id)}" class="composer reponse">
+            <form data-form="message" data-id="${esc(c.id)}" data-parent="${esc(r.id)}" data-brouillon="reponse-${esc(r.id)}" class="composer reponse">
               ${avatar(moi, 28)}
               <textarea name="texte" rows="2" maxlength="1000" required placeholder="Répondre à ${esc(etat.reponseA.nom || 'ce message')}…" id="champ-reponse">${etat.reponseA.mention ? `@${esc(etat.reponseA.nom)} ` : ''}</textarea>
               <div class="rangee"><button class="bouton" type="submit">Répondre</button><button class="bouton discret" type="button" data-action="annuler-reponse">Annuler</button></div>
             </form>` : ''}
         </div>`).join('') : '<p class="aide" style="margin:0">Aucun message pour le moment.</p>'}
-      <form data-form="message" data-id="${esc(c.id)}" class="composer">
+      <form data-form="message" data-id="${esc(c.id)}" data-brouillon="message-${esc(c.id)}" class="composer">
         ${avatar(moi, 36)}
         <textarea name="texte" rows="2" maxlength="1000" required placeholder="Écrire au club…"></textarea>
         <button class="bouton" type="submit">Envoyer</button>
@@ -194,7 +179,7 @@ export function ecranCourse(id) {
     <div class="fiche-meta">
       <span>${[esc(libelleDiscipline(c.discipline)), c.format ? esc(c.format) : '', c.lieu ? `${esc(c.lieu)}${c.departement ? ` (${esc(c.departement)})` : ''}` : ''].filter(Boolean).join(' · ')}</span>
     </div>
-    ${c.course_club ? '<div class="bandeau-club"><strong>Course club</strong><span>Course par équipe, organisée par le bureau.</span></div>' : ''}
+    ${c.course_club ? '<div class="bandeau-club"><strong>Course club</strong></div>' : ''}
     ${c.masquee ? '<p class="avertissement">Course masquée.</p>' : ''}
     ${!c.validee ? `<p class="avertissement">Proposée par ${esc(nomMembre(c.creee_par))}, en attente de validation par le bureau.</p>` : ''}
     ${actions.length ? `<div class="rangee">${actions.join('')}</div>` : ''}
@@ -209,7 +194,6 @@ export function ecranCourse(id) {
     ${c.infos ? `<section class="bloc"><h2>Infos</h2><p class="texte-libre">${esc(c.infos)}</p></section>` : ''}
 
     ${c.validee ? blocParticipation(c) + blocClub(c) + blocDiscussion(c) : ''}
-    ${c.validee && c.course_club && estBureau() ? blocBureau(c) : ''}
     ${c.validee && estBureau() ? blocOutilsBureau(c) : ''}
     ${c.validee && !future ? blocAlbums(c) : ''}
     ${c.validee && future && c.albums?.length ? blocAlbums(c) : ''}

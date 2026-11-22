@@ -17,6 +17,7 @@ import { detailSeance } from './ecrans/entrainement.js';
 import { groupeActif, sansGroupe } from './etat.js';
 import { etapesIphone } from './installation.js';
 import { appliquerFormat } from './texte-riche.js';
+import { effacerBrouillon } from './brouillons.js';
 import { vignettesActu, imageSure } from './ecrans/accueil.js';
 import { reduireImage } from './avatar.js';
 
@@ -60,7 +61,7 @@ async function changerStatut(id, valeur) {
   const p = maParticipation(c);
   if (!statut) c.participations = c.participations.filter((x) => x.membre_id !== etat.moi.id);
   else if (p) p.statut = statut;
-  else c.participations.push({ course_id: id, membre_id: etat.moi.id, statut, commentaire: null, dispo_equipe: null, temps: null, classement: null });
+  else c.participations.push({ course_id: id, membre_id: etat.moi.id, statut, commentaire: null, temps: null, classement: null });
   if (feuille.open) feuille.close();
   afficher();
   try {
@@ -124,12 +125,12 @@ export const themeSombre = () => (document.documentElement.dataset.theme ?? (mat
 
 // Export tableur (toutes les courses, ou une seule depuis sa fiche).
 function exporterCSV(courses = etat.courses, nomFichier = `participations-${aujourdhui()}.csv`) {
-  const lignes = [['Course', 'Date', 'Validée', 'Membre', 'Statut', 'Dispo équipe', 'Temps', 'Classement']];
+  const lignes = [['Course', 'Date', 'Validée', 'Membre', 'Statut', 'Temps', 'Classement']];
   for (const c of courses) {
     for (const p of c.participations) {
       const m = membre(p.membre_id);
       lignes.push([c.nom, c.date_course, c.validee ? 'oui' : 'non', m ? `${m.prenom} ${m.nom}` : '', STATUTS[p.statut]?.libelle ?? p.statut,
-        p.dispo_equipe === true ? 'oui' : p.dispo_equipe === false ? 'non' : '', p.temps ?? '', p.classement ?? '']);
+        p.temps ?? '', p.classement ?? '']);
     }
   }
   const csv = lignes.map((l) => l.map((x) => `"${String(x).replace(/"/g, '""')}"`).join(';')).join('\r\n');
@@ -218,6 +219,13 @@ document.addEventListener('click', async (ev) => {
       feuille.close();
       const photos = etat.actualites.find((a) => a.id === id)?.photos ?? [];
       await ecrire(async () => { await donnees.supprimerActualite(id); await donnees.supprimerPhotosActu(photos); }, 'Actualité supprimée.');
+      break;
+    }
+    case 'jeter-brouillon': {
+      const f = el.closest('form[data-brouillon]');
+      effacerBrouillon(f.dataset.brouillon);
+      f.querySelectorAll('textarea, input[type="text"], input[type="url"]').forEach((e) => { e.value = ''; });
+      el.closest('.brouillon-repris')?.remove();
       break;
     }
     case 'format': appliquerFormat(document.getElementById(el.dataset.cible), valeur); break;
@@ -466,15 +474,6 @@ document.addEventListener('change', async (ev) => {
   const el = ev.target;
   const { action, id, valeur } = el.dataset;
   switch (action) {
-    case 'dispo': {
-      if (bloquerSiHorsLigne()) { el.checked = !el.checked; return; }
-      try {
-        await donnees.majParticipation(id, { dispo_equipe: el.checked });
-        maParticipation(course(id)).dispo_equipe = el.checked;
-        message(el.checked ? "Noté : tu es disponible pour l'équipe." : 'Noté : pas disponible.');
-      } catch (e) { el.checked = !el.checked; message(e.message); }
-      break;
-    }
     case 'niveau-membre': {
       const m = membre(id);
       const nom = el.dataset.discipline === 'velo' ? 'vélo' : 'course à pied';
@@ -680,7 +679,7 @@ document.addEventListener('submit', async (ev) => {
       const texte = vide(champs.texte);
       if (!texte) break;
       bouton.disabled = true;
-      const ok = await ecrire(async () => { await donnees.posterMessage(form.dataset.id, texte, form.dataset.parent || null); etat.reponseA = null; },
+      const ok = await ecrire(async () => { await donnees.posterMessage(form.dataset.id, texte, form.dataset.parent || null); etat.reponseA = null; effacerBrouillon(form.dataset.brouillon); },
         form.dataset.parent ? 'Réponse envoyée.' : 'Message envoyé.');
       if (!ok) bouton.disabled = false;
       break;
@@ -723,6 +722,7 @@ document.addEventListener('submit', async (ev) => {
         if (id) await donnees.modifierCourse(id, c);
         else id = (await donnees.proposerCourse(c, estBureau())).id;
         if (valider) await donnees.validerCourse(id);
+        effacerBrouillon(form.dataset.brouillon);
       }, valider ? 'Course validée.' : form.dataset.id ? 'Course modifiée.' : estBureau() ? 'Course ajoutée au calendrier.' : 'Proposition envoyée au bureau.');
       if (ok) location.hash = `#/course/${id}`;
       else bouton.disabled = false;
@@ -752,7 +752,7 @@ document.addEventListener('submit', async (ev) => {
         if (p.nouvelles.length) { message('Envoi des photos…'); nouvelles = await donnees.envoyerPhotosActu(p.nouvelles.map((n) => n.blob)); }
         a.photos = [...p.gardees, ...nouvelles];
         if (!a.photos.length) a.photos = null;
-        try { await donnees.enregistrerActualite(form.dataset.id || null, a); }
+        try { await donnees.enregistrerActualite(form.dataset.id || null, a); effacerBrouillon(form.dataset.brouillon); }
         catch (e) { await donnees.supprimerPhotosActu(nouvelles); throw e; }   // pas de photo orpheline
         await donnees.supprimerPhotosActu(p.retirees);
       }, form.dataset.id ? 'Actualité modifiée.' : 'Actualité publiée.');

@@ -18,6 +18,9 @@ import { tutoAVoir } from './actions.js';
 import { DELAI_RENVOI } from './config.js';
 import { ecouterInstallation } from './installation.js';
 import { activerGestes } from './gestes.js';
+import { suivreBrouillons } from './brouillons.js';
+
+suivreBrouillons();
 
 ecouterInstallation(() => afficher());
 activerGestes({ afficher, actualiser: () => rafraichir(true) });

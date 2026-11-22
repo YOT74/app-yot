@@ -735,3 +735,21 @@ button.menu-lien { width: 100%; background: none; border-left: none; border-righ
 .sq-carte.petite { height: 70px; }
 @keyframes sq { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 @media (prefers-reduced-motion: reduce) { .sq { animation: none; } }
+.brouillon-repris .lien-discret { font-size: 12px; }
+
+/* --- Accueil : dossard et encarts de courses plus compacts -------------- */
+.accueil-prochaine .dossard-bandeau { padding-top: 6px; padding-bottom: 6px; }
+.accueil-prochaine .dossard-corps { padding: 4px 28px 12px; gap: 2px; }
+.accueil-prochaine .dossard-chiffre { font-size: 60px; }
+.accueil-prochaine .dossard-chiffre.petit { font-size: 40px; }
+.accueil-prochaine .dossard-nom { font-size: 16px; }
+.accueil-prochaine .dossard-info { font-size: 13px; }
+.accueil-prochaine .dossard-trou.hg, .accueil-prochaine .dossard-trou.hd { top: 40px; }
+.accueil-prochaine .dossard-trou.bg, .accueil-prochaine .dossard-trou.bd { bottom: 8px; }
+.encart .ligne { padding-top: 6px; padding-bottom: 6px; }
+.encart .ligne-lien { gap: 10px; min-height: 0; }
+.encart .ligne-jour { width: 34px; font-size: 30px; }
+.encart .ligne-nom { font-size: 15px; }
+.encart .ligne-detail { font-size: 12px; }
+.encart .ligne-detail .badge { font-size: 10px; padding: 1px 5px; }
+.encart .ligne .pastille { min-height: 24px; font-size: 12px; padding: 2px 7px; }

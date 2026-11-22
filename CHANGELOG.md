@@ -8,6 +8,13 @@ Numérotation X.Y.Z (la version change à chaque mise en ligne, sinon les télé
 - Y, fonctionnalité : nouvelle fonction visible pour les membres. Section + release.
 - X, version majeure : grande étape (lancement officiel auprès des membres = v2.0.0, refonte…). Section + release.
 
+## v1.12.0 — Brouillons et course club sur l'accueil
+
+- Brouillons : une actualité, un message ou une proposition de course en cours d'écriture est gardé sur le téléphone et repris au retour (« Brouillon repris · Effacer »). Effacé une fois publié.
+- Accueil : encart « Prochaine course club », sauf si c'est déjà ta prochaine course.
+- Accueil plus compact : dossard de la prochaine course et encarts de courses réduits.
+- Course club : bandeau simplifié, et retrait de « Je suis disponible pour l'équipe du club » (et de la vue bureau associée).
+
 ## v1.11.0 — Données personnelles, rappels et confort
 
 - Page « Données personnelles » (lisible sans être connecté) et bouton « Supprimer mon compte » dans Mon compte.

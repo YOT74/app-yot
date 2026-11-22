@@ -1,12 +1,12 @@
 // sw.js — service worker : ouverture rapide, lecture hors ligne, mises à jour.
 // À CHAQUE PUBLICATION : augmenter VERSION (la même que dans config.js).
-const VERSION = '1.11.0';
+const VERSION = '1.12.0';
 const CACHE = `app-club-${VERSION}`;
 
 // Les fichiers de l'app, gardés pour l'ouverture hors ligne.
 const FICHIERS = [
   './', 'index.html', 'style.css', 'app.js', 'config.js', 'client.js', 'auth.js', 'etat.js', 'outils.js',
-  'donnees.js', 'demo.js', 'demo-donnees.js', 'avatar.js', 'installation.js', 'texte-riche.js', 'gestes.js', 'rendu.js', 'actions.js', 'import-excel.js', 'lecteur-xlsx.js',
+  'donnees.js', 'demo.js', 'demo-donnees.js', 'avatar.js', 'installation.js', 'texte-riche.js', 'gestes.js', 'brouillons.js', 'rendu.js', 'actions.js', 'import-excel.js', 'lecteur-xlsx.js',
   'ecrans/communs.js', 'ecrans/connexion.js', 'ecrans/accueil.js', 'ecrans/calendrier.js', 'ecrans/course.js',
   'ecrans/entrainement.js', 'ecrans/mes-courses.js', 'ecrans/plus.js', 'ecrans/donnees.js',
   'manifest.webmanifest', 'icons/icone.svg', 'icons/icone-192.png',

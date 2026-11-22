@@ -19,9 +19,18 @@ function texteActu(a) {
     ${long ? `<button class="lien-mini" type="button" data-action="lire-actu" data-id="${esc(a.id)}">${ouvert ? 'Réduire' : 'Lire la suite'}</button>` : ''}`;
 }
 
+// La prochaine course club, mise en avant (sauf si c'est déjà « ma prochaine course » du dossard).
+function prochaineCourseClub() {
+  const c = etat.courses.filter((x) => x.validee && x.course_club && x.date_course >= aujourdhui())
+    .sort((a, b) => a.date_course.localeCompare(b.date_course))[0];
+  if (!c || c.id === maProchaineCourse()?.id) return '';
+  return `<section class="encart encart-club"><h2>Prochaine course club</h2><div class="liste">${ligneCourse(c)}</div></section>`;
+}
+
 // Sans course prévue : les 3 prochaines courses où des membres sont engagés, pour donner des idées.
 function ouVaLeClub() {
-  const idees = etat.courses.filter((c) => c.validee && c.date_course >= aujourdhui() && nbEngages(c) > 0)
+  const club = etat.courses.filter((x) => x.validee && x.course_club && x.date_course >= aujourdhui()).sort((a, b) => a.date_course.localeCompare(b.date_course))[0];
+  const idees = etat.courses.filter((c) => c.validee && c.date_course >= aujourdhui() && nbEngages(c) > 0 && c.id !== club?.id)
     .sort((a, b) => a.date_course.localeCompare(b.date_course)).slice(0, 3);
   if (!idees.length) return '';
   return `<section class="encart">
@@ -121,7 +130,8 @@ export function ecranAccueil() {
   return `
     ${entete(`Bonjour ${esc(etat.moi.prenom)}`, `<span class="entete-boutons">${bascule}${cloche}</span>`)}
     <p class="sous-titre">${esc(dateLongue(aujourdhui()))}</p>
-    ${dossardProchaine()}
+    <div class="accueil-prochaine">${dossardProchaine()}</div>
+    ${prochaineCourseClub()}
     ${maProchaineCourse() ? '' : ouVaLeClub()}
 
     ${clotures.length ? `
@@ -163,7 +173,7 @@ export function ecranFormulaireActu(id) {
   return `
     ${retour('#/', 'Accueil')}
     <h1 class="fiche-titre">${a ? "Modifier l'actualité" : 'Publier une actualité'}</h1>
-    <form data-form="actualite" data-id="${esc(a?.id ?? '')}">
+    <form data-form="actualite" data-id="${esc(a?.id ?? '')}" data-brouillon="actu-${esc(a?.id ?? 'nouvelle')}">
       <div class="champ"><label for="titre">Titre</label><input id="titre" name="titre" required maxlength="120" value="${esc(a?.titre ?? '')}"></div>
       <div class="champ"><label for="contenu">Texte</label>
         ${barreFormat('contenu')}

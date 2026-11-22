@@ -109,7 +109,7 @@ export function ecranFormulaireCourse(id) {
     <h1 class="fiche-titre">${c ? 'Modifier la course' : 'Proposer une course'}</h1>
     ${c && c.source && c.source !== 'membre' ? '<p class="aide" style="margin:0">Course importée : tes corrections seront conservées lors des prochaines mises à jour.</p>' : ''}
     ${!c && !estBureau() ? '<p class="aide" style="margin:0">Vérifie au préalable dans la recherche du calendrier que la course n’y figure pas déjà.</p>' : ''}
-    <form data-form="course" data-id="${esc(c?.id ?? '')}">
+    <form data-form="course" data-id="${esc(c?.id ?? '')}" data-brouillon="course-${esc(c?.id ?? 'nouvelle')}">
       <div class="champ"><label for="nom">Nom de la course</label><input id="nom" name="nom" required maxlength="120" value="${v('nom')}" placeholder="ex. Triathlon de Doussard"></div>
       <div id="zone-doublon">${c ? '' : ''}</div>
       <div class="deux">
@@ -128,7 +128,7 @@ export function ecranFormulaireCourse(id) {
           <datalist id="formats">${FORMATS_SUGGERES.map((x) => `<option value="${esc(x)}"></option>`).join('')}</datalist></div>
       </div>
       <div class="champ"><label for="url_inscription">Lien d'inscription</label><input id="url_inscription" name="url_inscription" type="url" placeholder="https://…" value="${v('url_inscription')}"></div>
-      <label class="champ champ-case"><input type="checkbox" name="course_club" ${c?.course_club ? 'checked' : ''}> Course par équipe pilotée par le bureau</label>
+      <label class="champ champ-case"><input type="checkbox" name="course_club" ${c?.course_club ? 'checked' : ''}> Course club</label>
       <div class="champ"><label for="infos">Infos utiles</label><textarea id="infos" name="infos" maxlength="1000" placeholder="Parking, retrait des dossards…">${v('infos')}</textarea></div>
       <p class="erreur" data-erreur hidden></p>
       ${c && !c.validee && estBureau() ? `

@@ -8,6 +8,7 @@ import { donnees } from './donnees.js';
 import { esc, icone, dateCourte } from './outils.js';
 import { noterInstallation } from './installation.js';
 import { ecranDonneesPerso } from './ecrans/donnees.js';
+import { restaurerBrouillons } from './brouillons.js';
 import { ecranConnexion, ecranInscription, ecranAttente, tuto } from './ecrans/connexion.js';
 import { ecranAccueil, ecranFormulaireActu } from './ecrans/accueil.js';
 import { ecranCalendrier, ecranFormulaireCourse } from './ecrans/calendrier.js';
@@ -91,6 +92,7 @@ export function afficher() {
   if (etat.tuto !== null && etat.tuto !== undefined) html += tuto(etat.tuto);
   ecran.innerHTML = html;
   barreNav(onglet);
+  restaurerBrouillons();
 }
 
 // Ouvrir les notifications = les avoir vues : plus de badge, mais celles qui
