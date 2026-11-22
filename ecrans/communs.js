@@ -2,8 +2,8 @@
 // ecrans/communs.js — morceaux d'interface réutilisés par plusieurs écrans.
 // =====================================================================
 import { NOM_CLUB, STATUTS, DISCIPLINES } from '../config.js';
-import { etat, aVenir, monStatut, maParticipation, participationDe, nbStatut, nbEngages, alerteCloture } from '../etat.js';
-import { esc, enDate, moisAnnee, jourMois, afficherTemps, icone, dateCourte, joursAvant } from '../outils.js';
+import { etat, aVenir, monStatut, maParticipation, participationDe, nbStatut, nbEngages, alerteCloture, maDate, plusieursDistances, epreuvesDe } from '../etat.js';
+import { esc, aujourdhui, enDate, moisAnnee, jourMois, afficherTemps, icone, dateCourte, joursAvant } from '../outils.js';
 
 export const libelleDiscipline = (cle) => DISCIPLINES[cle] ?? cle;
 
@@ -85,9 +85,19 @@ export function parMois(liste, options) {
 }
 
 // Ma prochaine échéance sous forme de dossard.
+// Choix de ma distance sur un événement à plusieurs distances (feuille de statut et fiche course).
+export function choixDistance(c) {
+  const p = maParticipation(c);
+  if (!p || p.statut === 'forfait' || !plusieursDistances(c)) return '';
+  const epreuves = epreuvesDe(c);
+  const jours = new Set(epreuves.map((e) => e.date)).size > 1;
+  return `<div class="champ"><span class="libelle">Ma distance</span>
+    <div class="puces choix-distance">${epreuves.map((e) => `<button type="button" data-action="distance" data-id="${esc(c.id)}" data-valeur="${esc(e.nom)}" aria-pressed="${p.distance === e.nom}">${esc(e.nom)}${jours ? ` · ${esc(dateCourte(e.date))}` : ''}</button>`).join('')}</div></div>`;
+}
+
 export const maProchaineCourse = () => etat.courses
-  .filter((c) => c.validee && aVenir(c) && ['inscrit', 'interesse', 'cherche_dossard'].includes(monStatut(c)))
-  .sort((a, b) => a.date_course.localeCompare(b.date_course))[0];
+  .filter((c) => c.validee && maDate(c) >= aujourdhui() && ['inscrit', 'interesse', 'cherche_dossard'].includes(monStatut(c)))
+  .sort((a, b) => maDate(a).localeCompare(maDate(b)))[0];
 
 export function dossardProchaine() {
   const p = maProchaineCourse();
@@ -97,11 +107,11 @@ export function dossardProchaine() {
       <span class="dossard-nom">Pas encore de course prévue</span>
       <span class="dossard-info">Choisis une course dans le calendrier et indique ton statut.</span>`, '#/calendrier');
   }
-  const jours = joursAvant(p.date_course);
+  const jours = joursAvant(maDate(p));   // jour de MA distance si l'événement dure plusieurs jours
   // les autres membres engagés (hors forfait), sans me compter
   const autres = nbEngages(p) - 1;
-  const statut = STATUTS[monStatut(p)]?.libelle ?? '';
-  return dossard(NOM_CLUB, dateCourte(p.date_course), `
+  const statut = [STATUTS[monStatut(p)]?.libelle, plusieursDistances(p) ? maParticipation(p)?.distance : null].filter(Boolean).join(' · ');
+  return dossard(NOM_CLUB, dateCourte(maDate(p)), `
     <span class="dossard-chiffre">${jours <= 0 ? 'Jour J' : `J-${jours}`}</span>
     <span class="dossard-nom">${esc(p.nom)}</span>
     <span class="dossard-info">${esc(statut)} · ${autres > 0 ? `toi + ${autres} du club` : 'personne d’autre du club pour l’instant'}</span>`, `#/course/${esc(p.id)}`);

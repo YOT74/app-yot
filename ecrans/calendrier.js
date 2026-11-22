@@ -134,9 +134,16 @@ export function ecranFormulaireCourse(id) {
         <div class="champ"><label for="discipline">Discipline</label><select id="discipline" name="discipline">
           ${Object.entries(DISCIPLINES).map(([cle, nom]) => `<option value="${cle}" ${(c?.discipline ?? 'triathlon') === cle ? 'selected' : ''}>${esc(nom)}</option>`).join('')}
         </select></div>
-        <div class="champ"><label for="format">Format</label><input id="format" name="format" list="formats" maxlength="40" value="${v('format')}" placeholder="S, M, 10 km…">
+        <div class="champ"><label for="format">Distances</label><input id="format" name="format" list="formats" maxlength="80" value="${v('format')}" placeholder="10 km, Semi, Marathon">
           <datalist id="formats">${FORMATS_SUGGERES.map((x) => `<option value="${esc(x)}"></option>`).join('')}</datalist></div>
       </div>
+      <span class="aide" style="margin-top:-6px">Plusieurs distances : sépare-les par des virgules, chacun choisira la sienne.</span>
+      <details class="bloc" ${c?.epreuves?.length ? 'open' : ''}>
+        <summary>Événement sur plusieurs jours</summary>
+        <div class="champ"><label for="epreuves">Une distance par ligne, avec sa date</label>
+          <textarea id="epreuves" name="epreuves" rows="3" placeholder="10 km : 2027-04-17&#10;Semi : 2027-04-18&#10;Marathon : 2027-04-18">${esc((c?.epreuves ?? []).map((e) => `${e.nom} : ${e.date}`).join('\n'))}</textarea>
+          <span class="aide">Le compte à rebours de chacun suit alors la date de sa distance.</span></div>
+      </details>
       <div class="champ"><label for="url_inscription">Lien d'inscription</label><input id="url_inscription" name="url_inscription" type="url" placeholder="https://…" value="${v('url_inscription')}"></div>
       <label class="champ champ-case"><input type="checkbox" name="course_club" ${c?.course_club ? 'checked' : ''}> Course club</label>
       <div class="champ"><label for="infos">Infos utiles</label><textarea id="infos" name="infos" maxlength="1000" placeholder="Parking, retrait des dossards…">${v('infos')}</textarea></div>

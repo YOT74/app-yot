@@ -2,9 +2,9 @@
 // ecrans/course.js — fiche d'une course.
 // =====================================================================
 import { STATUTS, TYPES_ALBUM, SOURCES } from '../config.js';
-import { etat, estBureau, course, maParticipation, aVenir, statutPossible, alerteCloture, nomMembre } from '../etat.js';
-import { esc, icone, lienSur, dateLongue, jourMois, joursAvant, afficherTemps, ilYa, horodatage } from '../outils.js';
-import { retour, libelleDiscipline } from './communs.js';
+import { etat, estBureau, course, maParticipation, aVenir, statutPossible, alerteCloture, nomMembre, plusieursDistances, plusieursJours, epreuvesDe, maDate, dernierJour } from '../etat.js';
+import { esc, icone, lienSur, aujourdhui as aujourdhuiIso, dateLongue, jourMois, joursAvant, afficherTemps, ilYa, horodatage } from '../outils.js';
+import { retour, libelleDiscipline, choixDistance } from './communs.js';
 import { avatar } from '../avatar.js';
 import { membre } from '../etat.js';
 
@@ -22,6 +22,7 @@ function blocParticipation(c) {
     <section class="bloc">
       <h2>Ma participation</h2>
       <div class="choix-statut">${boutons}</div>
+      ${choixDistance(c)}
       ${p ? '<span class="aide">Touche à nouveau la pastille pour annuler.</span>' : ''}
       ${p?.statut === 'finisher' ? `
         <form data-form="resultat" data-id="${esc(c.id)}">
@@ -43,6 +44,12 @@ const secondes = (t) => {
 
 function blocClub(c) {
   const passee = !aVenir(c);
+  const multi = plusieursDistances(c);
+  // événement à plusieurs distances : combien du club sur chacune
+  const engages = c.participations.filter((x) => x.statut !== 'forfait');
+  const parDistance = multi ? epreuvesDe(c).map((e) => [e, engages.filter((x) => x.distance === e.nom).length]).filter(([, n]) => n) : [];
+  const sansDistance = multi ? engages.filter((x) => !x.distance).length : 0;
+  const resume = parDistance.length ? `<p class="resume-distances">${parDistance.map(([e, n]) => `<span><strong>${n}</strong> ${esc(e.nom)}</span>`).join('')}${sansDistance ? `<span><strong>${sansDistance}</strong> distance non précisée</span>` : ''}</p>` : '';
   const groupes = ORDRE_CLUB.map((statut) => {
     let ps = c.participations.filter((x) => x.statut === statut);
     if (!ps.length) return '';
@@ -56,13 +63,14 @@ function blocClub(c) {
           return `<li>
             ${classement && x.temps ? `<span class="rang">${i + 1}</span>` : ''}
             <a href="#/membre/${esc(x.membre_id)}" class="engage-nom ${x.membre_id === etat.moi.id ? 'moi' : ''}">${avatar(membre(x.membre_id), 28)} ${esc(nomMembre(x.membre_id))}</a>
+            ${multi && x.distance ? `<span class="badge distance">${esc(x.distance)}</span>` : ''}
             ${chrono ? `<span class="chrono">${esc(chrono)}</span>` : ''}
           </li>`;
         }).join('')}</ul>
       </div>`;
   }).join('');
   const vide = passee ? 'Personne du club.' : 'Personne pour l’instant.';
-  return `<section class="bloc"><h2>Le club sur cette course</h2>${groupes || `<p class="aide" style="margin:0">${vide}</p>`}</section>`;
+  return `<section class="bloc"><h2>Le club sur cette course</h2>${resume}${groupes || `<p class="aide" style="margin:0">${vide}</p>`}</section>`;
 }
 
 // Bureau : écrire aux engagés de la course, exporter la liste.
@@ -174,7 +182,7 @@ export function ecranCourse(id) {
 
   return `
     ${retour('#/calendrier', 'Calendrier')}
-    <span class="etiquette">${esc(dateLongue(c.date_course))}${c.date_a_confirmer ? ' · date à confirmer' : future ? ` · J-${joursAvant(c.date_course)}` : ''}</span>
+    <span class="etiquette">${plusieursJours(c) ? `Du ${esc(jourMois(c.date_course))} au ${esc(jourMois(dernierJour(c)))}` : esc(dateLongue(c.date_course))}${c.date_a_confirmer ? ' · date à confirmer' : future && maDate(c) >= aujourdhuiIso() ? ` · J-${joursAvant(maDate(c))}${plusieursJours(c) && maParticipation(c)?.distance ? ` (${esc(maParticipation(c).distance)})` : ''}` : ''}</span>
     <h1 class="fiche-titre">${esc(c.nom)}</h1>
     <div class="fiche-meta">
       <span>${[esc(libelleDiscipline(c.discipline)), c.format ? esc(c.format) : '', c.lieu ? `${esc(c.lieu)}${c.departement ? ` (${esc(c.departement)})` : ''}` : ''].filter(Boolean).join(' · ')}</span>

@@ -3,7 +3,7 @@
 // Chaque bouton porte data-action="…" ; chaque formulaire data-form="…".
 // =====================================================================
 import { STATUTS, NOM_CLUB, DISCIPLINES_SEANCE, groupePourHeures, DELAI_RENVOI, LONGUEUR_CODE } from './config.js';
-import { etat, estBureau, course, maParticipation, monStatut, membre, nomMembre } from './etat.js';
+import { etat, estBureau, course, maParticipation, monStatut, membre, nomMembre, plusieursDistances } from './etat.js';
 import { donnees } from './donnees.js';
 import { demanderCode, validerCode, deconnexion, connexionFournisseur } from './auth.js';
 import { esc, aujourdhui, lundiDe, ajouterJours, vide, lienSur, normaliserTemps, fichierAgenda } from './outils.js';
@@ -62,10 +62,13 @@ async function changerStatut(id, valeur) {
   if (!statut) c.participations = c.participations.filter((x) => x.membre_id !== etat.moi.id);
   else if (p) p.statut = statut;
   else c.participations.push({ course_id: id, membre_id: etat.moi.id, statut, commentaire: null, temps: null, classement: null });
+  const dansFeuille = feuille.open;
   if (feuille.open) feuille.close();
   afficher();
   try {
     await donnees.changerStatut(id, statut);
+    // événement à plusieurs distances : on laisse choisir la distance tout de suite
+    if (dansFeuille && statut && statut !== 'forfait' && plusieursDistances(c) && !maParticipation(c)?.distance) ouvrirFeuilleStatut(id);
   } catch (e) {
     c.participations = avant;
     afficher();
@@ -125,12 +128,12 @@ export const themeSombre = () => (document.documentElement.dataset.theme ?? (mat
 
 // Export tableur (toutes les courses, ou une seule depuis sa fiche).
 function exporterCSV(courses = etat.courses, nomFichier = `participations-${aujourdhui()}.csv`) {
-  const lignes = [['Course', 'Date', 'Validée', 'Membre', 'Statut', 'Temps', 'Classement']];
+  const lignes = [['Course', 'Date', 'Validée', 'Membre', 'Statut', 'Distance', 'Temps', 'Classement']];
   for (const c of courses) {
     for (const p of c.participations) {
       const m = membre(p.membre_id);
       lignes.push([c.nom, c.date_course, c.validee ? 'oui' : 'non', m ? `${m.prenom} ${m.nom}` : '', STATUTS[p.statut]?.libelle ?? p.statut,
-        p.temps ?? '', p.classement ?? '']);
+        p.distance ?? '', p.temps ?? '', p.classement ?? '']);
     }
   }
   const csv = lignes.map((l) => l.map((x) => `"${String(x).replace(/"/g, '""')}"`).join(';')).join('\r\n');
@@ -219,6 +222,19 @@ document.addEventListener('click', async (ev) => {
       feuille.close();
       const photos = etat.actualites.find((a) => a.id === id)?.photos ?? [];
       await ecrire(async () => { await donnees.supprimerActualite(id); await donnees.supprimerPhotosActu(photos); }, 'Actualité supprimée.');
+      break;
+    }
+    case 'distance': {
+      if (bloquerSiHorsLigne()) break;
+      const p = maParticipation(course(id));
+      if (!p) break;
+      const distance = p.distance === valeur ? null : valeur;   // retoucher sa distance l'efface
+      try {
+        await donnees.majParticipation(id, { distance });
+        p.distance = distance;
+        if (feuille.open) ouvrirFeuilleStatut(id); else afficher();
+        message(distance ? `Distance : ${distance}.` : 'Distance retirée.');
+      } catch (e) { message(e.message); }
       break;
     }
     case 'fusionner': {
@@ -723,6 +739,21 @@ document.addEventListener('submit', async (ev) => {
         course_club: champs.course_club === 'on',
         infos: vide(champs.infos),
       };
+      // épreuves sur plusieurs jours : « Distance : AAAA-MM-JJ » (ou JJ/MM/AAAA), une par ligne
+      const lignesEp = String(champs.epreuves ?? '').split('\n').map((l) => l.trim()).filter(Boolean);
+      const epreuves = [];
+      for (const l of lignesEp) {
+        const m = l.match(/^(.+?)\s*[:;|–-]\s*(\d{4}-\d{2}-\d{2}|\d{1,2}\/\d{1,2}\/\d{4})$/);
+        if (!m) { epreuves.length = 0; montrerErreur(`Ligne non comprise : « ${l} ». Format attendu : Semi : 2027-04-18`); break; }
+        const d = m[2].includes('/') ? m[2].split('/').reverse().map((x) => x.padStart(2, '0')).join('-') : m[2];
+        epreuves.push({ nom: m[1].trim(), date: d });
+      }
+      if (lignesEp.length && epreuves.length !== lignesEp.length) break;
+      if (epreuves.length) {
+        c.epreuves = epreuves.sort((a, b) => a.date.localeCompare(b.date));
+        c.date_course = c.epreuves[0].date;                       // premier jour de l'événement
+        c.format = epreuves.map((e) => e.nom).join(', ');            // les distances suivent les épreuves
+      } else c.epreuves = null;
       if (c.url_inscription && !lienSur(c.url_inscription)) { montrerErreur('Le lien doit commencer par https://'); break; }
       if (c.date_limite_inscription && c.date_limite_inscription > c.date_course) { montrerErreur('La clôture des inscriptions doit être avant la course.'); break; }
       bouton.disabled = true;

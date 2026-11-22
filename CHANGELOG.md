@@ -8,6 +8,14 @@ Numérotation X.Y.Z (la version change à chaque mise en ligne, sinon les télé
 - Y, fonctionnalité : nouvelle fonction visible pour les membres. Section + release.
 - X, version majeure : grande étape (lancement officiel auprès des membres = v2.0.0, refonte…). Section + release.
 
+## v1.15.0 — Événements à plusieurs distances
+
+- Une course peut proposer plusieurs distances (« 10 km, Semi, Marathon ») : chacun choisit la sienne avec son statut, et la fiche montre combien du club sur chaque distance, avec la distance à côté de chaque nom.
+- Événement sur plusieurs jours : une date par distance. Le compte à rebours (J-x), le dossard de l'accueil et « ma prochaine course » suivent la date de MA distance ; la fiche affiche « Du … au … ».
+- Export tableur : colonne Distance.
+
+Base de données : colonnes `epreuves` (courses) et `distance` (participations).
+
 ## v1.14.0 — Fusion des courses en double
 
 - Espace bureau : liste « Doublons possibles » (course proposée par un membre ou estimée qui ressemble à une autre, à quelques jours près).

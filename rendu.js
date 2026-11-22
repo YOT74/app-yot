@@ -7,6 +7,7 @@ import { etat, estBureau, course, monStatut, statutPossible, nbNonLues, enAttent
 import { donnees } from './donnees.js';
 import { esc, icone, dateCourte } from './outils.js';
 import { noterInstallation } from './installation.js';
+import { choixDistance } from './ecrans/communs.js';
 import { ecranDonneesPerso } from './ecrans/donnees.js';
 import { restaurerBrouillons } from './brouillons.js';
 import { ecranConnexion, ecranInscription, ecranAttente, tuto } from './ecrans/connexion.js';
@@ -170,6 +171,7 @@ export function ouvrirFeuilleStatut(id) {
       <span class="etiquette">${esc(dateCourte(c.date_course))}</span>
       <h2 id="feuille-titre">${esc(c.nom)}</h2>
       <div class="choix-statut">${choix}</div>
+      ${choixDistance(c)}
       ${statut ? '<span class="aide">Touche à nouveau ton statut pour le retirer.</span>' : ''}
       <a class="bouton contour" href="#/course/${esc(c.id)}" data-action="fermer-feuille">Voir la course</a>
     </div>`;

@@ -66,11 +66,24 @@ export function appliquerDonnees(d, extra = {}) {
 }
 // Date avec l'année quand ce n'est pas l'année en cours (« dim. 29 août 2027 »).
 export const avecAnnee = (texte, iso) => (iso && iso.slice(0, 4) !== String(new Date().getFullYear()) ? `${texte} ${iso.slice(0, 4)}` : texte);
-export const aVenir = (c) => c.date_course >= aujourdhui();
+// Épreuves d'un événement : [{ nom, date }]. Sur plusieurs jours, elles sont dans c.epreuves ;
+// sinon ce sont les distances listées dans le format (« 10 km, Semi, Marathon »), toutes le jour de la course.
+export const epreuvesDe = (c) => {
+  if (Array.isArray(c?.epreuves) && c.epreuves.length) return c.epreuves.filter((e) => e?.nom).map((e) => ({ nom: String(e.nom), date: e.date || c.date_course }));
+  return String(c?.format ?? '').split(/\s*,\s*/).filter(Boolean).map((nom) => ({ nom, date: c.date_course }));
+};
+export const plusieursDistances = (c) => epreuvesDe(c).length > 1;
+export const plusieursJours = (c) => new Set(epreuvesDe(c).map((e) => e.date)).size > 1;
+// dernier jour de l'événement (une course reste « à venir » jusqu'à sa dernière épreuve)
+export const dernierJour = (c) => epreuvesDe(c).reduce((m, e) => (e.date > m ? e.date : m), c.date_course);
+// date qui me concerne : celle de ma distance si je l'ai choisie, sinon le premier jour
+export const dateDeLaDistance = (c, distance) => epreuvesDe(c).find((e) => e.nom === distance)?.date ?? c.date_course;
+export const aVenir = (c) => dernierJour(c) >= aujourdhui();
 export const enAttente = () => etat.courses.filter((c) => !c.validee);
 export const participationDe = (c, membreId) => c.participations.find((p) => p.membre_id === membreId);
 export const maParticipation = (c) => participationDe(c, etat.moi.id);
 export const monStatut = (c) => maParticipation(c)?.statut ?? null;
+export const maDate = (c) => dateDeLaDistance(c, maParticipation(c)?.distance);
 export const nbStatut = (c, ...statuts) => c.participations.filter((p) => statuts.includes(p.statut)).length;
 // Engagés = tous les statuts sauf forfait.
 export const nbEngages = (c) => c.participations.filter((p) => p.statut !== 'forfait').length;

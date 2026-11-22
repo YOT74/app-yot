@@ -55,6 +55,7 @@ create table courses (
   source text not null default 'membre',
   source_ref text,                                  -- identifiant chez la source (mises à jour du robot)
   date_a_confirmer boolean not null default false,  -- date estimée : jour pas encore publié par l'organisateur
+  epreuves jsonb,                                   -- événement sur plusieurs jours : [{"nom": "10 km", "date": "2027-04-17"}, …]
   url_source text,                                  -- page de la course chez la source
   corrigee boolean not null default false,          -- corrigée par le bureau : le robot ne l'écrase plus
   masquee boolean not null default false,           -- masquée par le bureau (une course importée supprimée reviendrait)
@@ -74,6 +75,7 @@ create table participations (
   membre_id uuid not null references membres(id) on delete cascade,
   statut statut_participation not null,
   dispo_equipe boolean,                                       -- courses club uniquement
+  distance text,                                              -- distance choisie si l'événement en propose plusieurs
   temps interval,
   classement int,
   maj_le timestamptz not null default now(),
