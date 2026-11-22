@@ -8,7 +8,7 @@ import { etat, estAdmin, estBureau, estCoach, membre, nomMembre, suffixeRole, co
 import { esc, icone, normalise, aujourdhui, ajouterJours, jourMois, dateCourte, ilYa, lienSur } from '../outils.js';
 import { entete, retour, ligneCourse, menuAdmin } from './communs.js';
 import { avatar } from '../avatar.js';
-import { installationPossible } from '../installation.js';
+import { installationPossible, installable } from '../installation.js';
 import { doublonsPossibles } from './calendrier.js';
 
 const lienMenu = (href, titre, detail = '', extra = '') =>
@@ -34,6 +34,7 @@ export function ecranPlus() {
       </div>
     </section>
     <button class="bouton discret" type="button" data-action="tuto-debut">Revoir la présentation de l'app</button>
+    ${installable() && !installationPossible() ? '<button class="lien-discret" type="button" data-action="installer-app">Installer l’app sur ce téléphone</button>' : ''}
     <p class="aide">Version ${esc(VERSION)}${MODE_DEMO ? ' · mode démo' : ''}</p>`;
 }
 

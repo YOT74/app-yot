@@ -6,6 +6,7 @@ import { STATUTS } from './config.js';
 import { etat, estBureau, course, monStatut, statutPossible, nbNonLues, enAttente, appliquerDonnees } from './etat.js';
 import { donnees } from './donnees.js';
 import { esc, icone, dateCourte } from './outils.js';
+import { noterInstallation } from './installation.js';
 import { ecranConnexion, ecranInscription, ecranAttente, tuto } from './ecrans/connexion.js';
 import { ecranAccueil, ecranFormulaireActu } from './ecrans/accueil.js';
 import { ecranCalendrier, ecranFormulaireCourse } from './ecrans/calendrier.js';
@@ -104,6 +105,7 @@ export async function charger() {
     appliquerDonnees(d, { horsLigne: false, aInscrire: false });
     try { localStorage.setItem(CLE_CACHE, JSON.stringify(d)); } catch { /* stockage plein ou bloqué */ }
     await chargerNotifications(false);
+    noterInstallation((champs) => donnees.modifierMaFiche(champs));   // app ouverte depuis son icône ?
   } catch (e) {
     let cache = null;
     try { cache = JSON.parse(localStorage.getItem(CLE_CACHE)); } catch { /* rien en cache */ }

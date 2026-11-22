@@ -25,7 +25,7 @@ export const etat = {
   filtres: { disciplines: [], periode: 'tout', club: false, miennes: false, passees: false, base: false, tri: 'date', recherche: '' },
   semaine: null,          // lundi de la semaine affichée dans Entraînement
   groupe: null,           // filtre de groupe dans Entraînement (null = mon groupe, sinon 'tous' ou un groupe)
-  vuePlanning: (() => { try { return localStorage.getItem('vue-planning') || 'texte'; } catch { return 'texte'; } })(),
+  vuePlanning: (() => { try { return localStorage.getItem('vue-planning') || 'graphique'; } catch { return 'graphique'; } })(),
   triDiscussion: 'asc',   // ordre des messages : 'asc' (anciens d'abord) ou 'desc'
   recherche: '',          // recherche dans Membres
   toutesActus: false,

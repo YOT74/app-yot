@@ -25,6 +25,7 @@ create table membres (
   niveau_cap text,                                  -- niveau de course à pied (1, 2, 3), réglé par le coach
   niveau_velo text,                                 -- niveau de vélo (1, 2, 3), réglé par le coach
   en_attente boolean not null default true,         -- nouveau compte : attend la validation du bureau
+  app_installee timestamptz,                        -- dernière ouverture depuis l'icône de l'écran d'accueil
   -- réglages des notifications (chacun coche ce qu'il veut recevoir)
   notif_mot boolean not null default true,          -- discussion : nouveau message sur une de mes courses, réponse à un fil où j'écris
   notif_inscription boolean not null default true,  -- quelqu'un s'inscrit à une course où je suis inscrit

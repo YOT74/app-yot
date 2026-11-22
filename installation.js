@@ -9,8 +9,24 @@ export const estInstallee = () =>
 export const estIphone = () =>
   /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-// Le bouton n'apparaît que si on peut vraiment aider : fenêtre Android disponible, ou iPhone.
-export const installationPossible = () => !estInstallee() && (!!etat.invitationInstall || estIphone());
+// Installation possible depuis ce navigateur : fenêtre Android disponible, ou iPhone.
+export const installable = () => !estInstallee() && (!!etat.invitationInstall || estIphone());
+
+// Sur iPhone, Safari ne peut pas savoir si l'app est déjà sur l'écran d'accueil. On retient donc,
+// dans la fiche du membre, la dernière ouverture depuis l'icône : si elle date de moins de 30 jours,
+// le bouton mis en avant est masqué. Si l'app a été supprimée, il revient de lui-même ensuite,
+// et le lien discret en bas de « Plus » reste toujours disponible.
+const JOURS_30 = 30 * 24 * 3600 * 1000;
+const installeeRecemment = () => !!etat.moi?.app_installee && Date.now() - new Date(etat.moi.app_installee) < JOURS_30;
+export const installationPossible = () => installable() && !installeeRecemment();
+
+// Appelé à chaque chargement : app ouverte depuis l'icône → on note la date (au plus une fois par jour).
+export async function noterInstallation(enregistrer) {
+  if (!estInstallee() || !etat.moi || etat.moi.en_attente) return;
+  if (etat.moi.app_installee && Date.now() - new Date(etat.moi.app_installee) < 24 * 3600 * 1000) return;
+  const quand = new Date().toISOString();
+  try { await enregistrer({ app_installee: quand }); etat.moi.app_installee = quand; } catch { /* on réessaiera à la prochaine ouverture */ }
+}
 
 export function ecouterInstallation(redessiner) {
   window.addEventListener('beforeinstallprompt', (ev) => {
