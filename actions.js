@@ -179,6 +179,22 @@ document.addEventListener('click', async (ev) => {
       break;
     }
     case 'changer-email': etat.connexion = { ...etat.connexion, etape: 'email', erreur: null }; afficher(); break;
+    case 'supprimer-compte':
+      confirmer({ titre: 'Supprimer ton compte ?', texte: 'Ta fiche, tes statuts, tes présences, tes votes et tes notifications seront effacés définitivement. Tes messages resteront, signés « Ancien membre ». Tu pourras te réinscrire plus tard.', bouton: 'Supprimer définitivement', action: 'confirmer-supprimer-compte' });
+      break;
+    case 'confirmer-supprimer-compte':
+      feuille.close();
+      if (bloquerSiHorsLigne()) break;
+      try {
+        await donnees.supprimerMonCompte();
+        await deconnexion();
+        try { localStorage.removeItem('cache-donnees-v2'); } catch { /* rien */ }
+        reinitialiserEtat();
+        location.hash = '#/';
+        afficher();
+        message('Ton compte a été supprimé.');
+      } catch (e) { message(e.message); }
+      break;
     case 'deconnexion':
       await deconnexion();
       try { localStorage.removeItem('cache-donnees-v2'); } catch { /* rien */ }

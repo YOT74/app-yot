@@ -85,10 +85,12 @@ export function parMois(liste, options) {
 }
 
 // Ma prochaine échéance sous forme de dossard.
+export const maProchaineCourse = () => etat.courses
+  .filter((c) => c.validee && aVenir(c) && ['inscrit', 'interesse', 'cherche_dossard'].includes(monStatut(c)))
+  .sort((a, b) => a.date_course.localeCompare(b.date_course))[0];
+
 export function dossardProchaine() {
-  const p = etat.courses
-    .filter((c) => c.validee && aVenir(c) && ['inscrit', 'interesse', 'cherche_dossard'].includes(monStatut(c)))
-    .sort((a, b) => a.date_course.localeCompare(b.date_course))[0];
+  const p = maProchaineCourse();
   if (!p) {
     return dossard(NOM_CLUB, 'Saison', `
       <span class="dossard-chiffre petit">À toi</span>

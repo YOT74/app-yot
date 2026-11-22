@@ -183,7 +183,8 @@ function texteNotif(n) {
     case 'validation': return `Le bureau a validé ta proposition <strong>${esc(n.extrait ?? '')}</strong>`;
     case 'actualite': return `${etat.actualites.find((a) => a.id === n.actualite_id)?.sondage_options ? 'Nouveau sondage' : 'Nouvelle actualité'} : <strong>${esc(n.extrait ?? '')}</strong>`;
     case 'refus': return `Le bureau n'a pas retenu ta proposition <strong>${esc(n.extrait ?? '')}</strong>`;
-    case 'message': return `${qui} (bureau) aux engagés de ${nomCourse} : « ${esc(n.extrait ?? '')} »`;
+    case 'rappel': return `Plus que 7 jours pour t’inscrire à ${nomCourse}`;
+    case 'message': return `${qui} aux engagés de ${nomCourse} : « ${esc(n.extrait ?? '')} »`;
     case 'dossard': return n.extrait === 'vend_dossard'
       ? `${qui} vend son dossard pour ${nomCourse}, et tu en cherches un`
       : `${qui} cherche un dossard pour ${nomCourse}, et tu vends le tien`;
@@ -255,7 +256,12 @@ export function ecranCompte() {
         <span class="aide">${etat.moi.groupe ? `Ton groupe du planning : <strong>${esc(libelleGroupe(etat.moi.groupe))}</strong>. ` : ''}</span>
       </form>
     </section>
-    <button class="bouton discret" type="button" data-action="deconnexion">Me déconnecter</button>`;
+    <button class="bouton discret" type="button" data-action="deconnexion">Me déconnecter</button>
+    <section class="bloc">
+      <h2>Mes données</h2>
+      <a class="lien-discret" href="#/donnees">Ce que l’app enregistre et pourquoi</a>
+      <button class="bouton contour danger" type="button" data-action="supprimer-compte">Supprimer mon compte</button>
+    </section>`;
 }
 
 // --- Espace bureau ------------------------------------------------------------------------

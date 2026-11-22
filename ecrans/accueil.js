@@ -2,9 +2,9 @@
 // ecrans/accueil.js — accueil (tableau de bord) et formulaire d'actualité.
 // =====================================================================
 import { DISCIPLINES_SEANCE } from '../config.js';
-import { etat, estBureau, course, alerteCloture, nbNonLues, nomMembre } from '../etat.js';
+import { etat, estBureau, course, alerteCloture, nbNonLues, nomMembre, nbEngages } from '../etat.js';
 import { esc, icone, aujourdhui, dateLongue, dateCourte, ilYa, jourMois } from '../outils.js';
-import { entete, dossardProchaine, retour, menuAdmin } from './communs.js';
+import { entete, dossardProchaine, maProchaineCourse, ligneCourse, retour, menuAdmin } from './communs.js';
 import { formaterTexte, barreFormat } from '../texte-riche.js';
 import { seanceDuGroupe } from './entrainement.js';
 import { ajouterJours } from '../outils.js';
@@ -17,6 +17,18 @@ function texteActu(a) {
   const ouvert = etat.actusOuvertes.includes(a.id);
   return `<div class="texte-riche${long && !ouvert ? ' coupe' : ''}">${formaterTexte(a.contenu)}</div>
     ${long ? `<button class="lien-mini" type="button" data-action="lire-actu" data-id="${esc(a.id)}">${ouvert ? 'Réduire' : 'Lire la suite'}</button>` : ''}`;
+}
+
+// Sans course prévue : les 3 prochaines courses où des membres sont engagés, pour donner des idées.
+function ouVaLeClub() {
+  const idees = etat.courses.filter((c) => c.validee && c.date_course >= aujourdhui() && nbEngages(c) > 0)
+    .sort((a, b) => a.date_course.localeCompare(b.date_course)).slice(0, 3);
+  if (!idees.length) return '';
+  return `<section class="encart">
+    <h2>Où va le club</h2>
+    <div class="liste">${idees.map((c) => ligneCourse(c)).join('')}</div>
+    <a class="lien-discret" href="#/calendrier">Voir tout le calendrier</a>
+  </section>`;
 }
 
 // Adresse d'image acceptée : stockage Supabase (https) ou image locale du mode démo.
@@ -110,6 +122,7 @@ export function ecranAccueil() {
     ${entete(`Bonjour ${esc(etat.moi.prenom)}`, `<span class="entete-boutons">${bascule}${cloche}</span>`)}
     <p class="sous-titre">${esc(dateLongue(aujourdhui()))}</p>
     ${dossardProchaine()}
+    ${maProchaineCourse() ? '' : ouVaLeClub()}
 
     ${clotures.length ? `
       <section class="encart alerte">

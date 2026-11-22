@@ -24,7 +24,7 @@ export const NOM_CLUB = 'YOT';
 // --- Version de l'app ---------------------------------------------------
 // À augmenter à chaque publication (et la même valeur dans sw.js),
 // sinon les téléphones gardent l'ancienne version en cache.
-export const VERSION = '1.10.0';
+export const VERSION = '1.11.0';
 
 // Nombre de chiffres du code reçu par email (réglage Supabase : Authentication → Sign In / Providers → Email → Email OTP Length).
 export const LONGUEUR_CODE = 6;
@@ -120,6 +120,7 @@ export const REGLAGES_NOTIF = {
   inscription: { libelle: "Quelqu'un s'inscrit à une course où je suis inscrit" },
   actualite:   { libelle: 'Le club publie une actualité' },
   validation:  { libelle: 'Le bureau valide une course que j\'ai proposée' },
+  rappel:      { libelle: 'Rappel 7 jours avant la clôture des inscriptions d\'une course où je suis intéressé' },
   dossard:     { libelle: 'Quelqu\'un vend un dossard sur une course où j\'en cherche un (ou en cherche un là où je vends le mien)' },
   proposition: { libelle: 'Une course est proposée et attend validation', bureau: true },
 };

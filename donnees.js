@@ -89,6 +89,14 @@ async function inscrire({ prenom, nom, heures_semaine = null, groupe = null }) {
 }
 
 // champs = { prenom, nom } ou des réglages { notif_mot: false, … }
+// Supprimer mon compte : photo, fiche et compte de connexion (fonction supprimer_mon_compte).
+async function supprimerMonCompte() {
+  await supabase.storage.from('avatars').remove([`${moiId}.jpg`]);
+  const { error } = await supabase.rpc('supprimer_mon_compte');
+  verifier(error, 'Impossible de supprimer le compte.');
+  await supabase.auth.signOut({ scope: 'local' });
+}
+
 async function modifierMaFiche(champs) {
   const { error } = await supabase.from('membres').update(champs).eq('id', moiId);
   verifier(error, "Impossible d'enregistrer.");
@@ -304,7 +312,7 @@ const reel = {
   proposerCourse, modifierCourse, validerCourse, supprimerCourse, refuserCourse, masquerCourse, messageEngages, modifierMembre,
   ajouterAlbum, supprimerAlbum,
   enregistrerSeance, supprimerSeance, remplacerSeances, repondrePresence, changerGroupe, changerNiveau, accepterMembre, refuserMembre,
-  enregistrerPartenaire, supprimerPartenaire, enregistrerActualite, supprimerActualite, envoyerPhotosActu, supprimerPhotosActu, voter,
+  enregistrerPartenaire, supprimerPartenaire, supprimerMonCompte, enregistrerActualite, supprimerActualite, envoyerPhotosActu, supprimerPhotosActu, voter,
   marquerLues,
 };
 

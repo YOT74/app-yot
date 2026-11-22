@@ -1,0 +1,41 @@
+# Sauvegarde chiffrée de la base, chaque dimanche à 3 h (heure de Paris en hiver).
+# Le fichier chiffré est gardé 90 jours dans l'onglet Actions → « Sauvegarde de la base » → la sauvegarde voulue → Artifacts.
+# Secrets nécessaires : SUPABASE_URL, SUPABASE_CLE_SERVICE (déjà créés) et SAUVEGARDE_MOT_DE_PASSE (à créer, à garder précieusement).
+#
+# Pour relire une sauvegarde : télécharger l'artifact, le dézipper, puis
+#   openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in sauvegarde.tar.gz.enc -out sauvegarde.tar.gz
+#   tar xzf sauvegarde.tar.gz        (le mot de passe est demandé à la première commande)
+name: Sauvegarde de la base
+
+on:
+  schedule:
+    - cron: '17 2 * * 0'
+  workflow_dispatch:
+
+jobs:
+  sauvegarde:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Exporter les tables
+        run: node robot/sauvegarde.mjs sauvegarde
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_CLE_SERVICE: ${{ secrets.SUPABASE_CLE_SERVICE }}
+      - name: Chiffrer
+        env:
+          MOT_DE_PASSE: ${{ secrets.SAUVEGARDE_MOT_DE_PASSE }}
+        run: |
+          if [ -z "$MOT_DE_PASSE" ]; then echo "Secret SAUVEGARDE_MOT_DE_PASSE manquant : rien n'est gardé (le dépôt est public)."; exit 1; fi
+          tar czf sauvegarde.tar.gz sauvegarde
+          openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -in sauvegarde.tar.gz -out sauvegarde.tar.gz.enc -pass env:MOT_DE_PASSE
+          rm -rf sauvegarde sauvegarde.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sauvegarde-${{ github.run_number }}
+          path: sauvegarde.tar.gz.enc
+          retention-days: 90

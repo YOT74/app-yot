@@ -7,6 +7,7 @@ import { etat, estBureau, course, monStatut, statutPossible, nbNonLues, enAttent
 import { donnees } from './donnees.js';
 import { esc, icone, dateCourte } from './outils.js';
 import { noterInstallation } from './installation.js';
+import { ecranDonneesPerso } from './ecrans/donnees.js';
 import { ecranConnexion, ecranInscription, ecranAttente, tuto } from './ecrans/connexion.js';
 import { ecranAccueil, ecranFormulaireActu } from './ecrans/accueil.js';
 import { ecranCalendrier, ecranFormulaireCourse } from './ecrans/calendrier.js';
@@ -52,6 +53,7 @@ function choisirEcran() {
     case 'partenaire': return [estBureau() ? ecranFormulairePartenaire(a === 'nouveau' ? null : a) : ecranPartenaires(), 'plus'];
     case 'reglages': return [ecranReglages(), 'plus'];
     case 'compte': return [ecranCompte(), 'plus'];
+    case 'donnees': return [ecranDonneesPerso(), 'plus'];
     case 'bureau': return [estBureau() ? ecranBureau() : ecranPlus(), 'plus'];
     default: return [ecranAccueil(), 'accueil'];
   }
@@ -72,10 +74,17 @@ function barreNav(actif) {
   nav.hidden = false;
 }
 
+// Écran de chargement : des blocs gris à la place du contenu, le temps que les données arrivent.
+const squelette = () => `<div class="squelette" aria-busy="true" aria-label="Chargement">
+  <span class="sq sq-titre"></span><span class="sq sq-ligne court"></span>
+  <span class="sq sq-carte"></span><span class="sq sq-ligne"></span><span class="sq sq-ligne"></span><span class="sq sq-carte petite"></span></div>`;
+
 export function afficher() {
+  // page « Données personnelles » : lisible avant même de se connecter
+  if (location.hash.startsWith('#/donnees') && !etat.moi) { nav.hidden = true; ecran.innerHTML = ecranDonneesPerso(); return; }
   if (!etat.email) { nav.hidden = true; ecran.innerHTML = ecranConnexion(); return; }
   if (etat.aInscrire) { nav.hidden = true; ecran.innerHTML = ecranInscription(); return; }
-  if (!etat.moi) { ecran.innerHTML = '<p class="chargement">Chargement…</p>'; return; }
+  if (!etat.moi) { ecran.innerHTML = squelette(); return; }
   if (etat.moi.en_attente) { nav.hidden = true; ecran.innerHTML = ecranAttente(); return; }
   let [html, onglet] = choisirEcran();
   if (etat.horsLigne) html = `<p class="avertissement">Hors ligne : affichage des dernières données reçues, modifications impossibles.</p>${html}`;
@@ -122,8 +131,8 @@ export async function charger() {
 // planning mis à jour, nouvelles courses, messages… sans rien demander à l'utilisateur.
 // Pas pendant une saisie (formulaire ou feuille ouverte), pour ne rien effacer.
 let dernierChargement = Date.now();
-export async function rafraichir() {
-  if (!etat.moi || etat.horsLigne || Date.now() - dernierChargement < 120000) return;
+export async function rafraichir(force = false) {
+  if (!etat.moi || etat.horsLigne || (!force && Date.now() - dernierChargement < 120000)) return;
   const saisie = document.activeElement?.matches?.('input, textarea, select') || feuille.open;
   if (saisie) return;
   try {

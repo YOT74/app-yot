@@ -13,12 +13,14 @@
 // =====================================================================
 import { etat } from './etat.js';
 import { emailConnecte } from './auth.js';
-import { afficher, charger, voirNotifications } from './rendu.js';
+import { afficher, charger, voirNotifications, rafraichir } from './rendu.js';
 import { tutoAVoir } from './actions.js';
 import { DELAI_RENVOI } from './config.js';
 import { ecouterInstallation } from './installation.js';
+import { activerGestes } from './gestes.js';
 
 ecouterInstallation(() => afficher());
+activerGestes({ afficher, actualiser: () => rafraichir(true) });
 
 // Bouton « Recevoir un nouveau code » : compte à rebours avant de pouvoir redemander.
 setInterval(() => {

@@ -8,6 +8,17 @@ Numérotation X.Y.Z (la version change à chaque mise en ligne, sinon les télé
 - Y, fonctionnalité : nouvelle fonction visible pour les membres. Section + release.
 - X, version majeure : grande étape (lancement officiel auprès des membres = v2.0.0, refonte…). Section + release.
 
+## v1.11.0 — Données personnelles, rappels et confort
+
+- Page « Données personnelles » (lisible sans être connecté) et bouton « Supprimer mon compte » dans Mon compte.
+- Rappel automatique 7 jours avant la clôture des inscriptions, pour les membres « Intéressé » (réglable dans les notifications).
+- Sauvegarde chiffrée de la base chaque dimanche, gardée 90 jours dans GitHub.
+- Planning : glisser à gauche ou à droite pour changer de semaine.
+- Accueil sans course prévue : « Où va le club », les 3 prochaines courses où des membres sont engagés.
+- Tirer vers le bas pour actualiser ; blocs gris pendant le chargement.
+
+Base de données : fonctions `supprimer_mon_compte` et `envoyer_rappels` (tâche quotidienne pg_cron), colonne `notif_rappel` sur `membres`.
+
 ## v1.10.0 — Grands triathlons ajoutés à la base
 
 - Nouvelle liste de grands triathlons (Alpe d'Huez, Embrunman, Challenge Roth, Altriman, Gérardmer, Deauville, Natureman Var), présents avant même leur arrivée au calendrier FFTri.

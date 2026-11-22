@@ -26,7 +26,7 @@ let compteur = 1000;
 const nouvelId = (p) => `${p}_${compteur++}`;
 const maintenant = () => new Date().toISOString();
 
-const REGLAGES_DEFAUT = { notif_mot: true, notif_inscription: true, notif_proposition: true, notif_validation: true, notif_actualite: true, notif_dossard: true };
+const REGLAGES_DEFAUT = { notif_mot: true, notif_inscription: true, notif_proposition: true, notif_validation: true, notif_actualite: true, notif_dossard: true, notif_rappel: true };
 
 const db = {
   membres: DONNEES.membres.map((m, i) => ({ ...REGLAGES_DEFAUT, cree_le: decaler(`2025-${String(9 + (i % 4)).padStart(2, '0')}-1${i % 10}`), ...m, email: m.email.toLowerCase() })),
@@ -176,6 +176,7 @@ export const demo = {
     return photo;
   },
   async retirerPhoto() { await pause(); moi.photo = null; },
+  async supprimerMonCompte() { await pause(); db.membres = db.membres.filter((m) => m.id !== moi.id); moi = null; },
 
   // discussion : mêmes règles que la base (un seul niveau de réponse, notifications)
   async posterMessage(courseId, texte, parentId = null) {

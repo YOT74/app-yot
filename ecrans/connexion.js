@@ -55,6 +55,7 @@ export function ecranConnexion() {
           ${CONNEXION_GOOGLE ? `<button class="bouton contour large fournisseur" type="button" data-action="connexion-fournisseur" data-valeur="google">${LOGO_GOOGLE} Continuer avec Google</button>` : ''}
           ${CONNEXION_APPLE ? `<button class="bouton large fournisseur apple" type="button" data-action="connexion-fournisseur" data-valeur="apple">${LOGO_APPLE} Continuer avec Apple</button>` : ''}
         </div>` : ''}
+      <p class="aide" style="text-align:center;margin:0"><a href="#/donnees">Données personnelles</a></p>
       ${installationPossible() ? '<button class="bouton discret large" type="button" data-action="installer-app">📲 Installer l’app sur mon téléphone</button>' : ''}
       ${MODE_DEMO && c.etape === 'email' ? `
         <div class="avertissement">

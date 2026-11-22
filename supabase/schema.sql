@@ -9,7 +9,7 @@ create type statut_participation as enum
   ('interesse', 'inscrit', 'cherche_dossard', 'vend_dossard', 'finisher', 'forfait');
 create type role_membre as enum ('membre', 'bureau', 'coach', 'admin');
 create type type_notification as enum
-  ('mot', 'inscription', 'proposition', 'validation', 'actualite', 'dossard', 'refus', 'message', 'reponse', 'adhesion');
+  ('mot', 'inscription', 'proposition', 'validation', 'actualite', 'dossard', 'refus', 'message', 'reponse', 'adhesion', 'rappel');
 
 -- 2. Tables -------------------------------------------------------------
 create table membres (
@@ -33,6 +33,7 @@ create table membres (
   notif_validation boolean not null default true,   -- ma proposition a été validée
   notif_actualite boolean not null default true,    -- une actualité est publiée
   notif_dossard boolean not null default true,      -- un dossard à vendre / recherché sur une course où je cherche / vends
+  notif_rappel boolean not null default true,       -- rappel 7 jours avant la clôture d'une course où je suis intéressé
   cree_le timestamptz not null default now()
 );
 
@@ -543,6 +544,44 @@ end $$;
 create trigger actualites_notifier after insert on actualites
   for each row execute function notifier_actualite();
 
+-- Supprimer mon compte : ma fiche (statuts, présences, votes, notifications partent avec),
+-- mes messages restent mais deviennent « Ancien membre », puis mon compte de connexion.
+create function supprimer_mon_compte() returns void
+language plpgsql security definer set search_path = public as $$
+declare mon_email text := lower(auth.jwt() ->> 'email');
+begin
+  if mon_email is null or auth.uid() is null then raise exception 'Non connecté'; end if;
+  delete from membres where email = mon_email;
+  delete from auth.users where id = auth.uid();
+end $$;
+grant execute on function supprimer_mon_compte() to authenticated;
+
+-- Rappel J-7 avant la clôture des inscriptions, pour les membres « intéressés » (tous les jours à 7 h UTC)
+create function envoyer_rappels() returns integer
+language plpgsql security definer set search_path = public as $$
+declare n integer;
+begin
+  insert into notifications (destinataire, type, course_id, extrait)
+  select p.membre_id, 'rappel', c.id, c.nom
+  from participations p
+  join courses c on c.id = p.course_id
+  join membres m on m.id = p.membre_id
+  where p.statut = 'interesse'
+    and c.date_limite_inscription = current_date + 7
+    and m.actif and not m.en_attente and m.notif_rappel
+    and not exists (select 1 from notifications n
+                    where n.destinataire = p.membre_id and n.type = 'rappel' and n.course_id = c.id);
+  get diagnostics n = row_count;
+  return n;
+end $$;
+do $$
+begin
+  if exists (select 1 from pg_available_extensions where name = 'pg_cron') then
+    create extension if not exists pg_cron;
+    perform cron.schedule('rappels-cloture', '0 7 * * *', 'select public.envoyer_rappels()');
+  end if;
+end $$;
+
 -- 9. Photos de profil (Supabase Storage) ------------------------------------
 -- Dossier public « avatars » ; chacun dépose, remplace ou retire SA photo (<son id>.jpg).
 -- Ignoré si le module Storage n'existe pas (base de test sans Supabase).
@@ -575,7 +614,7 @@ end $$;
 revoke execute on all functions in schema public from public, anon;
 grant execute on function ping() to anon;
 revoke execute on function notifier_actualite(), notifier_course(), notifier_message(), notifier_participation(),
-  proteger_corrections(), proteger_niveaux(), notifier_adhesion(), vote_unique(), maj_horodatage(), trace_validation(), ranger_message() from authenticated;
+  proteger_corrections(), proteger_niveaux(), notifier_adhesion(), vote_unique(), maj_horodatage(), trace_validation(), ranger_message(), envoyer_rappels() from authenticated;
 alter function vote_unique() set search_path = public;
 alter function maj_horodatage() set search_path = public;
 alter function trace_validation() set search_path = public;
