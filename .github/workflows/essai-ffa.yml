@@ -1,0 +1,14 @@
+# Essai ponctuel : lecture du calendrier FFA (lecture seule). Lancement à la main uniquement.
+name: Essai FFA
+on:
+  workflow_dispatch:
+jobs:
+  essai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node robot/essais/ffa-sonde.mjs
