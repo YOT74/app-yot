@@ -1,4 +1,4 @@
-# Met à jour la base de courses (FFTri, IRONMAN, listes du club) chaque lundi, masque les doublons
+# Met à jour la base de courses (FFTri, IRONMAN, listes du club) le lundi et le jeudi, masque les doublons
 # et cherche les nouvelles dates annoncées.
 # Secrets à créer dans GitHub → Settings → Secrets and variables → Actions :
 #   SUPABASE_URL          l'URL du projet (https://xxxx.supabase.co)
@@ -10,7 +10,7 @@ name: Base de courses
 
 on:
   schedule:
-    - cron: '17 4 * * 1'
+    - cron: '17 4 * * 1,4'   # lundi et jeudi
   workflow_dispatch:
     inputs:
       essai_dates:
