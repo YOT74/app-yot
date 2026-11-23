@@ -4,6 +4,7 @@
 //
 // Deux courses sont des doublons si :
 //   • elles ont lieu à un jour près ;
+//   • le lieu concorde (sinon noms quasi identiques exigés) ;
 //   • leurs noms se ressemblent : score ≥ 0,6 sur les mots significatifs (sans « triathlon »,
 //     « ironman », « de », « la »…, sans accents ni ponctuation) ;
 //   • elles ont au moins une distance en commun (70.3 = L, Full = XXL, Semi = 21 km…),
@@ -27,7 +28,7 @@ export async function traiterDoublons({ essai = false } = {}) {
   if (!url || !cle) throw new Error('SUPABASE_URL et SUPABASE_CLE_SERVICE doivent être définis.');
   const h = { apikey: cle, Authorization: `Bearer ${cle}`, 'Content-Type': 'application/json' };
   const aujourdhui = new Date().toISOString().slice(0, 10);
-  const rep = await fetch(`${url}/rest/v1/courses?select=id,nom,date_course,format,source,pas_doublon,jour_inconnu,participations(statut)&validee=eq.true&masquee=eq.false&date_course=gte.${aujourdhui}&limit=5000`, { headers: h });
+  const rep = await fetch(`${url}/rest/v1/courses?select=id,nom,lieu,departement,date_course,format,source,pas_doublon,jour_inconnu,participations(statut)&validee=eq.true&masquee=eq.false&date_course=gte.${aujourdhui}&limit=5000`, { headers: h });
   if (!rep.ok) throw new Error(`Supabase ${rep.status} : ${await rep.text()}`);
   const courses = (await rep.json()).map((c) => ({ ...c, engages: (c.participations ?? []).length }));
   const actions = trouverDoublons(courses);

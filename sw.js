@@ -1,6 +1,6 @@
 // sw.js — service worker : ouverture rapide, lecture hors ligne, mises à jour.
 // À CHAQUE PUBLICATION : augmenter VERSION (la même que dans config.js).
-const VERSION = '1.17.1';
+const VERSION = '1.17.2';
 const CACHE = `app-club-${VERSION}`;
 
 // Les fichiers de l'app, gardés pour l'ouverture hors ligne.

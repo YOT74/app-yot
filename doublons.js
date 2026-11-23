@@ -4,7 +4,11 @@
 //   • dates à un jour près (jamais pour une course dont seul le mois est connu) ;
 //   • noms qui se ressemblent : score ≥ 0,6 sur les mots significatifs (sans « triathlon », « trail »,
 //     « marathon », « de », « la »…) : « Trail des Grottes » et « Trail des Chamois » ne se ressemblent pas ;
-//   • au moins une distance en commun (70.3 = L, Full = XXL, Semi = 21 km…), ou l'une n'en indique pas.
+//   • au moins une distance en commun (70.3 = L, Full = XXL, Semi = 21 km…), ou l'une n'en indique pas ;
+//   • le lieu : même ville (écritures tolérées : « Aix-en-Provence » = « Aix en Provence »,
+//     « Chamonix-Mont-Blanc » = « Chamonix », « St » = « Saint »…) ou même département → règle normale ;
+//     villes différentes → il faut des noms quasi identiques (≥ 0,9 : une commune voisine
+//     annoncée par une autre source) ; ville inconnue d'un côté → règle normale.
 // =====================================================================
 
 const MOTS_VIDES = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'l', 'd', 'en', 'et', 'a', 'au', 'aux', 'sur', 'the',
@@ -35,6 +39,28 @@ export const distanceCommune = (a, b) => {
 };
 
 export const SEUIL_NOM = 0.6;
+export const SEUIL_NOM_AUTRE_VILLE = 0.9;
+
+const VIDES_LIEU = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'l', 'd', 'en', 'sur', 'sous', 'lez', 'les', 'et', 'aux', 'au', 'cedex', 'france']);
+const ABREGES = { st: 'saint', ste: 'sainte', mt: 'mont' };
+export const motsLieu = (lieu) => String(lieu ?? '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/\(.*?\)/g, ' ').replace(/[^a-z0-9]+/g, ' ').split(' ').filter(Boolean)
+  .map((m) => ABREGES[m] ?? m).filter((m) => !VIDES_LIEU.has(m) && !/^\d+$/.test(m));
+
+// true : même endroit · false : endroits différents · null : on ne sait pas
+export function memeLieu(a, b) {
+  const A = motsLieu(a.lieu); const B = motsLieu(b.lieu);
+  if (!A.length || !B.length) return null;
+  if (A.join(' ') === B.join(' ')) return true;
+  // l'un des noms contient l'autre (Chamonix / Chamonix-Mont-Blanc, Tours / Tours Métropole,
+  // St-Gervais / Saint-Gervais-les-Bains) ; mais Aix-en-Provence ≠ Aix-les-Bains
+  const COURANTS = new Set(['saint', 'sainte', 'mont', 'lac', 'bains', 'ville', 'val', 'bourg', 'port', 'grand', 'petit', 'haut', 'bas', 'vieux', 'neuf']);
+  const [court, long] = A.length <= B.length ? [A, B] : [B, A];
+  if (court.every((m) => long.includes(m)) && court.some((m) => !COURANTS.has(m))) return true;
+  if (a.departement && b.departement) return a.departement === b.departement ? true : false;
+  return false;
+}
+const seuilNom = (a, b) => (memeLieu(a, b) === false ? SEUIL_NOM_AUTRE_VILLE : SEUIL_NOM);
 export const PRIORITE = { fftri: 0, ironman: 1, liste: 2, membre: 3 };
 export const ecartJours = (a, b) => Math.abs(Date.parse(a) - Date.parse(b)) / 864e5;
 
@@ -50,7 +76,7 @@ export function trouverDoublons(courses) {
       if (masquees.has(a.id) || masquees.has(b.id)) continue;
       if (a.source === b.source && a.source !== 'membre') continue;   // une source ne se double pas elle-même
       const score = ressemblance(a.nom, b.nom);
-      if (score < SEUIL_NOM || !distanceCommune(a.format, b.format)) continue;
+      if (score < seuilNom(a, b) || !distanceCommune(a.format, b.format)) continue;
       if (a.engages && b.engages) continue;                            // au bureau de fusionner
       let [garder, masquer] = a.engages ? [a, b] : b.engages ? [b, a]
         : (PRIORITE[a.source] ?? 9) <= (PRIORITE[b.source] ?? 9) ? [a, b] : [b, a];
@@ -68,4 +94,4 @@ export function trouverDoublons(courses) {
 // même course ? (sans regarder les engagés ni la source)
 export const memeCourse = (a, b) => !a.jour_inconnu && !b.jour_inconnu
   && ecartJours(a.date_course, b.date_course) <= 1
-  && ressemblance(a.nom, b.nom) >= SEUIL_NOM && distanceCommune(a.format, b.format);
+  && ressemblance(a.nom, b.nom) >= seuilNom(a, b) && distanceCommune(a.format, b.format);
