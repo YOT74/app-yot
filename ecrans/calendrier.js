@@ -3,8 +3,9 @@
 // =====================================================================
 import { DISCIPLINES, FORMATS_SUGGERES, SEUIL_DOUBLON } from '../config.js';
 import { etat, estBureau, course, monStatut, nbStatut, nbEngages, aVenir, alerteCloture, suivieParLeClub } from '../etat.js';
-import { esc, icone, aujourdhui, ajouterJours, enDate, proximite, dateLongue, normalise } from '../outils.js';
+import { esc, icone, aujourdhui, ajouterJours, enDate, dateLongue, normalise } from '../outils.js';
 import { entete, parMois, ligneCourse, retour } from './communs.js';
+import { ressemblance, SEUIL_NOM } from '../doublons.js';
 
 const PERIODES = { '3mois': '3 prochains mois', saison: '12 prochains mois', tout: 'Tout' };
 const TRIS = { date: 'Par date', inscrits: "Plus d'inscrits", interesses: "Plus d'intéressés", engages: "Plus d'engagés" };
@@ -98,8 +99,9 @@ export function ecranCalendrier() {
 export function doublonsPossibles(nom, date, idIgnore) {
   if (!nom || !date) return [];
   return etat.courses.filter((c) => c.id !== idIgnore
-    && Math.abs((enDate(c.date_course) - enDate(date)) / 86400000) < SEUIL_DOUBLON
-    && proximite(c.nom, nom) >= 0.55);
+    && (c.jour_inconnu ? c.date_course.slice(0, 7) === date.slice(0, 7)
+      : Math.abs((enDate(c.date_course) - enDate(date)) / 86400000) < SEUIL_DOUBLON)
+    && ressemblance(c.nom, nom) >= SEUIL_NOM);
 }
 
 export function avertissementDoublons(nom, date, idIgnore) {

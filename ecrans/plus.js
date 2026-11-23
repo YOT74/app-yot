@@ -5,7 +5,8 @@
 import { VERSION, MODE_DEMO, REGLAGES_NOTIF, STATUTS, SOURCES, GROUPES_NIVEAU, NIVEAUX } from '../config.js';
 import { libelleGroupe } from './entrainement.js';
 import { etat, estAdmin, estBureau, estCoach, membre, nomMembre, suffixeRole, course, aVenir, enAttente, nbNonLues, nbEngages, avecAnnee } from '../etat.js';
-import { esc, icone, normalise, aujourdhui, ajouterJours, jourMois, dateCourte, ilYa, lienSur } from '../outils.js';
+import { esc, icone, normalise, aujourdhui, ajouterJours, jourMois, dateCourte, moisAnnee, ilYa, lienSur } from '../outils.js';
+import { memeCourse } from '../doublons.js';
 import { entete, retour, ligneCourse, menuAdmin } from './communs.js';
 import { avatar } from '../avatar.js';
 import { installationPossible, installable } from '../installation.js';
@@ -286,7 +287,7 @@ function tableauDeBord() {
         <div><strong>${endormis.length}</strong><span>sans activité (6 mois)</span></div>
       </div>
       ${suivies.length ? `<h3>Courses à venir les plus suivies</h3>
-        <ol class="classement">${suivies.map((c) => `<li><a href="#/course/${esc(c.id)}">${esc(c.nom)}</a> <span class="aide">${esc(avecAnnee(dateCourte(c.date_course), c.date_course))} · ${nbEngages(c)} engagé${nbEngages(c) > 1 ? 's' : ''}</span></li>`).join('')}</ol>` : ''}
+        <ol class="classement">${suivies.map((c) => `<li><a href="#/course/${esc(c.id)}">${esc(c.nom)}</a> <span class="aide">${esc(dateCourse(c))} · ${nbEngages(c)} engagé${nbEngages(c) > 1 ? 's' : ''}</span></li>`).join('')}</ol>` : ''}
       ${endormis.length ? `<details class="repli"><summary>Voir les membres sans activité depuis 6 mois</summary>
         <p class="aide" style="margin:0">${endormis.map((m) => `<a href="#/membre/${esc(m.id)}">${esc(m.prenom)} ${esc(m.nom)}</a>`).join(', ')}</p></details>` : ''}
     </section>`;
@@ -294,18 +295,19 @@ function tableauDeBord() {
 
 // Doublons possibles parmi les courses à venir : une course proposée par un membre (ou estimée,
 // de la liste) qui ressemble à une autre. On propose de garder la version importée (officielle).
+// Paires que le robot n'a pas pu traiter seul (des membres engagés des deux côtés, course réaffichée…).
 function doublonsAFusionner() {
   const auj = aujourdhui();
-  const avenir = etat.courses.filter((c) => c.validee && c.date_course >= auj);
-  const vues = new Set();
+  const avenir = etat.courses.filter((c) => c.validee && c.date_course >= auj && !c.jour_inconnu)
+    .sort((a, b) => a.date_course.localeCompare(b.date_course));
+  const officielle = (x) => x.source && x.source !== 'membre' && x.source !== 'liste';
   const paires = [];
-  for (const c of avenir.filter((x) => !x.source || x.source === 'membre' || x.source === 'liste')) {
-    for (const autre of doublonsPossibles(c.nom, c.date_course, c.id).filter((x) => x.validee && x.date_course >= auj)) {
-      const cle = [c.id, autre.id].sort().join('|');
-      if (vues.has(cle)) continue;
-      vues.add(cle);
+  for (let i = 0; i < avenir.length; i++) {
+    for (let j = i + 1; j < avenir.length && avenir[j].date_course <= ajouterJours(avenir[i].date_course, 1); j++) {
+      const c = avenir[i]; const autre = avenir[j];
+      if (c.source && c.source === autre.source && c.source !== 'membre') continue;   // une source ne se double pas elle-même
+      if (!memeCourse(c, autre)) continue;
       // garder : la version importée par le robot, sinon celle qui a le plus d'engagés
-      const officielle = (x) => x.source && x.source !== 'membre' && x.source !== 'liste';
       const [garder, retirer] = officielle(autre) && !officielle(c) ? [autre, c]
         : officielle(c) && !officielle(autre) ? [c, autre]
         : nbEngages(autre) >= nbEngages(c) ? [autre, c] : [c, autre];
@@ -315,11 +317,14 @@ function doublonsAFusionner() {
   return paires;
 }
 
+// date affichée : jamais un faux « 1er du mois » quand seul le mois est connu
+const dateCourse = (c) => (c.jour_inconnu ? (c.periode ?? moisAnnee(c.date_course)) : avecAnnee(dateCourte(c.date_course), c.date_course));
+
 function blocDoublons() {
   const paires = doublonsAFusionner();
   if (!paires.length) return '';
   const fiche = (c) => `<a href="#/course/${esc(c.id)}"><strong>${esc(c.nom)}</strong></a>
-    <span class="ligne-detail">${esc(avecAnnee(dateCourte(c.date_course), c.date_course))} · ${esc(SOURCES[c.source] ?? SOURCES.membre)} · ${nbEngages(c)} engagé${nbEngages(c) > 1 ? 's' : ''}</span>`;
+    <span class="ligne-detail">${esc(dateCourse(c))} · ${esc(SOURCES[c.source] ?? SOURCES.membre)} · ${nbEngages(c)} engagé${nbEngages(c) > 1 ? 's' : ''}</span>`;
   return `<section class="bloc">
     <h2>Doublons possibles <span class="compteur">${paires.length}</span></h2>
     <p class="aide" style="margin:0">La fusion déplace statuts, résultats, messages et albums sur la course gardée, puis supprime l’autre.</p>
@@ -363,7 +368,7 @@ export function ecranBureau() {
           <a class="ligne-lien" href="#/course/${esc(c.id)}"><span class="ligne-texte">
             <span class="ligne-nom">${esc(c.nom)}</span>
             <span class="ligne-detail">${esc(avecAnnee(dateCourte(c.date_course), c.date_course))} · par ${esc(nomMembre(c.creee_par))}</span></span></a>
-          ${suspects.length ? `<p class="avertissement">Ressemble à : ${suspects.map((x) => `<a href="#/course/${esc(x.id)}">${esc(x.nom)}</a> (${esc(SOURCES[x.source] ?? 'membre')}, ${esc(avecAnnee(dateCourte(x.date_course), x.date_course))})`).join(', ')}</p>` : ''}
+          ${suspects.length ? `<p class="avertissement">Ressemble à : ${suspects.map((x) => `<a href="#/course/${esc(x.id)}">${esc(x.nom)}</a> (${esc(SOURCES[x.source] ?? 'membre')}, ${esc(dateCourse(x))})`).join(', ')}</p>` : ''}
           <div class="rangee">
             <button class="bouton" type="button" data-action="valider" data-id="${esc(c.id)}">Valider</button>
             <a class="bouton contour" href="#/modifier/${esc(c.id)}">Modifier</a>
@@ -377,7 +382,7 @@ export function ecranBureau() {
       <section class="bloc">
         <h2>Courses masquées · ${masquees.length}</h2>
         <p class="aide" style="margin:0">Les doublons repérés par le robot sont masqués ici. Une course réaffichée ne sera plus masquée.</p>
-            ${masquees.map((c) => `<div class="ligne-simple"><span>${esc(c.nom)} <span class="aide">· ${esc(avecAnnee(dateCourte(c.date_course), c.date_course))}${c.doublon_de ? ` · doublon de « ${esc(course(c.doublon_de)?.nom ?? 'une autre course')} »` : ''}</span></span>
+            ${masquees.map((c) => `<div class="ligne-simple"><span>${esc(c.nom)} <span class="aide">· ${esc(dateCourse(c))}${c.doublon_de ? ` · doublon de « ${esc(course(c.doublon_de)?.nom ?? 'une autre course')} »` : ''}</span></span>
           <button class="lien-mini" type="button" data-action="reafficher-course" data-id="${esc(c.id)}">Réafficher</button></div>`).join('')}
       </section>` : ''}
     <section class="bloc">
